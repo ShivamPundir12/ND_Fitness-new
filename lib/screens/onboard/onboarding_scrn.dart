@@ -2,6 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/generated/assets.dart';
+import 'package:nd_fitness/screens/auth/sign_in.dart';
+import 'package:nd_fitness/screens/info/gender.dart';
+
+import '../../services/google_signin.dart';
+import '../auth/sign_up.dart';
 
 class onbaording_screen extends StatefulWidget {
   const onbaording_screen({Key? key}) : super(key: key);
@@ -74,63 +79,75 @@ class _onbaording_screenState extends State<onbaording_screen> {
                     SizedBox(
                       height: 50,
                     ),
-                    Container(
-                      padding: EdgeInsets.symmetric(vertical: 15),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: text_color,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(15),
-                            topRight: Radius.circular(15),
-                            bottomLeft: Radius.circular(15),
-                            bottomRight: Radius.circular(15),
-                          )),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Container(
-                            child: Image.asset(Assets.assetsGoogle,scale: 04.8),
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width*0.09,
-                          ),
-                          Text(
-                            'Sign in with Google',
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontFamily: 'Mukta',
-                                fontWeight: FontWeight.w700,
-                                color: background_color),
-                          ),
-                        ],
+                    GestureDetector(
+                      onTap: () async {
+                        await FirebaseServices().signInWithGoogle();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => gender()));
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 15),
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: text_color,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(15),
+                              topRight: Radius.circular(15),
+                              bottomLeft: Radius.circular(15),
+                              bottomRight: Radius.circular(15),
+                            )),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Container(
+                              child: Image.asset(Assets.assetsGoogle,scale: 04.8),
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width*0.09,
+                            ),
+                            Text(
+                              'Sign in with Google',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontFamily: 'Mukta',
+                                  fontWeight: FontWeight.w700,
+                                  color: background_color),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(
                       height: 20,
                     ),
-                    Container(
-                      padding: EdgeInsets.symmetric(vertical: 15),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        border: Border.all(
-                            strokeAlign: 1.0, width: 2, color: Colors.white),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          topRight: Radius.circular(15),
-                          bottomLeft: Radius.circular(15),
-                          bottomRight: Radius.circular(15),
+                    InkWell(
+                      onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=> sign_up()),);},
+                      child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 15),
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          border: Border.all(
+                              strokeAlign: 1.0, width: 2, color: Colors.white),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(15),
+                            bottomLeft: Radius.circular(15),
+                            bottomRight: Radius.circular(15),
+                          ),
                         ),
-                      ),
-                      child: Text(
-                        'Create an account',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontFamily: 'Mukta',
-                            fontWeight: FontWeight.w700,
-                            color: text_color),
+                        child: Text(
+                          'Create an account',
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontFamily: 'Mukta',
+                              fontWeight: FontWeight.w700,
+                              color: text_color),
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -150,12 +167,15 @@ class _onbaording_screenState extends State<onbaording_screen> {
                           SizedBox(
                             width: 05,
                           ),
-                          Text(
-                            'Sign in',
-                            style: TextStyle(
-                              color: text_color,
-                              fontSize: 17,
-                              fontWeight: FontWeight.w600
+                          InkWell(
+                            onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=> sign_in()),);},
+                            child: Text(
+                              'Sign in',
+                              style: TextStyle(
+                                color: text_color,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w600
+                              ),
                             ),
                           ),
                         ],

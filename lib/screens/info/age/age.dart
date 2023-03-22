@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:nd_fitness/screens/info/activity_level.dart';
 import 'package:nd_fitness/screens/info/age/widgets/wheeltile.dart';
+import 'package:nd_fitness/screens/info/gender.dart';
 import '../../../materials/colors.dart';
 import 'data/statemodel.dart';
 
@@ -122,49 +124,55 @@ class _ageState extends State<age> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 60),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: text_color2.withOpacity(0.15),
-                      border: Border.all(
-                          strokeAlign: 1.0, width: 2, color: Colors.white),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15),
-                        topRight: Radius.circular(15),
-                        bottomLeft: Radius.circular(15),
-                        bottomRight: Radius.circular(15),
+                  GestureDetector(
+                    onTap:(){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> gender(),),);},
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 60),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: text_color2.withOpacity(0.15),
+                        border: Border.all(
+                            strokeAlign: 1.0, width: 2, color: Colors.white),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(15),
+                          bottomLeft: Radius.circular(15),
+                          bottomRight: Radius.circular(15),
+                        ),
                       ),
-                    ),
-                    child: Text(
-                      'Back',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          color: text_color2),
+                      child: Text(
+                        'Back',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: text_color2),
+                      ),
                     ),
                   ),
                   SizedBox(
                     width: 20,
                   ),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: text_color2,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15),
-                        topRight: Radius.circular(15),
-                        bottomLeft: Radius.circular(15),
-                        bottomRight: Radius.circular(15),
+                  GestureDetector(
+                    onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=> activity_level(),),);},
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: text_color2,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(15),
+                          bottomLeft: Radius.circular(15),
+                          bottomRight: Radius.circular(15),
+                        ),
                       ),
-                    ),
-                    child: Text(
-                      'Continue',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          color: background_color),
+                      child: Text(
+                        'Continue',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: background_color),
+                      ),
                     ),
                   ),
                 ],

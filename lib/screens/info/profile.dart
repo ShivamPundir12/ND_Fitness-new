@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/materials/colors.dart';
+import 'package:nd_fitness/screens/info/membership.dart';
 
 class profile extends StatefulWidget {
   const profile({Key? key}) : super(key: key);
@@ -217,24 +218,27 @@ class _profileState extends State<profile> {
                       padding: EdgeInsets.only(
                           top: MediaQuery.of(context).size.height * 0.05,
                           bottom: MediaQuery.of(context).size.height * 0.06),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 15),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: background_color,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(15),
-                            topRight: Radius.circular(15),
-                            bottomLeft: Radius.circular(15),
-                            bottomRight: Radius.circular(15),
+                      child: GestureDetector(
+                        onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=> membership(),),);},
+                        child: Container(
+                          padding: EdgeInsets.symmetric(vertical: 15),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: background_color,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(15),
+                              topRight: Radius.circular(15),
+                              bottomLeft: Radius.circular(15),
+                              bottomRight: Radius.circular(15),
+                            ),
                           ),
-                        ),
-                        child: Text(
-                          'Next',
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                              color: text_color2),
+                          child: Text(
+                            'Next',
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                                color: text_color2),
+                          ),
                         ),
                       ),
                     ),

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/generated/assets.dart';
 import 'package:nd_fitness/materials/colors.dart';
+import 'package:nd_fitness/screens/info/age/age.dart';
 
 class gender extends StatefulWidget {
   const gender({Key? key}) : super(key: key);
@@ -69,24 +70,27 @@ class _genderState extends State<gender> {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.15,
             ),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 15),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: text_color2,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  topRight: Radius.circular(15),
-                  bottomLeft: Radius.circular(15),
-                  bottomRight: Radius.circular(15),
+            GestureDetector(
+              onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=> age(),),);},
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 15),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: text_color2,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15),
+                    bottomLeft: Radius.circular(15),
+                    bottomRight: Radius.circular(15),
+                  ),
                 ),
-              ),
-              child: Text(
-                'Continue',
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: background_color),
+                child: Text(
+                  'Continue',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      color: background_color),
+                ),
               ),
             ),
           ],

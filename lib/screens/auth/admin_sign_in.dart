@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/generated/assets.dart';
+import 'package:nd_fitness/screens/auth/sign_in.dart';
 
 class admin_sign_in extends StatefulWidget {
   const admin_sign_in({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class _admin_sign_inState extends State<admin_sign_in> {
       appBar: AppBar(
         backgroundColor: background_color,
         elevation: 0,
-        leading: IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.back)),
+        leading: IconButton(onPressed:(){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> sign_in(),),);}, icon: Icon(CupertinoIcons.back)),
       ),
       body: Container(
         child: Column(
