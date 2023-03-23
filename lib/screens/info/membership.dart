@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../materials/colors.dart';
@@ -100,13 +99,14 @@ class _membershipState extends State<membership> {
                                       fontFamily: 'Mukta'),
                                 ),
                                 SizedBox(
-                                  width: 70,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.04,
                                 ),
                                 Text(
                                   '1250',
                                   style: TextStyle(
                                       color: background_color,
-                                      fontSize: 38,
+                                      fontSize: 30,
                                       fontWeight: FontWeight.w900,
                                       fontFamily: 'Mukta'),
                                 ),
@@ -120,7 +120,7 @@ class _membershipState extends State<membership> {
                       ),
                       Container(
                         padding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         height: 150,
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
@@ -159,13 +159,14 @@ class _membershipState extends State<membership> {
                                       fontFamily: 'Mukta'),
                                 ),
                                 SizedBox(
-                                  width: 70,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.04,
                                 ),
                                 Text(
                                   '3500',
                                   style: TextStyle(
                                       color: background_color,
-                                      fontSize: 38,
+                                      fontSize: 30,
                                       fontWeight: FontWeight.w900,
                                       fontFamily: 'Mukta'),
                                 ),
@@ -179,7 +180,7 @@ class _membershipState extends State<membership> {
                       ),
                       Container(
                         padding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         height: 150,
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
@@ -218,13 +219,14 @@ class _membershipState extends State<membership> {
                                       fontFamily: 'Mukta'),
                                 ),
                                 SizedBox(
-                                  width: 65,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.04,
                                 ),
                                 Text(
                                   '7000',
                                   style: TextStyle(
                                       color: background_color,
-                                      fontSize: 38,
+                                      fontSize: 30,
                                       fontWeight: FontWeight.w900,
                                       fontFamily: 'Mukta'),
                                 ),
@@ -233,10 +235,12 @@ class _membershipState extends State<membership> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 30,),
+                      SizedBox(
+                        height: 30,
+                      ),
                       Container(
                         padding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         height: 150,
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
@@ -275,13 +279,16 @@ class _membershipState extends State<membership> {
                                       fontFamily: 'Mukta'),
                                 ),
                                 SizedBox(
-                                  width: 40,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.02,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.03,
                                 ),
                                 Text(
                                   '13000',
                                   style: TextStyle(
                                       color: background_color,
-                                      fontSize: 38,
+                                      fontSize: 30,
                                       fontWeight: FontWeight.w900,
                                       fontFamily: 'Mukta'),
                                 ),

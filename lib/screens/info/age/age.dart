@@ -125,9 +125,19 @@ class _ageState extends State<age> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   GestureDetector(
-                    onTap:(){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> gender(),),);},
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => gender(),
+                        ),
+                      );
+                    },
                     child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 60),
+                      padding: EdgeInsets.symmetric(
+                          vertical: MediaQuery.of(context).size.width * 0.04,
+                          horizontal:
+                              MediaQuery.of(context).size.height * 0.04),
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         color: text_color2.withOpacity(0.15),
@@ -153,9 +163,19 @@ class _ageState extends State<age> {
                     width: 20,
                   ),
                   GestureDetector(
-                    onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=> activity_level(),),);},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => activity_level(),
+                        ),
+                      );
+                    },
                     child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+                      padding: EdgeInsets.symmetric(
+                          vertical: MediaQuery.of(context).size.width * 0.04,
+                          horizontal:
+                              MediaQuery.of(context).size.height * 0.05),
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         color: text_color2,

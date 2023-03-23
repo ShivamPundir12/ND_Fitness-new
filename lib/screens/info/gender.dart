@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/generated/assets.dart';
 import 'package:nd_fitness/materials/colors.dart';
-import 'package:nd_fitness/screens/info/age/age.dart';
 
 class gender extends StatefulWidget {
   const gender({Key? key}) : super(key: key);
@@ -44,7 +42,7 @@ class _genderState extends State<gender> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.1,
+              height: MediaQuery.of(context).size.height * 0.03,
             ),
             Container(
               height: 130,
@@ -71,7 +69,9 @@ class _genderState extends State<gender> {
               height: MediaQuery.of(context).size.height * 0.15,
             ),
             GestureDetector(
-              onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=> age(),),);},
+              onTap: () {
+                Navigator.pushNamed(context, '/age');
+              },
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 15),
                 alignment: Alignment.center,
