@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "815940506697",
+    "project_id": "ndfitness-59b55",
+    "storage_bucket": "ndfitness-59b55.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:815940506697:android:611813511564513e651b98",
+        "android_client_info": {
+          "package_name": "com.example.nd_fitness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "815940506697-n3ldpadesgnej7t2em840m35dkni95k2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpHFpfGhI6Hjrj8FwBzSUYCAhZPvY8C-c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "815940506697-n3ldpadesgnej7t2em840m35dkni95k2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -112,15 +112,24 @@ class _activity_levelState extends State<activity_level> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.27,
+              height: MediaQuery.of(context).size.height * 0.20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 GestureDetector(
-                  onTap:(){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> age(),),);},
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => age(),
+                      ),
+                    );
+                  },
                   child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 60),
+                    padding: EdgeInsets.symmetric(
+                        vertical: MediaQuery.of(context).size.width * 0.04,
+                        horizontal: MediaQuery.of(context).size.height * 0.04),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: text_color2.withOpacity(0.15),
@@ -146,9 +155,18 @@ class _activity_levelState extends State<activity_level> {
                   width: 20,
                 ),
                 GestureDetector(
-                  onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=> profile(),),);},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => profile(),
+                      ),
+                    );
+                  },
                   child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+                    padding: EdgeInsets.symmetric(
+                        vertical: MediaQuery.of(context).size.width * 0.04,
+                        horizontal: MediaQuery.of(context).size.height * 0.05),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: text_color2,

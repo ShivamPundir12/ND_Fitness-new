@@ -16,6 +16,7 @@ class sign_up extends StatefulWidget {
 class _sign_upState extends State<sign_up> {
   var email;
   bool _obscuretext = true;
+  bool _obsecuretxt = true;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmpassController = TextEditingController();
@@ -46,6 +47,7 @@ class _sign_upState extends State<sign_up> {
     }
     return false;
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +55,14 @@ class _sign_upState extends State<sign_up> {
       appBar: AppBar(
         backgroundColor: background_color,
         elevation: 0,
-        leading: IconButton(onPressed:(){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> onbaording_screen()),);}, icon: Icon(CupertinoIcons.back)),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => onbaording_screen()),
+              );
+            },
+            icon: Icon(CupertinoIcons.back)),
       ),
       body: Container(
         child: Column(
@@ -130,26 +139,26 @@ class _sign_upState extends State<sign_up> {
                           suffixIcon: Icon(CupertinoIcons.mail),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(18)),
-                        ),validator: (value) {
-                if (value!.isEmpty) {
-                return "Email is required";
-                }
-                if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                    .hasMatch(value)) {
-                return 'Please a valid Email';
-                }
-                return null;
-                },
-                  onSaved: (value) {
-                    email = value;
-                  },
-                style: TextStyle(
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Email is required";
+                          }
+                          if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                              .hasMatch(value)) {
+                            return 'Please a valid Email';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          email = value;
+                        },
+                        style: TextStyle(
                             color: Colors.black.withOpacity(0.4),
                             fontSize: 15,
                             fontFamily: 'Mukta',
                             fontWeight: FontWeight.w500),
                       ),
-
                       SizedBox(
                         height: 15,
                       ),
@@ -173,7 +182,7 @@ class _sign_upState extends State<sign_up> {
                           hintText: 'Enter your password',
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(18)),
-                         suffixIcon: GestureDetector(
+                          suffixIcon: GestureDetector(
                             onTap: () {
                               setState(() {});
                               _obscuretext = !_obscuretext;
@@ -189,9 +198,7 @@ class _sign_upState extends State<sign_up> {
                           if (value!.isEmpty) {
                             return 'Password is required';
                           }
-                          if (value
-                              .trim()
-                              .length < 6) {
+                          if (value.trim().length < 6) {
                             return 'Password must be at least 8 characters in length';
                           }
                           return null;
@@ -220,7 +227,7 @@ class _sign_upState extends State<sign_up> {
                       ),
                       TextFormField(
                         controller: confirmpassController,
-                        obscureText: _obscuretext,
+                        obscureText: _obsecuretxt,
                         decoration: InputDecoration(
                           hintText: 'Confirm your password',
                           border: OutlineInputBorder(
@@ -228,18 +235,18 @@ class _sign_upState extends State<sign_up> {
                           suffixIcon: GestureDetector(
                             onTap: () {
                               setState(() {});
-                              _obscuretext = !_obscuretext;
+                              _obsecuretxt = !_obsecuretxt;
                             },
                             child: Icon(
-                              _obscuretext
+                              _obsecuretxt
                                   ? CupertinoIcons.eye_fill
                                   : CupertinoIcons.eye_slash_fill,
                             ),
                           ),
                         ),
-                          validator: MultiValidator([
-                            RequiredValidator(errorText: 'Enter Something'),
-                          ]),
+                        validator: MultiValidator([
+                          RequiredValidator(errorText: 'Enter Something'),
+                        ]),
                         style: TextStyle(
                             color: Colors.black.withOpacity(0.4),
                             fontSize: 15,
@@ -253,11 +260,10 @@ class _sign_upState extends State<sign_up> {
                         child: Text(
                           "Forgot password?",
                           style: TextStyle(
-                            color: background_color,
-                            fontSize: 16,
-                            fontFamily: "Mukta",
-                            fontWeight: FontWeight.w500
-                          ),
+                              color: background_color,
+                              fontSize: 16,
+                              fontFamily: "Mukta",
+                              fontWeight: FontWeight.w500),
                         ),
                       ),
                       SizedBox(
@@ -276,20 +282,17 @@ class _sign_upState extends State<sign_up> {
                                   });
                               await FirebaseAuth.instance
                                   .createUserWithEmailAndPassword(
-                                  email: emailController.text.trim(),
-                                  password:
-                                  passwordController.text.trim());
-                              Navigator.pushReplacementNamed(
-                                  context, "/nav");
+                                      email: emailController.text.trim(),
+                                      password: passwordController.text.trim());
+                              Navigator.pushNamedAndRemoveUntil(
+                                  context, '/gen', (route) => false);
                             }
                           } on FirebaseAuthException catch (e) {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(SnackBar(
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               backgroundColor: Colors.blueGrey.shade300,
                               content: Text(
                                 e.toString(),
-                                style:
-                                TextStyle(fontWeight: FontWeight.w400),
+                                style: TextStyle(fontWeight: FontWeight.w400),
                               ),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
@@ -303,10 +306,15 @@ class _sign_upState extends State<sign_up> {
                           alignment: Alignment.center,
                           padding: EdgeInsets.symmetric(vertical: 18),
                           decoration: BoxDecoration(
-                            color: background_color,
-                            borderRadius: BorderRadius.circular(15)
+                              color: background_color,
+                              borderRadius: BorderRadius.circular(15)),
+                          child: Text(
+                            'Sign up',
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                                color: text_color2),
                           ),
-                          child: Text('Sign up', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: text_color2),),
                         ),
                       )
                     ],
