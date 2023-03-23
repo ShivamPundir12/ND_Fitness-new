@@ -1,11 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/generated/assets.dart';
 import 'package:nd_fitness/screens/auth/sign_in.dart';
-import 'package:nd_fitness/screens/info/gender.dart';
 
-import '../../services/google_signin.dart';
 import '../auth/sign_up.dart';
 
 class onbaording_screen extends StatefulWidget {
@@ -26,16 +23,18 @@ class _onbaording_screenState extends State<onbaording_screen> {
           children: [
             Container(
               alignment: Alignment.center,
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height/4),
-              child: Image.asset(Assets.assetsLogo, scale: 22,),
+              padding:
+                  EdgeInsets.only(top: MediaQuery.of(context).size.height / 4),
+              child: Image.asset(
+                Assets.assetsLogo,
+                scale: 22,
+              ),
             ),
             Padding(
               padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height*0.17
-              ),
+                  top: MediaQuery.of(context).size.height * 0.08),
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 30),
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,56 +75,61 @@ class _onbaording_screenState extends State<onbaording_screen> {
                         ),
                       ),
                     ),
+                    // SizedBox(
+                    //   height: 50,
+                    // ),
+                    // GestureDetector(
+                    //   onTap: () async {
+                    //     await FirebaseServices().signInWithGoogle();
+                    //     Navigator.pushNamed(context, '/age');
+                    //   },
+                    // child: Container(
+                    //   padding: EdgeInsets.symmetric(vertical: 15),
+                    //   alignment: Alignment.center,
+                    //   decoration: BoxDecoration(
+                    //       color: text_color,
+                    //       borderRadius: BorderRadius.only(
+                    //         topLeft: Radius.circular(15),
+                    //         topRight: Radius.circular(15),
+                    //         bottomLeft: Radius.circular(15),
+                    //         bottomRight: Radius.circular(15),
+                    //       )),
+                    // child: Row(
+                    //   children: [
+                    //     SizedBox(
+                    //       width: 28,
+                    //     ),
+                    //     Container(child: Icon(Icons.mail_outline)),
+                    //     SizedBox(
+                    //       width: MediaQuery.of(context).size.width * 0.09,
+                    //     ),
+                    //     Center(
+                    //       widthFactor: 2.4,
+                    //       child: Text(
+                    //         'Sign in',
+                    //         style: TextStyle(
+                    //             fontSize: 20,
+                    //             fontFamily: 'Mukta',
+                    //             fontWeight: FontWeight.w700,
+                    //             color: background_color),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                    //   ),
+                    // ),
                     SizedBox(
-                      height: 50,
-                    ),
-                    GestureDetector(
-                      onTap: () async {
-                        await FirebaseServices().signInWithGoogle();
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => gender()));
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 15),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: text_color,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(15),
-                              topRight: Radius.circular(15),
-                              bottomLeft: Radius.circular(15),
-                              bottomRight: Radius.circular(15),
-                            )),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Container(
-                              child: Image.asset(Assets.assetsGoogle,scale: 04.8),
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width*0.09,
-                            ),
-                            Text(
-                              'Sign in with Google',
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontFamily: 'Mukta',
-                                  fontWeight: FontWeight.w700,
-                                  color: background_color),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
+                      height: MediaQuery.of(context).size.height * 0.09,
                     ),
                     InkWell(
-                      onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=> sign_up()),);},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => sign_up(),
+                          ),
+                        );
+                      },
                       child: Container(
                         padding: EdgeInsets.symmetric(vertical: 15),
                         alignment: Alignment.center,
@@ -168,14 +172,19 @@ class _onbaording_screenState extends State<onbaording_screen> {
                             width: 05,
                           ),
                           InkWell(
-                            onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=> sign_in()),);},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => sign_in()),
+                              );
+                            },
                             child: Text(
                               'Sign in',
                               style: TextStyle(
-                                color: text_color,
-                                fontSize: 17,
-                                fontWeight: FontWeight.w600
-                              ),
+                                  color: text_color,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w600),
                             ),
                           ),
                         ],

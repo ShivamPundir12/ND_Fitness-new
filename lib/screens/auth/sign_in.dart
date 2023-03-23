@@ -6,7 +6,6 @@ import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/generated/assets.dart';
 import 'package:nd_fitness/screens/auth/admin_sign_in.dart';
 import 'package:nd_fitness/screens/auth/sign_up.dart';
-import 'package:nd_fitness/screens/info/gender.dart';
 import 'package:nd_fitness/screens/onboard/onboarding_scrn.dart';
 import 'package:nd_fitness/services/secure_storage.dart';
 
@@ -46,6 +45,7 @@ class _sign_inState extends State<sign_in> {
       print('error');
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +53,14 @@ class _sign_inState extends State<sign_in> {
       appBar: AppBar(
         backgroundColor: background_color,
         elevation: 0,
-        leading: IconButton(onPressed:(){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> onbaording_screen()),);}, icon: Icon(CupertinoIcons.back)),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => onbaording_screen()),
+              );
+            },
+            icon: Icon(CupertinoIcons.back)),
       ),
       body: Container(
         child: Column(
@@ -140,8 +147,7 @@ class _sign_inState extends State<sign_in> {
                           if (value!.isEmpty) {
                             return "Email is required";
                           }
-                          if (!RegExp(
-                              "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                          if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
                               .hasMatch(value)) {
                             return 'Please a valid Email';
                           }
@@ -191,15 +197,15 @@ class _sign_inState extends State<sign_in> {
                             fontSize: 15,
                             fontFamily: 'Mukta',
                             fontWeight: FontWeight.w500),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Password is required';
-                    } else if (value.trim().length < 6) {
-                      return 'Password must be at least 8 characters in length';
-                    }
-                    return null;
-                  },
-                ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Password is required';
+                          } else if (value.trim().length < 6) {
+                            return 'Password must be at least 8 characters in length';
+                          }
+                          return null;
+                        },
+                      ),
                       SizedBox(
                         height: 20,
                       ),
@@ -212,8 +218,7 @@ class _sign_inState extends State<sign_in> {
                                 color: background_color,
                                 fontSize: 16,
                                 fontFamily: "Mukta",
-                                fontWeight: FontWeight.w500
-                            ),
+                                fontWeight: FontWeight.w500),
                           ),
                         ),
                       ),
@@ -221,7 +226,7 @@ class _sign_inState extends State<sign_in> {
                         height: 20,
                       ),
                       GestureDetector(
-                        onTap:() async {
+                        onTap: () async {
                           try {
                             showDialog(
                                 context: context,
@@ -230,49 +235,30 @@ class _sign_inState extends State<sign_in> {
                                     child: CircularProgressIndicator(),
                                   );
                                 });
-
-                            UserCredential userCredential =
-                            await FirebaseAuth
+                            UserCredential userCredential = await FirebaseAuth
                                 .instance
                                 .signInWithEmailAndPassword(
-                                email:
-                                emailController.text.trim(),
-                                password: passwordController.text
-                                    .trim());
-                            await secureStorage.writeSecureData('email',
-                                userCredential.user!.email.toString());
-                            secureStorage.writeSecureData(
-                                'name',
-                                userCredential.user!.displayName
-                                    .toString());
-                            // storage.write(
-                            //     key: "email",
-                            //     value: userCredential.user?.uid);
-
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => gender(),
-                                ));
+                                    email: emailController.text.trim(),
+                                    password: passwordController.text.trim());
+                            await secureStorage.writeSecureData(
+                                'email', userCredential.user!.email.toString());
+                            secureStorage.writeSecureData('name',
+                                userCredential.user!.displayName.toString());
+                            Navigator.pushNamedAndRemoveUntil(
+                                context, '/gen', ((route) => false));
                           } on FirebaseAuthException catch (e) {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(SnackBar(
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               backgroundColor: Colors.blueGrey.shade300,
                               content: Text(
                                 e.toString(),
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w400),
+                                style: TextStyle(fontWeight: FontWeight.w400),
                               ),
                               shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                  BorderRadius.circular(20)),
+                                  borderRadius: BorderRadius.circular(20)),
                               duration: Duration(seconds: 3),
                               behavior: SnackBarBehavior.floating,
                             ));
                             Navigator.of(context).pop();
-                            // Fluttertoast.showToast(
-                            //     msg: e.toString(),
-                            //     gravity: ToastGravity.BOTTOM);
                           }
                         },
                         child: Container(
@@ -280,9 +266,14 @@ class _sign_inState extends State<sign_in> {
                           padding: EdgeInsets.symmetric(vertical: 18),
                           decoration: BoxDecoration(
                               color: background_color,
-                              borderRadius: BorderRadius.circular(15)
+                              borderRadius: BorderRadius.circular(15)),
+                          child: Text(
+                            'Sign in',
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                                color: text_color2),
                           ),
-                          child: Text('Sign in', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: text_color2),),
                         ),
                       ),
                       SizedBox(
@@ -303,14 +294,20 @@ class _sign_inState extends State<sign_in> {
                               width: 05,
                             ),
                             InkWell(
-                              onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=> admin_sign_in(),),);},
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => admin_sign_in(),
+                                  ),
+                                );
+                              },
                               child: Text(
                                 'Sign in',
                                 style: TextStyle(
                                     color: background_color,
                                     fontSize: 17,
-                                    fontWeight: FontWeight.w600
-                                ),
+                                    fontWeight: FontWeight.w600),
                               ),
                             ),
                           ],
@@ -334,14 +331,20 @@ class _sign_inState extends State<sign_in> {
                               width: 05,
                             ),
                             InkWell(
-                              onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=> sign_up(),),);},
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => sign_up(),
+                                  ),
+                                );
+                              },
                               child: Text(
                                 'Sign up',
                                 style: TextStyle(
                                     color: background_color,
                                     fontSize: 17,
-                                    fontWeight: FontWeight.w600
-                                ),
+                                    fontWeight: FontWeight.w600),
                               ),
                             ),
                           ],
