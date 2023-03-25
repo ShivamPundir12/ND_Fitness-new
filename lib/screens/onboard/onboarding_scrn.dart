@@ -1,40 +1,54 @@
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/materials/colors.dart';
-import 'package:nd_fitness/generated/assets.dart';
 import 'package:nd_fitness/screens/auth/sign_in.dart';
-
 import '../auth/sign_up.dart';
+import 'photo_hero.dart';
 
 class onbaording_screen extends StatefulWidget {
-  const onbaording_screen({Key? key}) : super(key: key);
+  onbaording_screen({Key? key}) : super(key: key);
 
   @override
   State<onbaording_screen> createState() => _onbaording_screenState();
 }
 
-class _onbaording_screenState extends State<onbaording_screen> {
+class _onbaording_screenState extends State<onbaording_screen>
+    with TickerProviderStateMixin {
+  late AnimationController controller;
+  late Animation<double> animation;
+
+  initState() {
+    super.initState();
+    controller = AnimationController(
+        duration: Duration(milliseconds: 4500), vsync: this);
+    animation = CurvedAnimation(parent: controller, curve: Curves.easeIn);
+
+    controller.forward();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: background_color,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              alignment: Alignment.center,
-              padding:
-                  EdgeInsets.only(top: MediaQuery.of(context).size.height / 4),
-              child: Image.asset(
-                Assets.assetsLogo,
-                scale: 22,
-              ),
+      backgroundColor: background_color,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            alignment: Alignment.center,
+            padding:
+                EdgeInsets.only(top: MediaQuery.of(context).size.height / 4),
+            child: PhotoHero(
+              photo: 'assets/logo.png',
+              width: 110,
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.08),
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+          ),
+          Padding(
+            padding:
+                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.08),
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: FadeTransition(
+                opacity: animation,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,60 +89,12 @@ class _onbaording_screenState extends State<onbaording_screen> {
                         ),
                       ),
                     ),
-                    // SizedBox(
-                    //   height: 50,
-                    // ),
-                    // GestureDetector(
-                    //   onTap: () async {
-                    //     await FirebaseServices().signInWithGoogle();
-                    //     Navigator.pushNamed(context, '/age');
-                    //   },
-                    // child: Container(
-                    //   padding: EdgeInsets.symmetric(vertical: 15),
-                    //   alignment: Alignment.center,
-                    //   decoration: BoxDecoration(
-                    //       color: text_color,
-                    //       borderRadius: BorderRadius.only(
-                    //         topLeft: Radius.circular(15),
-                    //         topRight: Radius.circular(15),
-                    //         bottomLeft: Radius.circular(15),
-                    //         bottomRight: Radius.circular(15),
-                    //       )),
-                    // child: Row(
-                    //   children: [
-                    //     SizedBox(
-                    //       width: 28,
-                    //     ),
-                    //     Container(child: Icon(Icons.mail_outline)),
-                    //     SizedBox(
-                    //       width: MediaQuery.of(context).size.width * 0.09,
-                    //     ),
-                    //     Center(
-                    //       widthFactor: 2.4,
-                    //       child: Text(
-                    //         'Sign in',
-                    //         style: TextStyle(
-                    //             fontSize: 20,
-                    //             fontFamily: 'Mukta',
-                    //             fontWeight: FontWeight.w700,
-                    //             color: background_color),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                    //   ),
-                    // ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.09,
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => sign_up(),
-                          ),
-                        );
+                        Navigator.pushNamed(context, '/signup');
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(vertical: 15),
@@ -194,7 +160,9 @@ class _onbaording_screenState extends State<onbaording_screen> {
                 ),
               ),
             ),
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 }
