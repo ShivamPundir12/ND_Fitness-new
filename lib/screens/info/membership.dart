@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../materials/colors.dart';
+import '../../services/secure_storage.dart';
 
 class membership extends StatefulWidget {
   const membership({Key? key}) : super(key: key);
@@ -10,9 +12,25 @@ class membership extends StatefulWidget {
 }
 
 class _membershipState extends State<membership> {
+  final secure_storage secureStorage = secure_storage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut().whenComplete(
+                    () => secureStorage.deleteSecureData('email').whenComplete(
+                          () => Navigator.pushNamedAndRemoveUntil(
+                              context, '/signin', (route) => false),
+                        ));
+              },
+              icon: Icon(Icons.logout_outlined))
+        ],
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
       backgroundColor: background_color,
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 30),
@@ -21,7 +39,7 @@ class _membershipState extends State<membership> {
           children: [
             Container(
               padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.11),
+                  top: MediaQuery.of(context).size.height * 0.0),
               child: Text(
                 "Select your",
                 style: TextStyle(
