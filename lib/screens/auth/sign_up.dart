@@ -57,10 +57,7 @@ class _sign_upState extends State<sign_up> {
         elevation: 0,
         leading: IconButton(
             onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => onbaording_screen()),
-              );
+              Navigator.pushNamed(context, '/');
             },
             icon: Icon(CupertinoIcons.back)),
       ),

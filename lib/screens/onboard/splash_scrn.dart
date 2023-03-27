@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:nd_fitness/screens/auth/sign_in.dart';
 import 'package:nd_fitness/screens/info/gender.dart';
-import 'package:page_transition/page_transition.dart';
+import 'package:nd_fitness/screens/onboard/onboarding_scrn.dart';
+import 'package:nd_fitness/screens/onboard/photo_hero.dart';
 
 import '../../services/secure_storage.dart';
 
@@ -26,12 +26,17 @@ class _SplashScreenState extends State<SplashScreen> {
       finalName = value;
     });
     Timer(
-        Duration(seconds: 3),
-        () => Navigator.pushReplacement(
-            context,
-            PageTransition(
-                child: finalEmail == null ? sign_in() : gender(),
-                type: PageTransitionType.rightToLeftWithFade)));
+      Duration(seconds: 4),
+      () => Navigator.pushReplacement(
+        context,
+        PageRouteBuilder(
+          transitionDuration: Duration(seconds: 4),
+          pageBuilder: ((BuildContext context, animation, secondaryAnimation) {
+            return finalEmail == null ? onbaording_screen() : gender();
+          }),
+        ),
+      ),
+    );
     super.initState();
   }
 
@@ -41,14 +46,11 @@ class _SplashScreenState extends State<SplashScreen> {
         backgroundColor: Color(0xff08074C),
         body: Padding(
           padding: EdgeInsets.only(
-            top: 90,
+            top: 70,
           ),
           child: Center(
             child: Container(
-              child: Image.asset(
-                'assets/logo.png',
-                scale: 14,
-              ),
+              child: PhotoHero(photo: 'assets/logo.png', width: 110),
             ),
           ),
         ));
