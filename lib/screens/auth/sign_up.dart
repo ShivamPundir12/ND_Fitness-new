@@ -285,7 +285,7 @@ class _sign_upState extends State<sign_up> {
                                       email: emailController.text.trim(),
                                       password: passwordController.text.trim());
                               Navigator.pushNamedAndRemoveUntil(
-                                  context, '/gen', (route) => false);
+                                  context, '/gend', (route) => false);
                             }
                           } on FirebaseAuthException catch (e) {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(

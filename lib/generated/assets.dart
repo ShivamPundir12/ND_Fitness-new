@@ -2,9 +2,12 @@
 class Assets {
   Assets._();
 
+  static const String assetsDone = 'assets/done.png';
   static const String assetsFemale = 'assets/female.png';
   static const String assetsGoogle = 'assets/google.png';
   static const String assetsLogo = 'assets/logo.png';
+  static const String assetsLogosml = 'assets/logosml.png';
   static const String assetsMale = 'assets/male.png';
+  static const String assetsPerson = 'assets/person.png';
 
 }

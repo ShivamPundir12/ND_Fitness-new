@@ -245,7 +245,7 @@ class _sign_inState extends State<sign_in> {
                             secureStorage.writeSecureData('name',
                                 userCredential.user!.displayName.toString());
                             Navigator.pushNamedAndRemoveUntil(
-                                context, '/gen', ((route) => false));
+                                context, '/gend', ((route) => false));
                           } on FirebaseAuthException catch (e) {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               backgroundColor: Colors.blueGrey.shade300,
