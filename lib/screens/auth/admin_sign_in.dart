@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/generated/assets.dart';
-import 'package:nd_fitness/screens/auth/sign_in.dart';
 
 class admin_sign_in extends StatefulWidget {
   const admin_sign_in({Key? key}) : super(key: key);
@@ -19,7 +18,11 @@ class _admin_sign_inState extends State<admin_sign_in> {
       appBar: AppBar(
         backgroundColor: background_color,
         elevation: 0,
-        leading: IconButton(onPressed:(){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> sign_in(),),);}, icon: Icon(CupertinoIcons.back)),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/signin');
+            },
+            icon: Icon(CupertinoIcons.back)),
       ),
       body: Container(
         child: Column(
@@ -140,8 +143,7 @@ class _admin_sign_inState extends State<admin_sign_in> {
                             color: background_color,
                             fontSize: 16,
                             fontFamily: "Mukta",
-                            fontWeight: FontWeight.w500
-                        ),
+                            fontWeight: FontWeight.w500),
                       ),
                     ),
                     SizedBox(
@@ -152,9 +154,14 @@ class _admin_sign_inState extends State<admin_sign_in> {
                       padding: EdgeInsets.symmetric(vertical: 18),
                       decoration: BoxDecoration(
                           color: background_color,
-                          borderRadius: BorderRadius.circular(15)
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Text(
+                        'Sign in',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: text_color2),
                       ),
-                      child: Text('Sign in', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: text_color2),),
                     ),
                   ],
                 ),
@@ -166,4 +173,3 @@ class _admin_sign_inState extends State<admin_sign_in> {
     );
   }
 }
-

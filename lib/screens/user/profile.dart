@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/generated/assets.dart';
 
@@ -16,8 +15,7 @@ class _Usr_ProfileState extends State<Usr_Profile> {
       backgroundColor: Colors.transparent,
       body: Container(
         decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage(Assets.assetsPerson))
-        ),
+            image: DecorationImage(image: AssetImage(Assets.assetsPerson))),
       ),
     );
   }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/screens/auth/sign_in.dart';
-import '../auth/sign_up.dart';
 import 'photo_hero.dart';
 
 class onbaording_screen extends StatefulWidget {
@@ -19,7 +18,7 @@ class _onbaording_screenState extends State<onbaording_screen>
   initState() {
     super.initState();
     controller = AnimationController(
-        duration: Duration(milliseconds: 4500), vsync: this);
+        duration: Duration(milliseconds: 4400), vsync: this);
     animation = CurvedAnimation(parent: controller, curve: Curves.easeIn);
 
     controller.forward();
