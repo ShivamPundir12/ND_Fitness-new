@@ -17,8 +17,8 @@ class _Onboard_screenState extends State<Onboard_screen>
 
   initState() {
     super.initState();
-    controller = AnimationController(
-        duration: Duration(seconds: 4), vsync: this);
+    controller =
+        AnimationController(duration: Duration(seconds: 4), vsync: this);
     animation = CurvedAnimation(parent: controller, curve: Curves.easeInOut);
 
     controller.forward();

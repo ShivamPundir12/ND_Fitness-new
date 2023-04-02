@@ -7,13 +7,14 @@ import 'package:nd_fitness/screens/auth/sign_in.dart';
 import 'package:nd_fitness/screens/auth/sign_up.dart';
 import 'package:nd_fitness/screens/info/activity_level.dart';
 import 'package:nd_fitness/screens/info/age/age.dart';
-import 'package:nd_fitness/screens/info/all_set.dart';
 import 'package:nd_fitness/screens/info/gender.dart';
 import 'package:nd_fitness/screens/info/membership.dart';
 import 'package:nd_fitness/screens/info/profile.dart';
 import 'package:nd_fitness/screens/onboard/onboarding_scrn.dart';
 import 'package:nd_fitness/screens/onboard/splash_scrn.dart';
-import 'package:nd_fitness/screens/user/profile.dart';
+
+import 'screens/info/all_set.dart';
+import 'screens/user/profile.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/splash' : (context) => SplashScreen(),
+        '/splash': (context) => SplashScreen(),
         '/onboard': (context) => Onboard_screen(),
         '/signin': (context) => Sign_in(),
         '/signup': (context) => Sign_up(),

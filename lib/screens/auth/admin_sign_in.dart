@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/generated/assets.dart';
-import 'package:nd_fitness/screens/auth/sign_in.dart';
+
+import 'sign_in.dart';
 
 class Admin_sign_in extends StatefulWidget {
   const Admin_sign_in({Key? key}) : super(key: key);

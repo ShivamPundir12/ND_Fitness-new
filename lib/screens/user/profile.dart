@@ -15,8 +15,7 @@ class _Usr_ProfileState extends State<Usr_Profile> {
       backgroundColor: Colors.transparent,
       body: Container(
         decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage(Assets.assetsPerson))
-        ),
+            image: DecorationImage(image: AssetImage(Assets.assetsPerson))),
       ),
     );
   }
