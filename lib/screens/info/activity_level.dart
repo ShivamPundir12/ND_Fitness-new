@@ -3,14 +3,14 @@ import 'package:nd_fitness/screens/info/age/age.dart';
 import 'package:nd_fitness/screens/info/profile.dart';
 import '../../materials/colors.dart';
 
-class activity_level extends StatefulWidget {
-  const activity_level({Key? key}) : super(key: key);
+class Activity_level extends StatefulWidget {
+  const Activity_level({Key? key}) : super(key: key);
 
   @override
-  State<activity_level> createState() => _activity_levelState();
+  State<Activity_level> createState() => _Activity_levelState();
 }
 
-class _activity_levelState extends State<activity_level> {
+class _Activity_levelState extends State<Activity_level> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,7 +122,7 @@ class _activity_levelState extends State<activity_level> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => age(),
+                        builder: (context) => Usr_Age(),
                       ),
                     );
                   },
@@ -159,7 +159,7 @@ class _activity_levelState extends State<activity_level> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => profile(),
+                        builder: (context) => Profile(),
                       ),
                     );
                   },

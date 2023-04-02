@@ -29,7 +29,7 @@ class FirebaseServices {
       print(e.message);
       throw e;
     }
-    return "Error Occured";
+    return "Error occurred";
   }
 
   googleSignOut() async {

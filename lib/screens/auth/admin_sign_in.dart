@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/generated/assets.dart';
 
-class admin_sign_in extends StatefulWidget {
-  const admin_sign_in({Key? key}) : super(key: key);
+import 'sign_in.dart';
+
+class Admin_sign_in extends StatefulWidget {
+  const Admin_sign_in({Key? key}) : super(key: key);
 
   @override
-  State<admin_sign_in> createState() => _admin_sign_inState();
+  State<Admin_sign_in> createState() => _Admin_sign_inState();
 }
 
-class _admin_sign_inState extends State<admin_sign_in> {
+class _Admin_sign_inState extends State<Admin_sign_in> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +22,12 @@ class _admin_sign_inState extends State<admin_sign_in> {
         elevation: 0,
         leading: IconButton(
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '/signin');
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Sign_in(),
+                ),
+              );
             },
             icon: Icon(CupertinoIcons.back)),
       ),

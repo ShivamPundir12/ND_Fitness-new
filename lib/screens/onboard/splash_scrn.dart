@@ -26,13 +26,13 @@ class _SplashScreenState extends State<SplashScreen> {
       finalName = value;
     });
     Timer(
-      Duration(seconds: 4),
+      Duration(seconds: 2),
       () => Navigator.pushReplacement(
         context,
         PageRouteBuilder(
-          transitionDuration: Duration(seconds: 4),
+          transitionDuration: Duration(seconds: 2),
           pageBuilder: ((BuildContext context, animation, secondaryAnimation) {
-            return finalEmail == null ? onbaording_screen() : gender();
+            return finalEmail == null ? Onboard_screen() : Gender();
           }),
         ),
       ),

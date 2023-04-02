@@ -5,16 +5,14 @@ import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/screens/auth/sign_up.dart';
 import 'package:nd_fitness/services/secure_storage.dart';
 
-import '../onboard/photo_hero.dart';
-
-class sign_in extends StatefulWidget {
-  const sign_in({Key? key}) : super(key: key);
+class Sign_in extends StatefulWidget {
+  const Sign_in({Key? key}) : super(key: key);
 
   @override
-  State<sign_in> createState() => _sign_inState();
+  State<Sign_in> createState() => _Sign_inState();
 }
 
-class _sign_inState extends State<sign_in> with TickerProviderStateMixin {
+class _Sign_inState extends State<Sign_in> {
   var email;
   bool _obscuretext = true;
 
@@ -61,7 +59,10 @@ class _sign_inState extends State<sign_in> with TickerProviderStateMixin {
         elevation: 0,
         leading: IconButton(
             onPressed: () {
-              Navigator.pushReplacementNamed(context, "/onboard");
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => Onboard_screen()),
+              );
             },
             icon: Icon(CupertinoIcons.back)),
       ),
@@ -289,80 +290,91 @@ class _sign_inState extends State<sign_in> with TickerProviderStateMixin {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: 100,
-                          ),
-                          Container(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Admin?',
-                                  style: TextStyle(
-                                    color: background_color.withOpacity(0.6),
-                                    fontSize: 15,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 05,
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.pushNamed(context, '/adsignin');
-                                  },
-                                  child: Text(
-                                    'Sign in',
-                                    style: TextStyle(
-                                        color: background_color,
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Didn't have an account?",
-                                  style: TextStyle(
-                                    color: background_color.withOpacity(0.6),
-                                    fontSize: 15,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 05,
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => sign_up(),
-                                      ),
-                                    );
-                                  },
-                                  child: Text(
-                                    'Sign up',
-                                    style: TextStyle(
-                                        color: background_color,
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
                         ],
                       ),
                     ),
                   ),
                 ),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Text(
+                  "Didn't have an account?",
+                  style: TextStyle(
+                    color: background_color.withOpacity(0.6),
+                    fontSize: 15,
+                  ),
+                ),
+                SizedBox(
+                  width: 05,
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Sign_up(),
+                      ),
+                    );
+                    SizedBox(
+                      width: 05,
+                    );
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/adsignin');
+                      },
+                      child: Text(
+                        'Sign in',
+                        style: TextStyle(
+                            color: background_color,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    );
+                  },
+                ),
+              ]),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Didn't have an account?",
+                    style: TextStyle(
+                      color: background_color.withOpacity(0.6),
+                      fontSize: 15,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 05,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Sign_up(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      'Sign up',
+                      style: TextStyle(
+                          color: background_color,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
               ),
             )
           ],

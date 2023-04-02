@@ -3,23 +3,23 @@ import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/screens/auth/sign_in.dart';
 import 'photo_hero.dart';
 
-class onbaording_screen extends StatefulWidget {
-  onbaording_screen({Key? key}) : super(key: key);
+class Onboard_screen extends StatefulWidget {
+  Onboard_screen({Key? key}) : super(key: key);
 
   @override
-  State<onbaording_screen> createState() => _onbaording_screenState();
+  State<Onboard_screen> createState() => _Onboard_screenState();
 }
 
-class _onbaording_screenState extends State<onbaording_screen>
+class _Onboard_screenState extends State<Onboard_screen>
     with TickerProviderStateMixin {
   late AnimationController controller;
   late Animation<double> animation;
 
   initState() {
     super.initState();
-    controller = AnimationController(
-        duration: Duration(milliseconds: 4400), vsync: this);
-    animation = CurvedAnimation(parent: controller, curve: Curves.easeIn);
+    controller =
+        AnimationController(duration: Duration(seconds: 4), vsync: this);
+    animation = CurvedAnimation(parent: controller, curve: Curves.easeInOut);
 
     controller.forward();
   }
@@ -38,12 +38,12 @@ class _onbaording_screenState extends State<onbaording_screen>
                 EdgeInsets.only(top: MediaQuery.of(context).size.height / 4),
             child: PhotoHero(
               photo: 'assets/logo.png',
-              width: 110,
+              width: 95,
             ),
           ),
           Padding(
             padding:
-                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.08),
+                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.12),
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: FadeTransition(
@@ -89,7 +89,7 @@ class _onbaording_screenState extends State<onbaording_screen>
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.09,
+                      height: MediaQuery.of(context).size.height * 0.1,
                     ),
                     InkWell(
                       onTap: () {
@@ -99,9 +99,9 @@ class _onbaording_screenState extends State<onbaording_screen>
                         padding: EdgeInsets.symmetric(vertical: 15),
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          border: Border.all(
-                              strokeAlign: 1.0, width: 2, color: Colors.white),
+                          color: text_color2,
+                          // border: Border.all(
+                          //     strokeAlign: 1.0, width: 2, color: Colors.white),
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(15),
                             topRight: Radius.circular(15),
@@ -114,8 +114,8 @@ class _onbaording_screenState extends State<onbaording_screen>
                           style: TextStyle(
                               fontSize: 20,
                               fontFamily: 'Mukta',
-                              fontWeight: FontWeight.w700,
-                              color: text_color),
+                              fontWeight: FontWeight.w900,
+                              color: background_color),
                         ),
                       ),
                     ),
@@ -141,7 +141,7 @@ class _onbaording_screenState extends State<onbaording_screen>
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => sign_in()),
+                                    builder: (context) => Sign_in()),
                               );
                             },
                             child: Text(

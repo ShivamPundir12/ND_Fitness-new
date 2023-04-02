@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:nd_fitness/generated/assets.dart';
 import 'package:nd_fitness/materials/colors.dart';
 
-class gender extends StatefulWidget {
-  const gender({Key? key}) : super(key: key);
+class Gender extends StatefulWidget {
+  const Gender({Key? key}) : super(key: key);
 
   @override
-  State<gender> createState() => _genderState();
+  State<Gender> createState() => _GenderState();
 }
 
-class _genderState extends State<gender> {
+class _GenderState extends State<Gender> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

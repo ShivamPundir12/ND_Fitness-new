@@ -3,16 +3,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:nd_fitness/materials/colors.dart';
-import 'package:nd_fitness/screens/onboard/photo_hero.dart';
+import 'package:nd_fitness/generated/assets.dart';
 
-class sign_up extends StatefulWidget {
-  const sign_up({Key? key}) : super(key: key);
+import '../onboard/photo_hero.dart';
+
+class Sign_up extends StatefulWidget {
+  const Sign_up({Key? key}) : super(key: key);
 
   @override
-  State<sign_up> createState() => _sign_upState();
+  State<Sign_up> createState() => _Sign_upState();
 }
 
-class _sign_upState extends State<sign_up> with TickerProviderStateMixin {
+class _Sign_upState extends State<Sign_up> {
   var email;
   bool _obscuretext = true;
   bool _obsecuretxt = true;
