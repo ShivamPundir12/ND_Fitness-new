@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import '../../materials/colors.dart';
 import '../../services/secure_storage.dart';
 
-class membership extends StatefulWidget {
-  const membership({Key? key}) : super(key: key);
+class Membership extends StatefulWidget {
+  const Membership({Key? key}) : super(key: key);
 
   @override
-  State<membership> createState() => _membershipState();
+  State<Membership> createState() => _MembershipState();
 }
 
-class _membershipState extends State<membership> {
+class _MembershipState extends State<Membership> {
   final secure_storage secureStorage = secure_storage();
   @override
   Widget build(BuildContext context) {

@@ -6,14 +6,14 @@ import 'package:nd_fitness/screens/info/gender.dart';
 import '../../../materials/colors.dart';
 import 'data/statemodel.dart';
 
-class age extends StatefulWidget {
-  const age({Key? key}) : super(key: key);
+class Usr_Age extends StatefulWidget {
+  const Usr_Age({Key? key}) : super(key: key);
 
   @override
-  State<age> createState() => _ageState();
+  State<Usr_Age> createState() => _Usr_AgeState();
 }
 
-class _ageState extends State<age> {
+class _Usr_AgeState extends State<Usr_Age> {
   List<Age> states = [];
 
   String currentstate = '16';
@@ -129,7 +129,7 @@ class _ageState extends State<age> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => gender(),
+                          builder: (context) => Gender(),
                         ),
                       );
                     },
@@ -167,7 +167,7 @@ class _ageState extends State<age> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => activity_level(),
+                          builder: (context) => Activity_level(),
                         ),
                       );
                     },

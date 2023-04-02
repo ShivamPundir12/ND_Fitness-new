@@ -9,14 +9,14 @@ import 'package:nd_fitness/screens/auth/sign_up.dart';
 import 'package:nd_fitness/screens/onboard/onboarding_scrn.dart';
 import 'package:nd_fitness/services/secure_storage.dart';
 
-class sign_in extends StatefulWidget {
-  const sign_in({Key? key}) : super(key: key);
+class Sign_in extends StatefulWidget {
+  const Sign_in({Key? key}) : super(key: key);
 
   @override
-  State<sign_in> createState() => _sign_inState();
+  State<Sign_in> createState() => _Sign_inState();
 }
 
-class _sign_inState extends State<sign_in> {
+class _Sign_inState extends State<Sign_in> {
   final storage = FlutterSecureStorage();
 
   var email;
@@ -57,7 +57,7 @@ class _sign_inState extends State<sign_in> {
             onPressed: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => onbaording_screen()),
+                MaterialPageRoute(builder: (context) => Onboard_screen()),
               );
             },
             icon: Icon(CupertinoIcons.back)),
@@ -298,7 +298,7 @@ class _sign_inState extends State<sign_in> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => admin_sign_in(),
+                                    builder: (context) => Admin_sign_in(),
                                   ),
                                 );
                               },
@@ -335,7 +335,7 @@ class _sign_inState extends State<sign_in> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => sign_up(),
+                                    builder: (context) => Sign_up(),
                                   ),
                                 );
                               },

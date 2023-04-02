@@ -1,16 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/materials/colors.dart';
-import 'package:nd_fitness/screens/info/membership.dart';
 
-class profile extends StatefulWidget {
-  const profile({Key? key}) : super(key: key);
+import 'membership.dart';
+
+class Profile extends StatefulWidget {
+  const Profile({Key? key}) : super(key: key);
 
   @override
-  State<profile> createState() => _profileState();
+  State<Profile> createState() => _ProfileState();
 }
 
-class _profileState extends State<profile> {
+class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +70,7 @@ class _profileState extends State<profile> {
                             children: [
                               TextFormField(
                                 decoration: InputDecoration(
-                                  hintText: 'Enter your fullname',
+                                  hintText: 'Enter your full name',
                                   suffixIcon: Icon(CupertinoIcons.person),
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(18)),
@@ -163,7 +164,7 @@ class _profileState extends State<profile> {
                               ),
                               TextFormField(
                                 decoration: InputDecoration(
-                                  hintText: 'Enter your fullname',
+                                  hintText: 'Enter your full name',
                                   suffixIcon: Icon(CupertinoIcons.person),
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(18)),
@@ -219,7 +220,7 @@ class _profileState extends State<profile> {
                           top: MediaQuery.of(context).size.height * 0.05,
                           bottom: MediaQuery.of(context).size.height * 0.06),
                       child: GestureDetector(
-                        onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=> membership(),),);},
+                        onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=> Membership(),),);},
                         child: Container(
                           padding: EdgeInsets.symmetric(vertical: 15),
                           alignment: Alignment.center,
