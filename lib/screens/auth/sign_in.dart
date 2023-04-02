@@ -5,6 +5,9 @@ import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/screens/auth/sign_up.dart';
 import 'package:nd_fitness/services/secure_storage.dart';
 
+import '../onboard/onboarding_scrn.dart';
+import '../onboard/photo_hero.dart';
+
 class Sign_in extends StatefulWidget {
   const Sign_in({Key? key}) : super(key: key);
 
@@ -12,7 +15,7 @@ class Sign_in extends StatefulWidget {
   State<Sign_in> createState() => _Sign_inState();
 }
 
-class _Sign_inState extends State<Sign_in> {
+class _Sign_inState extends State<Sign_in> with TickerProviderStateMixin {
   var email;
   bool _obscuretext = true;
 

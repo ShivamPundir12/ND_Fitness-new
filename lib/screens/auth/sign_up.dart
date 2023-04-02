@@ -3,9 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:nd_fitness/materials/colors.dart';
-import 'package:nd_fitness/generated/assets.dart';
-
-import '../onboard/photo_hero.dart';
+import 'package:nd_fitness/screens/onboard/photo_hero.dart';
 
 class Sign_up extends StatefulWidget {
   const Sign_up({Key? key}) : super(key: key);
@@ -14,7 +12,7 @@ class Sign_up extends StatefulWidget {
   State<Sign_up> createState() => _Sign_upState();
 }
 
-class _Sign_upState extends State<Sign_up> {
+class _Sign_upState extends State<Sign_up> with TickerProviderStateMixin {
   var email;
   bool _obscuretext = true;
   bool _obsecuretxt = true;
