@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/materials/colors.dart';
-import 'package:nd_fitness/screens/auth/sign_in.dart';
 import 'photo_hero.dart';
 
 class Onboard_screen extends StatefulWidget {
@@ -34,129 +33,95 @@ class _Onboard_screenState extends State<Onboard_screen>
         children: [
           Container(
             alignment: Alignment.center,
-            padding:
-                EdgeInsets.only(top: MediaQuery.of(context).size.height / 4),
+            padding: const EdgeInsets.only(top: 200),
             child: PhotoHero(
               photo: 'assets/logo.png',
               width: 95,
             ),
           ),
-          Padding(
-            padding:
-                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.12),
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: FadeTransition(
-                opacity: animation,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      child: Text(
-                        'Welcome',
+          const SizedBox(height: 50),
+          FadeTransition(
+            opacity: animation,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Welcome',
+                    style: TextStyle(
+                      fontFamily: 'Mukta',
+                      fontSize: 35,
+                      color: text_color2,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    'Track your Growth',
+                    style: TextStyle(
+                      fontFamily: 'Mukta',
+                      fontSize: 22,
+                      color: text_color2.withOpacity(0.8),
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                  Text(
+                    'seamlessly & intuitively',
+                    style: TextStyle(
+                      fontFamily: 'Mukta',
+                      fontSize: 22,
+                      color: text_color2,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  const SizedBox(height: 80),
+                  InkWell(
+                    onTap: () => Navigator.pushNamed(context, '/signup'),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: text_color2,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: const Text(
+                        'Create an account',
                         style: TextStyle(
+                          fontSize: 20,
                           fontFamily: 'Mukta',
-                          fontSize: 35,
-                          color: text_color2,
                           fontWeight: FontWeight.w900,
+                          color: background_color,
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      child: Text(
-                        'Track your Growth',
+                  ),
+                  const SizedBox(height: 30),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Already have an account?',
                         style: TextStyle(
-                          fontFamily: 'Mukta',
-                          fontSize: 22,
-                          color: text_color2.withOpacity(0.8),
-                          fontWeight: FontWeight.w300,
+                          color: Colors.grey,
+                          fontSize: 15,
                         ),
                       ),
-                    ),
-                    Container(
-                      child: Text(
-                        'seamlessly & intuitively',
-                        style: TextStyle(
-                          fontFamily: 'Mukta',
-                          fontSize: 22,
-                          color: text_color2,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.1,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/signup');
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 15),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: text_color2,
-                          // border: Border.all(
-                          //     strokeAlign: 1.0, width: 2, color: Colors.white),
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(15),
-                            topRight: Radius.circular(15),
-                            bottomLeft: Radius.circular(15),
-                            bottomRight: Radius.circular(15),
-                          ),
-                        ),
-                        child: Text(
-                          'Create an account',
+                      const SizedBox(width: 5),
+                      InkWell(
+                        onTap: () => Navigator.pushNamed(context, '/signin'),
+                        child: const Text(
+                          'Sign in',
                           style: TextStyle(
-                              fontSize: 20,
-                              fontFamily: 'Mukta',
-                              fontWeight: FontWeight.w900,
-                              color: background_color),
+                            color: text_color,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Already have an account?',
-                            style: TextStyle(
-                              color: text_color.withOpacity(0.6),
-                              fontSize: 15,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 05,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Sign_in()),
-                              );
-                            },
-                            child: Text(
-                              'Sign in',
-                              style: TextStyle(
-                                  color: text_color,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                    ],
+                  )
+                ],
               ),
             ),
           ),
