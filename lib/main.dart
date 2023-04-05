@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
         // '/gen': (context) => gender(),
         // '/age': (context) => age(),
       },
-      home: SplashScreen(),
+      home: Usr_Profile(),
     );
   }
 }
