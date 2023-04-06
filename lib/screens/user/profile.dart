@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/generated/assets.dart';
+import 'package:nd_fitness/materials/colors.dart';
 
 class Usr_Profile extends StatefulWidget {
   const Usr_Profile({Key? key}) : super(key: key);
@@ -12,44 +13,123 @@ class _Usr_ProfileState extends State<Usr_Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(Assets.assetsPerson),
-                    fit: BoxFit.fitHeight)),
-          ),
-          Padding(
-            padding:
-                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.5),
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.40,
-              width: MediaQuery.of(context).size.width * 0.90,
-              margin: EdgeInsets.all(20),
+        backgroundColor: Colors.transparent,
+        body: Stack(
+          fit: StackFit.passthrough,
+          alignment: Alignment.bottomCenter,
+          children: [
+            Container(
               decoration: BoxDecoration(
-                //decoration for the outer wrapper
-                color: Colors.white70,
-                borderRadius: BorderRadius.circular(
-                    30), //border radius exactly to ClipRRect
+                  image:
+                      DecorationImage(image: AssetImage(Assets.assetsPerson))),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              height: MediaQuery.of(context).size.height * 0.35,
+              width: MediaQuery.of(context).size.width * 0.9,
+              decoration: BoxDecoration(
+                color: text_color.withOpacity(0.75),
+                borderRadius: BorderRadius.circular(15),
               ),
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                    horizontal: MediaQuery.of(context).size.width * 0.08,
-                    vertical: MediaQuery.of(context).size.height * 0.03),
-                child: Text(
-                  'DAVID WARNER',
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontFamily: 'Mukta',
-                      fontWeight: FontWeight.w800,
-                      color: Colors.black),
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        child: Text(
+                          "David Warner",
+                          style: TextStyle(
+                              fontSize: 33,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: 'Mukta',
+                              color: Colors.black),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 12),
+                        child: Container(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 2, horizontal: 20),
+                          decoration: BoxDecoration(
+                              color: card,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Text(
+                            'Member',
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontFamily: 'Mukta',
+                                fontWeight: FontWeight.w700,
+                                color: Colors.black),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    child: Text(
+                      "davidwarner123@gmail.com",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: 'Mukta',
+                          color: Colors.black),
+                    ),
+                  ),
+                  Container(
+                    child: Text(
+                      "+91 5684623212",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: 'Mukta',
+                          color: Colors.black),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    child: Text(
+                      "House no. 13, downtown streets, California, New York",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: 'Mukta',
+                          color: Colors.black),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                      decoration: BoxDecoration(
+                          color: Colors.black87,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Text(
+                        'Settings',
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontFamily: 'Mukta',
+                            fontWeight: FontWeight.w700,
+                            color: text_color2),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ));
   }
 }

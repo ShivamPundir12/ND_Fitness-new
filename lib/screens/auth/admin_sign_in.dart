@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/generated/assets.dart';
 
+import '../../widgets/textstyle.dart';
 import 'sign_in.dart';
 
 class Admin_sign_in extends StatefulWidget {
@@ -88,11 +89,9 @@ class _Admin_sign_inState extends State<Admin_sign_in> {
                     Container(
                       child: Text(
                         'Owner Id',
-                        style: TextStyle(
-                            color: Colors.black.withOpacity(0.7),
-                            fontSize: 18,
-                            fontFamily: 'Mukta',
-                            fontWeight: FontWeight.w500),
+                        style: customstyle(
+                          color: Colors.black.withOpacity(0.7),
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -105,11 +104,10 @@ class _Admin_sign_inState extends State<Admin_sign_in> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(18)),
                       ),
-                      style: TextStyle(
-                          color: Colors.black.withOpacity(0.4),
-                          fontSize: 15,
-                          fontFamily: 'Mukta',
-                          fontWeight: FontWeight.w500),
+                      style: customstyle(
+                        size: 15,
+                        color: Colors.black.withOpacity(0.4),
+                      ),
                     ),
                     SizedBox(
                       height: 15,
@@ -117,11 +115,9 @@ class _Admin_sign_inState extends State<Admin_sign_in> {
                     Container(
                       child: Text(
                         'Password',
-                        style: TextStyle(
-                            color: Colors.black.withOpacity(0.7),
-                            fontSize: 18,
-                            fontFamily: 'Mukta',
-                            fontWeight: FontWeight.w500),
+                        style: customstyle(
+                          color: Colors.black.withOpacity(0.7),
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -134,11 +130,10 @@ class _Admin_sign_inState extends State<Admin_sign_in> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(18)),
                       ),
-                      style: TextStyle(
-                          color: Colors.black.withOpacity(0.4),
-                          fontSize: 15,
-                          fontFamily: 'Mukta',
-                          fontWeight: FontWeight.w500),
+                      style: customstyle(
+                        size: 15,
+                        color: Colors.black.withOpacity(0.4),
+                      ),
                     ),
                     SizedBox(
                       height: 20,
@@ -146,11 +141,10 @@ class _Admin_sign_inState extends State<Admin_sign_in> {
                     Container(
                       child: Text(
                         "Forgot password?",
-                        style: TextStyle(
-                            color: background_color,
-                            fontSize: 16,
-                            fontFamily: "Mukta",
-                            fontWeight: FontWeight.w500),
+                        style: customstyle(
+                          size: 16,
+                          color: background_color,
+                        ),
                       ),
                     ),
                     SizedBox(

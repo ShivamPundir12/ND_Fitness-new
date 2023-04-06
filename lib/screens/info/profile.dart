@@ -220,7 +220,14 @@ class _ProfileState extends State<Profile> {
                           top: MediaQuery.of(context).size.height * 0.05,
                           bottom: MediaQuery.of(context).size.height * 0.06),
                       child: GestureDetector(
-                        onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=> Membership(),),);},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Membership(),
+                            ),
+                          );
+                        },
                         child: Container(
                           padding: EdgeInsets.symmetric(vertical: 15),
                           alignment: Alignment.center,
