@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:nd_fitness/services/secure_storage.dart';
 
-
 class FirebaseServices {
   final _auth = FirebaseAuth.instance;
   final _googleSignIn = GoogleSignIn();
@@ -10,20 +9,17 @@ class FirebaseServices {
   Future<String> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleSignInAccount =
-      await _googleSignIn.signIn();
+          await _googleSignIn.signIn();
       if (googleSignInAccount != null) {
         final GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount.authentication;
+            await googleSignInAccount.authentication;
         final AuthCredential authCredential = GoogleAuthProvider.credential(
             accessToken: googleSignInAuthentication.accessToken,
             idToken: googleSignInAuthentication.idToken);
         await _auth.signInWithCredential(authCredential);
+        secureStorage.writeSecureData('email', googleSignInAccount.email);
         secureStorage.writeSecureData(
-            'email',googleSignInAccount.email
-        );
-        secureStorage.writeSecureData(
-            'name',googleSignInAccount.displayName ?? ""
-        );
+            'name', googleSignInAccount.displayName ?? "");
       }
     } on FirebaseAuthException catch (e) {
       print(e.message);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/screens/auth/sign_in.dart';
-import 'photo_hero.dart';
+import 'material/photo_hero.dart';
 
 class Onboard_screen extends StatefulWidget {
   Onboard_screen({Key? key}) : super(key: key);

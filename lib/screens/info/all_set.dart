@@ -33,9 +33,11 @@ class _AllSetState extends State<AllSet> {
             ),
             Container(
               padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height*0.2
+                  top: MediaQuery.of(context).size.height * 0.2),
+              child: Image.asset(
+                Assets.assetsDone,
+                scale: 1.2,
               ),
-              child: Image.asset(Assets.assetsDone, scale: 1.2,),
             )
           ],
         ),

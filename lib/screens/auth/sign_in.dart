@@ -5,8 +5,9 @@ import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/screens/auth/sign_up.dart';
 import 'package:nd_fitness/services/secure_storage.dart';
 
+import '../../widgets/textstyle.dart';
 import '../onboard/onboarding_scrn.dart';
-import '../onboard/photo_hero.dart';
+import '../onboard/material/photo_hero.dart';
 
 class Sign_in extends StatefulWidget {
   const Sign_in({Key? key}) : super(key: key);
@@ -131,11 +132,9 @@ class _Sign_inState extends State<Sign_in> with TickerProviderStateMixin {
                           Container(
                             child: Text(
                               'Username or Email',
-                              style: TextStyle(
-                                  color: Colors.black.withOpacity(0.7),
-                                  fontSize: 18,
-                                  fontFamily: 'Mukta',
-                                  fontWeight: FontWeight.w500),
+                              style: customstyle(
+                                color: Colors.black.withOpacity(0.7),
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -149,11 +148,10 @@ class _Sign_inState extends State<Sign_in> with TickerProviderStateMixin {
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(18)),
                             ),
-                            style: TextStyle(
-                                color: Colors.black.withOpacity(0.4),
-                                fontSize: 15,
-                                fontFamily: 'Mukta',
-                                fontWeight: FontWeight.w500),
+                            style: customstyle(
+                              size: 15,
+                              color: Colors.black.withOpacity(0.4),
+                            ),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Email is required";
@@ -175,11 +173,9 @@ class _Sign_inState extends State<Sign_in> with TickerProviderStateMixin {
                           Container(
                             child: Text(
                               'Password',
-                              style: TextStyle(
-                                  color: Colors.black.withOpacity(0.7),
-                                  fontSize: 18,
-                                  fontFamily: 'Mukta',
-                                  fontWeight: FontWeight.w500),
+                              style: customstyle(
+                                color: Colors.black.withOpacity(0.7),
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -204,11 +200,10 @@ class _Sign_inState extends State<Sign_in> with TickerProviderStateMixin {
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(18)),
                             ),
-                            style: TextStyle(
-                                color: Colors.black.withOpacity(0.4),
-                                fontSize: 15,
-                                fontFamily: 'Mukta',
-                                fontWeight: FontWeight.w500),
+                            style: customstyle(
+                              size: 15,
+                              color: Colors.black.withOpacity(0.4),
+                            ),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Password is required';
@@ -226,11 +221,10 @@ class _Sign_inState extends State<Sign_in> with TickerProviderStateMixin {
                             child: Container(
                               child: Text(
                                 "Forgot password?",
-                                style: TextStyle(
-                                    color: background_color,
-                                    fontSize: 16,
-                                    fontFamily: "Mukta",
-                                    fontWeight: FontWeight.w500),
+                                style: customstyle(
+                                  size: 16,
+                                  color: background_color,
+                                ),
                               ),
                             ),
                           ),

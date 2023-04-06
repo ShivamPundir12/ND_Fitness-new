@@ -25,21 +25,20 @@ class _Admin_ReminderState extends State<Admin_Reminder> {
               children: [
                 Container(
                   padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height*0.03
-                  ),
+                      top: MediaQuery.of(context).size.height * 0.03),
                   child: Image.asset(Assets.assetsLogosml),
                 ),
                 Container(
                   padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height*0.08
-                  ),
-                  child: Text('Reminder',
+                      top: MediaQuery.of(context).size.height * 0.08),
+                  child: Text(
+                    'Reminder',
                     style: TextStyle(
                         color: text_color2,
                         fontSize: 38,
                         fontFamily: 'Mukta',
-                        fontWeight: FontWeight.w900
-                    ),),
+                        fontWeight: FontWeight.w900),
+                  ),
                 )
               ],
             ),

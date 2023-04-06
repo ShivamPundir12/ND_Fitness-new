@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/screens/admin/admin_reminder.dart';
 import 'package:nd_fitness/screens/admin/admn_home.dart';
+import 'package:nd_fitness/screens/admin/member/member_profile.dart';
 import 'package:nd_fitness/screens/auth/admin_sign_in.dart';
 import 'package:nd_fitness/screens/auth/sign_in.dart';
 import 'package:nd_fitness/screens/auth/sign_up.dart';
@@ -43,13 +44,11 @@ class MyApp extends StatelessWidget {
         '/member': (context) => Membership(),
         '/adsignin': (context) => Admin_sign_in(),
         '/adhome': (context) => Admin_Home(),
+        '/adreminder': (context) => Admin_Reminder(),
         '/usrprofile': (context) => Usr_Profile(),
         '/allset': (context) => AllSet(),
-        // '/gen': (context) => gender(),
-        // '/gen': (context) => gender(),
-        // '/age': (context) => age(),
       },
-      home: Admin_Reminder(),
+      home: Member_Profile(),
     );
   }
 }

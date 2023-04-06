@@ -3,7 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:nd_fitness/materials/colors.dart';
-import 'package:nd_fitness/screens/onboard/photo_hero.dart';
+import 'package:nd_fitness/screens/onboard/material/photo_hero.dart';
+import 'package:nd_fitness/widgets/textstyle.dart';
 
 class Sign_up extends StatefulWidget {
   const Sign_up({Key? key}) : super(key: key);
@@ -26,7 +27,7 @@ class _Sign_upState extends State<Sign_up> with TickerProviderStateMixin {
     super.initState();
     controller =
         AnimationController(duration: Duration(minutes: 1), vsync: this);
-    animation = Tween<double>(begin: 0, end: 500).animate(controller);
+    animation = Tween<double>(begin: 0, end: 600).animate(controller);
 
     controller.forward();
   }
@@ -129,11 +130,9 @@ class _Sign_upState extends State<Sign_up> with TickerProviderStateMixin {
                           Container(
                             child: Text(
                               'Email',
-                              style: TextStyle(
-                                  color: Colors.black.withOpacity(0.7),
-                                  fontSize: 18,
-                                  fontFamily: 'Mukta',
-                                  fontWeight: FontWeight.w500),
+                              style: customstyle(
+                                color: Colors.black.withOpacity(0.7),
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -161,11 +160,10 @@ class _Sign_upState extends State<Sign_up> with TickerProviderStateMixin {
                             onSaved: (value) {
                               email = value;
                             },
-                            style: TextStyle(
-                                color: Colors.black.withOpacity(0.4),
-                                fontSize: 15,
-                                fontFamily: 'Mukta',
-                                fontWeight: FontWeight.w500),
+                            style: customstyle(
+                              size: 15,
+                              color: Colors.black.withOpacity(0.4),
+                            ),
                           ),
                           SizedBox(
                             height: 15,
@@ -173,11 +171,9 @@ class _Sign_upState extends State<Sign_up> with TickerProviderStateMixin {
                           Container(
                             child: Text(
                               'Password',
-                              style: TextStyle(
-                                  color: Colors.black.withOpacity(0.7),
-                                  fontSize: 18,
-                                  fontFamily: 'Mukta',
-                                  fontWeight: FontWeight.w500),
+                              style: customstyle(
+                                color: Colors.black.withOpacity(0.7),
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -211,11 +207,10 @@ class _Sign_upState extends State<Sign_up> with TickerProviderStateMixin {
                               }
                               return null;
                             },
-                            style: TextStyle(
-                                color: Colors.black.withOpacity(0.4),
-                                fontSize: 15,
-                                fontFamily: 'Mukta',
-                                fontWeight: FontWeight.w500),
+                            style: customstyle(
+                              size: 15,
+                              color: Colors.black.withOpacity(0.4),
+                            ),
                           ),
                           SizedBox(
                             height: 15,
@@ -223,11 +218,9 @@ class _Sign_upState extends State<Sign_up> with TickerProviderStateMixin {
                           Container(
                             child: Text(
                               'Confirm password',
-                              style: TextStyle(
-                                  color: Colors.black.withOpacity(0.7),
-                                  fontSize: 18,
-                                  fontFamily: 'Mukta',
-                                  fontWeight: FontWeight.w500),
+                              style: customstyle(
+                                color: Colors.black.withOpacity(0.7),
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -255,11 +248,10 @@ class _Sign_upState extends State<Sign_up> with TickerProviderStateMixin {
                             validator: MultiValidator([
                               RequiredValidator(errorText: 'Enter Something'),
                             ]),
-                            style: TextStyle(
-                                color: Colors.black.withOpacity(0.4),
-                                fontSize: 15,
-                                fontFamily: 'Mukta',
-                                fontWeight: FontWeight.w500),
+                            style: customstyle(
+                              size: 15,
+                              color: Colors.black.withOpacity(0.4),
+                            ),
                           ),
                           SizedBox(
                             height: 20,
@@ -267,11 +259,10 @@ class _Sign_upState extends State<Sign_up> with TickerProviderStateMixin {
                           Container(
                             child: Text(
                               "Forgot password?",
-                              style: TextStyle(
-                                  color: background_color,
-                                  fontSize: 16,
-                                  fontFamily: "Mukta",
-                                  fontWeight: FontWeight.w500),
+                              style: customstyle(
+                                size: 16,
+                                color: background_color,
+                              ),
                             ),
                           ),
                           SizedBox(

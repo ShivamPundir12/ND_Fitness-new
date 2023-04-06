@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/screens/info/gender.dart';
 import 'package:nd_fitness/screens/onboard/onboarding_scrn.dart';
-import 'package:nd_fitness/screens/onboard/photo_hero.dart';
+import 'package:nd_fitness/screens/onboard/material/photo_hero.dart';
 
 import '../../services/secure_storage.dart';
 
