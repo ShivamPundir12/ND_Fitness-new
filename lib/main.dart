@@ -1,8 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:nd_fitness/screens/admin/admin_reminder.dart';
 import 'package:nd_fitness/screens/admin/admn_home.dart';
-import 'package:nd_fitness/screens/admin/member/member_profile.dart';
 import 'package:nd_fitness/screens/auth/admin_sign_in.dart';
 import 'package:nd_fitness/screens/auth/sign_in.dart';
 import 'package:nd_fitness/screens/auth/sign_up.dart';
@@ -13,9 +11,9 @@ import 'package:nd_fitness/screens/info/membership.dart';
 import 'package:nd_fitness/screens/info/profile.dart';
 import 'package:nd_fitness/screens/onboard/onboarding_scrn.dart';
 import 'package:nd_fitness/screens/onboard/splash_scrn.dart';
-
 import 'screens/info/all_set.dart';
 import 'screens/user/profile.dart';
+import 'screens/weight/weight.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,11 +42,13 @@ class MyApp extends StatelessWidget {
         '/member': (context) => Membership(),
         '/adsignin': (context) => Admin_sign_in(),
         '/adhome': (context) => Admin_Home(),
-        '/adreminder': (context) => Admin_Reminder(),
         '/usrprofile': (context) => Usr_Profile(),
         '/allset': (context) => AllSet(),
+        '/weigt': (context) => Usr_Weight(),
+        // '/gen': (context) => gender(),
+        // '/age': (context) => age(),
       },
-      home: Member_Profile(),
+      home: SplashScreen(),
     );
   }
 }

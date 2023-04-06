@@ -1,21 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:nd_fitness/screens/info/activity_level.dart';
 import 'package:nd_fitness/screens/info/age/widgets/wheeltile.dart';
-import 'package:nd_fitness/screens/info/gender.dart';
 import '../../../materials/colors.dart';
-import 'data/statemodel.dart';
+import '../info/age/data/statemodel.dart';
 
-class Usr_Age extends StatefulWidget {
-  const Usr_Age({Key? key}) : super(key: key);
+class Usr_Weight extends StatefulWidget {
+  const Usr_Weight({Key? key}) : super(key: key);
 
   @override
-  State<Usr_Age> createState() => _Usr_AgeState();
+  State<Usr_Weight> createState() => _Usr_WeightState();
 }
 
-class _Usr_AgeState extends State<Usr_Age> {
+class _Usr_WeightState extends State<Usr_Weight> {
   List<Age> states = [];
 
-  String currentstate = '16';
+  String currentstate = '19';
 
   @override
   void initState() {
@@ -33,9 +33,9 @@ class _Usr_AgeState extends State<Usr_Age> {
           children: [
             Container(
               padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.13),
+                  top: MediaQuery.of(context).size.height * 0.08),
               child: Text(
-                "How Old Are You!",
+                "Tell Us About Your Weight!",
                 style: TextStyle(
                     color: text_color2,
                     fontSize: 36,
@@ -45,7 +45,7 @@ class _Usr_AgeState extends State<Usr_Age> {
             ),
             Container(
               child: Text(
-                "To give you a better experience and to get to know your Age",
+                "To give you a better experience and to get to know your Weight",
                 style: TextStyle(
                   color: text_color2.withOpacity(0.5),
                   fontSize: 18,
@@ -54,9 +54,7 @@ class _Usr_AgeState extends State<Usr_Age> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             Expanded(
               child: Container(
                 child: Stack(
@@ -64,53 +62,52 @@ class _Usr_AgeState extends State<Usr_Age> {
                     Positioned(
                       left: 90,
                       right: 90,
-                      top: 0,
+                      top: 90,
                       bottom: 0,
                       child: Center(
                         child: Container(
-                          height: 75,
+                          height: 25,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Icon(
-                                CupertinoIcons.forward,
-                                size: 38,
-                                color: text_color,
-                              ),
-                              Icon(
-                                CupertinoIcons.back,
-                                size: 38,
-                                color: text_color,
-                              ),
-                            ],
+                          child: RotatedBox(
+                            quarterTurns: 15,
+                            child: Icon(
+                              CupertinoIcons.forward,
+                              size: 38,
+                              color: text_color,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                    ListWheelScrollView.useDelegate(
-                      itemExtent: 50,
-                      perspective: 0.001,
-                      diameterRatio: 2.0,
-                      physics: FixedExtentScrollPhysics(),
-                      squeeze: 0.7,
-                      useMagnifier: true,
-                      magnification: 2.0,
-                      onSelectedItemChanged: (index) {
-                        setState(() {
-                          currentstate = states[index].age!;
-                        });
-                      },
-                      childDelegate: ListWheelChildBuilderDelegate(
-                          childCount: states.length,
-                          builder: (context, index) {
-                            return wheeltile(
-                                currentstate == states[index].age
-                                    ? Colors.white
-                                    : Colors.white.withOpacity(0.5),
-                                states[index].age!);
-                          }),
+                    RotatedBox(
+                      quarterTurns: 19,
+                      child: ListWheelScrollView.useDelegate(
+                        itemExtent: 50,
+                        perspective: 0.0001,
+                        diameterRatio: 1.5,
+                        physics: FixedExtentScrollPhysics(),
+                        squeeze: 0.7,
+                        useMagnifier: true,
+                        magnification: 2.0,
+                        onSelectedItemChanged: (index) {
+                          setState(() {
+                            currentstate = states[index].age!;
+                          });
+                        },
+                        childDelegate: ListWheelChildBuilderDelegate(
+                            childCount: states.length,
+                            builder: (context, index) {
+                              return RotatedBox(
+                                quarterTurns: -15,
+                                child: wheeltile(
+                                    currentstate == states[index].age
+                                        ? Colors.white
+                                        : Colors.white.withOpacity(0.5),
+                                    states[index].age!),
+                              );
+                            }),
+                      ),
                     )
                   ],
                 ),
@@ -125,12 +122,7 @@ class _Usr_AgeState extends State<Usr_Age> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Gender(),
-                        ),
-                      );
+                      Navigator.pushReplacementNamed(context, "/age");
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(
@@ -163,7 +155,12 @@ class _Usr_AgeState extends State<Usr_Age> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, '/weigt');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Activity_level(),
+                        ),
+                      );
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(
