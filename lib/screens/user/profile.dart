@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/generated/assets.dart';
 import 'package:nd_fitness/materials/colors.dart';
+
+import '../../services/secure_storage.dart';
 
 class Usr_Profile extends StatefulWidget {
   const Usr_Profile({Key? key}) : super(key: key);
@@ -10,6 +13,8 @@ class Usr_Profile extends StatefulWidget {
 }
 
 class _Usr_ProfileState extends State<Usr_Profile> {
+  final secure_storage secureStorage = secure_storage();
+  final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +29,9 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                       DecorationImage(image: AssetImage(Assets.assetsPerson))),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * 0.03,
+                  vertical: MediaQuery.of(context).size.height * 0.01),
               height: MediaQuery.of(context).size.height * 0.35,
               width: MediaQuery.of(context).size.width * 0.9,
               decoration: BoxDecoration(
@@ -41,7 +48,7 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                     children: [
                       Container(
                         child: Text(
-                          "David Warner",
+                          user.displayName.toString(),
                           style: TextStyle(
                               fontSize: 33,
                               fontWeight: FontWeight.w700,
@@ -74,7 +81,7 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                   ),
                   Container(
                     child: Text(
-                      "davidwarner123@gmail.com",
+                      user.email.toString(),
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w700,

@@ -45,7 +45,7 @@ dependencies:
     # Use with the CupertinoIcons class for iOS style icons.
   firebase_auth: ^4.3.0
   firebase_core: ^2.8.0
-  cloud_firestore: ^4.4.5
+  cloud_firestore: ^4.5.0
   fluttertoast: ^8.2.1
   flutter_secure_storage: ^8.0.0
   image_picker: ^0.8.7

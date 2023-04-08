@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/materials/colors.dart';
-import 'photo_hero.dart';
+import 'package:nd_fitness/screens/onboard/material/photo_hero.dart';
 
 class Onboard_screen extends StatefulWidget {
   Onboard_screen({Key? key}) : super(key: key);
