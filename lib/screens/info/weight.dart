@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nd_fitness/screens/info/activity_level.dart';
 import 'package:nd_fitness/screens/info/age/widgets/wheeltile.dart';
 import '../../../materials/colors.dart';
-import '../info/age/data/statemodel.dart';
+import 'age/data/statemodel.dart';
 
 class Usr_Weight extends StatefulWidget {
   const Usr_Weight({Key? key}) : super(key: key);
