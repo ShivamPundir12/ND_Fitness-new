@@ -29,7 +29,7 @@ class AuthServices {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController, password: passwordController);
-      Navigator.pushNamedAndRemoveUntil(context, '/gen', (route) => false);
+      Navigator.pushNamedAndRemoveUntil(context, '/gend', (route) => false);
     } on FirebaseAuthException catch (e) {
       Message.custommessage(e.toString(), context);
       Navigator.of(context).pop();

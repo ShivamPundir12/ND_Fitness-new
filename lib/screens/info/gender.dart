@@ -54,6 +54,17 @@ class _GenderState extends State<Gender> {
               ),
             ),
             SizedBox(
+              height: 10,
+            ),
+            Container(
+              child: Text('Male', style: TextStyle(
+                color: text_color2,
+                fontFamily: 'Mukta',
+                fontWeight: FontWeight.w500,
+                fontSize: 20,
+              ),),
+            ),
+            SizedBox(
               height: MediaQuery.of(context).size.height * 0.05,
             ),
             Container(
@@ -66,7 +77,18 @@ class _GenderState extends State<Gender> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.15,
+              height: 10,
+            ),
+            Container(
+              child: Text('Female', style: TextStyle(
+                color: text_color2,
+                fontFamily: 'Mukta',
+                fontWeight: FontWeight.w500,
+                fontSize: 20,
+              ),),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.13,
             ),
             GestureDetector(
               onTap: () {
