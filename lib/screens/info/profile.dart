@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/materials/colors.dart';
-
-import 'membership.dart';
+import 'package:nd_fitness/services/firestore.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -12,6 +11,28 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  final _emrccontroller = TextEditingController();
+  final _emailcontroller = TextEditingController();
+  final _namecontroller = TextEditingController();
+  final _dobcontroller = TextEditingController();
+  final _addresscontroller = TextEditingController();
+  final _mobnocontroller = TextEditingController();
+  final _relatvnamecontroller = TextEditingController();
+  final _reltioncontroller = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailcontroller.dispose();
+    _namecontroller.dispose();
+    _dobcontroller.dispose();
+    _addresscontroller.dispose();
+    _mobnocontroller.dispose();
+    _relatvnamecontroller.dispose();
+    _reltioncontroller.dispose();
+    _emrccontroller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,11 +90,13 @@ class _ProfileState extends State<Profile> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               TextFormField(
+                                controller: _namecontroller,
                                 decoration: InputDecoration(
                                   hintText: 'Enter your full name',
                                   suffixIcon: Icon(CupertinoIcons.person),
                                   border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(18)),
+                                    borderRadius: BorderRadius.circular(18),
+                                  ),
                                 ),
                                 style: TextStyle(
                                     color: Colors.black.withOpacity(0.4),
@@ -85,6 +108,7 @@ class _ProfileState extends State<Profile> {
                                 height: 20,
                               ),
                               TextFormField(
+                                controller: _dobcontroller,
                                 decoration: InputDecoration(
                                   hintText: 'Enter your D.O.B',
                                   suffixIcon:
@@ -102,6 +126,7 @@ class _ProfileState extends State<Profile> {
                                 height: 20,
                               ),
                               TextFormField(
+                                controller: _addresscontroller,
                                 decoration: InputDecoration(
                                   hintText: 'Enter your Address',
                                   suffixIcon: Icon(CupertinoIcons.home),
@@ -118,6 +143,7 @@ class _ProfileState extends State<Profile> {
                                 height: 20,
                               ),
                               TextFormField(
+                                controller: _mobnocontroller,
                                 decoration: InputDecoration(
                                   hintText: 'Enter your Mobile no.',
                                   suffixIcon: Icon(CupertinoIcons.phone),
@@ -134,6 +160,7 @@ class _ProfileState extends State<Profile> {
                                 height: 20,
                               ),
                               TextFormField(
+                                controller: _emailcontroller,
                                 decoration: InputDecoration(
                                   hintText: 'Enter your Email',
                                   suffixIcon: Icon(CupertinoIcons.mail),
@@ -163,6 +190,7 @@ class _ProfileState extends State<Profile> {
                                 height: 10,
                               ),
                               TextFormField(
+                                controller: _relatvnamecontroller,
                                 decoration: InputDecoration(
                                   hintText: 'Enter your full name',
                                   suffixIcon: Icon(CupertinoIcons.person),
@@ -179,11 +207,13 @@ class _ProfileState extends State<Profile> {
                                 height: 20,
                               ),
                               TextFormField(
+                                controller: _emrccontroller,
                                 decoration: InputDecoration(
                                   hintText: 'Enter your Mobile no.',
                                   suffixIcon: Icon(CupertinoIcons.phone),
                                   border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(18)),
+                                    borderRadius: BorderRadius.circular(18),
+                                  ),
                                 ),
                                 style: TextStyle(
                                     color: Colors.black.withOpacity(0.4),
@@ -195,11 +225,13 @@ class _ProfileState extends State<Profile> {
                                 height: 20,
                               ),
                               TextFormField(
+                                controller: _reltioncontroller,
                                 decoration: InputDecoration(
                                   hintText: 'Enter your Relationship.',
                                   suffixIcon: Icon(CupertinoIcons.person_2),
                                   border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(18)),
+                                    borderRadius: BorderRadius.circular(18),
+                                  ),
                                 ),
                                 style: TextStyle(
                                     color: Colors.black.withOpacity(0.4),
@@ -221,10 +253,22 @@ class _ProfileState extends State<Profile> {
                           bottom: MediaQuery.of(context).size.height * 0.06),
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Membership(),
+                          Firecloud.adduserdetail(
+                              _namecontroller.text.trim(),
+                              _emailcontroller.text.trim(),
+                              int.parse(_mobnocontroller.text.trim()),
+                              int.parse(_dobcontroller.text.trim()),
+                              _addresscontroller.text.trim(),
+                              _relatvnamecontroller.text.trim(),
+                              _reltioncontroller.text.trim(),
+                              _emrccontroller.text.trim());
+                          Navigator.pushNamedAndRemoveUntil(
+                                  context, "/member", ((route) => false))
+                              .whenComplete(
+                            () => ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text("All Set"),
+                              ),
                             ),
                           );
                         },

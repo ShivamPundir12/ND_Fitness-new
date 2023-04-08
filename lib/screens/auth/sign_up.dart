@@ -1,9 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:nd_fitness/materials/colors.dart';
-import 'package:nd_fitness/screens/onboard/photo_hero.dart';
+import 'package:nd_fitness/services/authservice.dart';
+
+import '../../services/Message.dart';
+import '../onboard/material/photo_hero.dart';
 
 class Sign_up extends StatefulWidget {
   const Sign_up({Key? key}) : super(key: key);
@@ -272,26 +274,14 @@ class _Sign_upState extends State<Sign_up> {
                                       child: CircularProgressIndicator(),
                                     );
                                   });
-                              await FirebaseAuth.instance
-                                  .createUserWithEmailAndPassword(
-                                      email: emailController.text.trim(),
-                                      password: passwordController.text.trim());
-                              Navigator.pushNamedAndRemoveUntil(
-                                  context, '/gen', (route) => false);
+                              AuthServices.signup(emailController.text,
+                                  passwordController.text, context);
                             }
-                          } on FirebaseAuthException catch (e) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              backgroundColor: Colors.blueGrey.shade300,
-                              content: Text(
-                                e.toString(),
-                                style: TextStyle(fontWeight: FontWeight.w400),
-                              ),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
-                              duration: Duration(seconds: 1),
-                              behavior: SnackBarBehavior.floating,
-                            ));
-                            Navigator.of(context).pop();
+                          } catch (e) {
+                            Message.custommessage(e.toString(), context)
+                                .Navigator
+                                .of(context)
+                                .pop();
                           }
                         },
                         child: Container(

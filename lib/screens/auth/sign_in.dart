@@ -1,11 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/screens/auth/sign_up.dart';
+import 'package:nd_fitness/services/Message.dart';
+import 'package:nd_fitness/services/authservice.dart';
 import 'package:nd_fitness/services/secure_storage.dart';
 
-import '../onboard/photo_hero.dart';
+import '../onboard/material/photo_hero.dart';
 
 class Sign_in extends StatefulWidget {
   const Sign_in({Key? key}) : super(key: key);
@@ -208,30 +209,10 @@ class _Sign_inState extends State<Sign_in> {
                                     child: CircularProgressIndicator(),
                                   );
                                 });
-                            UserCredential userCredential = await FirebaseAuth
-                                .instance
-                                .signInWithEmailAndPassword(
-                                    email: emailController.text.trim(),
-                                    password: passwordController.text.trim());
-                            await secureStorage.writeSecureData(
-                                'email', userCredential.user!.email.toString());
-                            secureStorage.writeSecureData('name',
-                                userCredential.user!.displayName.toString());
-                            Navigator.pushNamedAndRemoveUntil(
-                                context, '/gend', ((route) => false));
-                          } on FirebaseAuthException catch (e) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              backgroundColor: Colors.blueGrey.shade300,
-                              content: Text(
-                                e.toString(),
-                                style: TextStyle(fontWeight: FontWeight.w400),
-                              ),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
-                              duration: Duration(seconds: 3),
-                              behavior: SnackBarBehavior.floating,
-                            ));
-                            Navigator.of(context).pop();
+                            AuthServices.login(emailController.text,
+                                passwordController.text, context);
+                          } catch (e) {
+                            Message.custommessage(e.toString(), context);
                           }
                         },
                         child: Container(

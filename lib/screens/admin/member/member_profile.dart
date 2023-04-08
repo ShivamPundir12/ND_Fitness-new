@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/generated/assets.dart';
 import 'package:nd_fitness/materials/colors.dart';
@@ -22,8 +21,9 @@ class _Member_ProfileState extends State<Member_Profile> {
               width: MediaQuery.of(context).size.width,
               clipBehavior: Clip.none,
               child: ClipRRect(
-                borderRadius:
-                    BorderRadius.only(bottomLeft: Radius.elliptical(300, 70)),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.elliptical(300, 70),
+                ),
                 child: Image.asset(Assets.assetsPerson, fit: BoxFit.cover),
               ),
             ),
