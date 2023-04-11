@@ -1,9 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:nd_fitness/screens/info/activity_level.dart';
 import 'package:nd_fitness/screens/info/age/widgets/wheeltile.dart';
-import '../../../materials/colors.dart';
-import 'age/data/statemodel.dart';
+import 'package:nd_fitness/services/firestore.dart';
+import '../../../../materials/colors.dart';
+import '../age/data/statemodel.dart';
 
 class Usr_Weight extends StatefulWidget {
   const Usr_Weight({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class Usr_Weight extends StatefulWidget {
 class _Usr_WeightState extends State<Usr_Weight> {
   List<Age> states = [];
 
-  String currentstate = '19';
+  String currentweight = '19';
 
   @override
   void initState() {
@@ -68,7 +69,8 @@ class _Usr_WeightState extends State<Usr_Weight> {
                         child: Container(
                           height: 25,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20)),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
                           child: RotatedBox(
                             quarterTurns: 15,
                             child: Icon(
@@ -92,7 +94,7 @@ class _Usr_WeightState extends State<Usr_Weight> {
                         magnification: 2.0,
                         onSelectedItemChanged: (index) {
                           setState(() {
-                            currentstate = states[index].age!;
+                            currentweight = states[index].age!;
                           });
                         },
                         childDelegate: ListWheelChildBuilderDelegate(
@@ -101,7 +103,7 @@ class _Usr_WeightState extends State<Usr_Weight> {
                               return RotatedBox(
                                 quarterTurns: -15,
                                 child: wheeltile(
-                                    currentstate == states[index].age
+                                    currentweight == states[index].age
                                         ? Colors.white
                                         : Colors.white.withOpacity(0.5),
                                     states[index].age!),
@@ -122,7 +124,12 @@ class _Usr_WeightState extends State<Usr_Weight> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushReplacementNamed(context, "/age");
+                      Firecloud.addweight('$currentweight');
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        "/age",
+                        (route) => false,
+                      );
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(
@@ -155,11 +162,11 @@ class _Usr_WeightState extends State<Usr_Weight> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
+                      Firecloud.addweight(states.toString());
+                      Navigator.pushNamedAndRemoveUntil(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => Activity_level(),
-                        ),
+                        '/level',
+                        (route) => false,
                       );
                     },
                     child: Container(

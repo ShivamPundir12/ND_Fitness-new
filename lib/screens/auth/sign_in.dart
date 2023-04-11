@@ -32,7 +32,7 @@ class _Sign_inState extends State<Sign_in> {
     super.dispose();
   }
 
-  final formkey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
   void validate() {
     if (formkey.currentState!.validate()) {
@@ -84,237 +84,241 @@ class _Sign_inState extends State<Sign_in> {
                   ),
                   height: MediaQuery.of(context).size.height * 0.8,
                   width: MediaQuery.of(context).size.width,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.01),
-                      Container(
-                        child: Text(
-                          "Welcome Back",
-                          style: TextStyle(
-                              color: background_color,
-                              fontSize: 30,
-                              fontFamily: 'Mukta',
-                              fontWeight: FontWeight.w900),
-                        ),
-                      ),
-                      Container(
-                        child: Text(
-                          "Hey there, Sign in to continue!",
-                          style: TextStyle(
-                              color: Colors.black.withOpacity(0.5),
-                              fontSize: 18,
-                              fontFamily: 'Mukta',
-                              fontWeight: FontWeight.w700),
-                        ),
-                      ),
-                      SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.05),
-                      Container(
-                        child: Text(
-                          'Username or Email',
-                          style: TextStyle(
-                              color: Colors.black.withOpacity(0.7),
-                              fontSize: 18,
-                              fontFamily: 'Mukta',
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                      SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.01),
-                      TextFormField(
-                        controller: emailController,
-                        decoration: InputDecoration(
-                          hintText: 'Enter your username or email',
-                          suffixIcon: Icon(CupertinoIcons.mail),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(18)),
-                        ),
-                        style: TextStyle(
-                            color: Colors.black.withOpacity(0.4),
-                            fontSize: 15,
-                            fontFamily: 'Mukta',
-                            fontWeight: FontWeight.w500),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Email is required";
-                          }
-                          if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                              .hasMatch(value)) {
-                            return 'Please a valid Email';
-                          }
-                          return null;
-                        },
-                        onSaved: (value) {
-                          email = value;
-                        },
-                      ),
-                      SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.02),
-                      Container(
-                        child: Text(
-                          'Password',
-                          style: TextStyle(
-                              color: Colors.black.withOpacity(0.7),
-                              fontSize: 18,
-                              fontFamily: 'Mukta',
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                      SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.01),
-                      TextFormField(
-                        controller: passwordController,
-                        obscureText: _obscuretext,
-                        decoration: InputDecoration(
-                          suffixIcon: GestureDetector(
-                            onTap: () {
-                              setState(() {});
-                              _obscuretext = !_obscuretext;
-                            },
-                            child: Icon(
-                              _obscuretext
-                                  ? CupertinoIcons.eye_fill
-                                  : CupertinoIcons.eye_slash_fill,
-                            ),
-                          ),
-                          hintText: 'Enter your password',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(18)),
-                        ),
-                        style: TextStyle(
-                            color: Colors.black.withOpacity(0.4),
-                            fontSize: 15,
-                            fontFamily: 'Mukta',
-                            fontWeight: FontWeight.w500),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Password is required';
-                          } else if (value.trim().length < 6) {
-                            return 'Password must be at least 8 characters in length';
-                          }
-                          return null;
-                        },
-                      ),
-                      SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.02),
-                      GestureDetector(
-                        onTap: () async {
-                          try {
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                });
-                            AuthServices.login(emailController.text,
-                                passwordController.text, context);
-                          } catch (e) {
-                            Message.custommessage(e.toString(), context);
-                          }
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.symmetric(
-                              vertical:
-                                  MediaQuery.of(context).size.height * 0.025),
-                          decoration: BoxDecoration(
-                              color: background_color,
-                              borderRadius: BorderRadius.circular(15)),
+                  child: Form(
+                    key: formkey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.01),
+                        Container(
                           child: Text(
-                            'Sign in',
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
-                                color: text_color2),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.05),
-                      GestureDetector(
-                        // onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=> ()),);},
-                        child: Container(
-                          child: Text(
-                            "Forgot password?",
+                            "Welcome Back",
                             style: TextStyle(
                                 color: background_color,
-                                fontSize: 16,
-                                fontFamily: "Mukta",
+                                fontSize: 30,
+                                fontFamily: 'Mukta',
+                                fontWeight: FontWeight.w900),
+                          ),
+                        ),
+                        Container(
+                          child: Text(
+                            "Hey there, Sign in to continue!",
+                            style: TextStyle(
+                                color: Colors.black.withOpacity(0.5),
+                                fontSize: 18,
+                                fontFamily: 'Mukta',
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.05),
+                        Container(
+                          child: Text(
+                            'Username or Email',
+                            style: TextStyle(
+                                color: Colors.black.withOpacity(0.7),
+                                fontSize: 18,
+                                fontFamily: 'Mukta',
                                 fontWeight: FontWeight.w500),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.04),
-                      Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Admin?',
-                              style: TextStyle(
-                                color: background_color.withOpacity(0.6),
-                                fontSize: 15,
-                              ),
-                            ),
-                            SizedBox(
-                                width:
-                                    MediaQuery.of(context).size.width * 0.01),
-                            InkWell(
-                              onTap: () {
-                                Navigator.pushNamed(context, '/adsignin');
-                              },
-                              child: Text(
-                                'Sign in',
-                                style: TextStyle(
-                                    color: background_color,
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ),
-                          ],
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.01),
+                        TextFormField(
+                          controller: emailController,
+                          decoration: InputDecoration(
+                            hintText: 'Enter your username or email',
+                            suffixIcon: Icon(CupertinoIcons.mail),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(18)),
+                          ),
+                          style: TextStyle(
+                              color: Colors.black.withOpacity(0.4),
+                              fontSize: 15,
+                              fontFamily: 'Mukta',
+                              fontWeight: FontWeight.w500),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Email is required";
+                            }
+                            if (!RegExp(
+                                    "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                                .hasMatch(value)) {
+                              return 'Please a valid Email';
+                            }
+                            return null;
+                          },
+                          onSaved: (value) {
+                            email = value;
+                          },
                         ),
-                      ),
-                      SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.01),
-                      Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Didn't have an account?",
-                              style: TextStyle(
-                                color: background_color.withOpacity(0.6),
-                                fontSize: 15,
-                              ),
-                            ),
-                            SizedBox(
-                                width:
-                                    MediaQuery.of(context).size.width * 0.01),
-                            InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Sign_up(),
-                                  ),
-                                );
-                              },
-                              child: Text(
-                                'Sign up',
-                                style: TextStyle(
-                                    color: background_color,
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ),
-                          ],
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02),
+                        Container(
+                          child: Text(
+                            'Password',
+                            style: TextStyle(
+                                color: Colors.black.withOpacity(0.7),
+                                fontSize: 18,
+                                fontFamily: 'Mukta',
+                                fontWeight: FontWeight.w500),
+                          ),
                         ),
-                      )
-                    ],
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.01),
+                        TextFormField(
+                          controller: passwordController,
+                          obscureText: _obscuretext,
+                          decoration: InputDecoration(
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                setState(() {});
+                                _obscuretext = !_obscuretext;
+                              },
+                              child: Icon(
+                                _obscuretext
+                                    ? CupertinoIcons.eye_fill
+                                    : CupertinoIcons.eye_slash_fill,
+                              ),
+                            ),
+                            hintText: 'Enter your password',
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(18)),
+                          ),
+                          style: TextStyle(
+                              color: Colors.black.withOpacity(0.4),
+                              fontSize: 15,
+                              fontFamily: 'Mukta',
+                              fontWeight: FontWeight.w500),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Password is required';
+                            } else if (value.trim().length < 6) {
+                              return 'Password must be at least 8 characters in length';
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02),
+                        GestureDetector(
+                          onTap: () async {
+                            try {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  });
+                              AuthServices.login(emailController.text,
+                                  passwordController.text, context);
+                            } catch (e) {
+                              Message.custommessage(e.toString(), context);
+                            }
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.symmetric(
+                                vertical:
+                                    MediaQuery.of(context).size.height * 0.025),
+                            decoration: BoxDecoration(
+                                color: background_color,
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Text(
+                              'Sign in',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                  color: text_color2),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.05),
+                        GestureDetector(
+                          // onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=> ()),);},
+                          child: Container(
+                            child: Text(
+                              "Forgot password?",
+                              style: TextStyle(
+                                  color: background_color,
+                                  fontSize: 16,
+                                  fontFamily: "Mukta",
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.04),
+                        Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Admin?',
+                                style: TextStyle(
+                                  color: background_color.withOpacity(0.6),
+                                  fontSize: 15,
+                                ),
+                              ),
+                              SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.01),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.pushNamed(context, '/adsignin');
+                                },
+                                child: Text(
+                                  'Sign in',
+                                  style: TextStyle(
+                                      color: background_color,
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.01),
+                        Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Didn't have an account?",
+                                style: TextStyle(
+                                  color: background_color.withOpacity(0.6),
+                                  fontSize: 15,
+                                ),
+                              ),
+                              SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.01),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Sign_up(),
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  'Sign up',
+                                  style: TextStyle(
+                                      color: background_color,
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),

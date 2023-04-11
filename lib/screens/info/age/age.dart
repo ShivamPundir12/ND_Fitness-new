@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/screens/info/age/widgets/wheeltile.dart';
 import 'package:nd_fitness/screens/info/gender.dart';
+import 'package:nd_fitness/services/firestore.dart';
 import '../../../materials/colors.dart';
 import 'data/statemodel.dart';
 
@@ -15,7 +16,7 @@ class Usr_Age extends StatefulWidget {
 class _Usr_AgeState extends State<Usr_Age> {
   List<Age> states = [];
 
-  String currentstate = '16';
+  String currentage = '16';
 
   @override
   void initState() {
@@ -99,14 +100,14 @@ class _Usr_AgeState extends State<Usr_Age> {
                       magnification: 2.0,
                       onSelectedItemChanged: (index) {
                         setState(() {
-                          currentstate = states[index].age!;
+                          currentage = states[index].age!;
                         });
                       },
                       childDelegate: ListWheelChildBuilderDelegate(
                           childCount: states.length,
                           builder: (context, index) {
                             return wheeltile(
-                                currentstate == states[index].age
+                                currentage == states[index].age
                                     ? Colors.white
                                     : Colors.white.withOpacity(0.5),
                                 states[index].age!);
@@ -163,6 +164,7 @@ class _Usr_AgeState extends State<Usr_Age> {
                   ),
                   GestureDetector(
                     onTap: () {
+                      Firecloud.addage("$currentage");
                       Navigator.pushNamed(context, '/weigt');
                     },
                     child: Container(

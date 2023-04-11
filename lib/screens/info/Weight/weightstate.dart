@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AgeStateSelected extends StatelessWidget {
-  final String agestate;
-  const AgeStateSelected(this.agestate, {Key? key}) : super(key: key);
+  final String weightstate;
+  const AgeStateSelected(this.weightstate, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class AgeStateSelected extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               Text(
-                "$agestate",
+                "$weightstate",
                 style: const TextStyle(
                   fontSize: 22,
                   color: Colors.white,
