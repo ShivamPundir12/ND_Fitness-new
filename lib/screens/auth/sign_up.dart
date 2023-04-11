@@ -21,6 +21,7 @@ class _Sign_upState extends State<Sign_up> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmpassController = TextEditingController();
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -31,20 +32,11 @@ class _Sign_upState extends State<Sign_up> {
   }
 
   bool passwordConfirmed() {
+    var e;
     if (passwordController.text.trim() == confirmpassController.text.trim()) {
       return true;
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        backgroundColor: Colors.blueGrey.shade300,
-        content: Text(
-          "Password Did'nt match",
-          style: TextStyle(fontWeight: FontWeight.w400),
-        ),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        duration: Duration(seconds: 2),
-        behavior: SnackBarBehavior.floating,
-        margin: EdgeInsets.only(bottom: 700),
-      ));
+      Message.custommessage(e, context);
     }
     return false;
   }
@@ -67,8 +59,12 @@ class _Sign_upState extends State<Sign_up> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                child: PhotoHero(photo: 'assets/logo.png', width: 60)),
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+              child: PhotoHero(
+                photo: 'assets/logo.png',
+                width: MediaQuery.of(context).size.width * 0.2,
+              ),
+            ),
             SizedBox(
               height: 10,
             ),
@@ -84,222 +80,226 @@ class _Sign_upState extends State<Sign_up> {
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
                 child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 25,
-                      ),
-                      Container(
-                        child: Text(
-                          "Welcome",
-                          style: TextStyle(
-                              color: background_color,
-                              fontSize: 30,
-                              fontFamily: 'Mukta',
-                              fontWeight: FontWeight.w900),
+                  child: Form(
+                    key: _formkey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 25,
                         ),
-                      ),
-                      Container(
-                        child: Text(
-                          "Hey there, Sign up to continue!",
-                          style: TextStyle(
-                              color: Colors.black.withOpacity(0.5),
-                              fontSize: 18,
-                              fontFamily: 'Mukta',
-                              fontWeight: FontWeight.w700),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 50,
-                      ),
-                      Container(
-                        child: Text(
-                          'Email',
-                          style: TextStyle(
-                              color: Colors.black.withOpacity(0.7),
-                              fontSize: 18,
-                              fontFamily: 'Mukta',
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      TextFormField(
-                        controller: emailController,
-                        decoration: InputDecoration(
-                          hintText: 'Enter your email',
-                          suffixIcon: Icon(CupertinoIcons.mail),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(18)),
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Email is required";
-                          }
-                          if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                              .hasMatch(value)) {
-                            return 'Please a valid Email';
-                          }
-                          return null;
-                        },
-                        onSaved: (value) {
-                          email = value;
-                        },
-                        style: TextStyle(
-                            color: Colors.black.withOpacity(0.4),
-                            fontSize: 15,
-                            fontFamily: 'Mukta',
-                            fontWeight: FontWeight.w500),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Container(
-                        child: Text(
-                          'Password',
-                          style: TextStyle(
-                              color: Colors.black.withOpacity(0.7),
-                              fontSize: 18,
-                              fontFamily: 'Mukta',
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      TextFormField(
-                        controller: passwordController,
-                        obscureText: _obscuretext,
-                        decoration: InputDecoration(
-                          hintText: 'Enter your password',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(18)),
-                          suffixIcon: GestureDetector(
-                            onTap: () {
-                              setState(() {});
-                              _obscuretext = !_obscuretext;
-                            },
-                            child: Icon(
-                              _obscuretext
-                                  ? CupertinoIcons.eye_fill
-                                  : CupertinoIcons.eye_slash_fill,
-                            ),
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Password is required';
-                          }
-                          if (value.trim().length < 6) {
-                            return 'Password must be at least 8 characters in length';
-                          }
-                          return null;
-                        },
-                        style: TextStyle(
-                            color: Colors.black.withOpacity(0.4),
-                            fontSize: 15,
-                            fontFamily: 'Mukta',
-                            fontWeight: FontWeight.w500),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Container(
-                        child: Text(
-                          'Confirm password',
-                          style: TextStyle(
-                              color: Colors.black.withOpacity(0.7),
-                              fontSize: 18,
-                              fontFamily: 'Mukta',
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      TextFormField(
-                        controller: confirmpassController,
-                        obscureText: _obsecuretxt,
-                        decoration: InputDecoration(
-                          hintText: 'Confirm your password',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(18)),
-                          suffixIcon: GestureDetector(
-                            onTap: () {
-                              setState(() {});
-                              _obsecuretxt = !_obsecuretxt;
-                            },
-                            child: Icon(
-                              _obsecuretxt
-                                  ? CupertinoIcons.eye_fill
-                                  : CupertinoIcons.eye_slash_fill,
-                            ),
-                          ),
-                        ),
-                        validator: MultiValidator([
-                          RequiredValidator(errorText: 'Enter Something'),
-                        ]),
-                        style: TextStyle(
-                            color: Colors.black.withOpacity(0.4),
-                            fontSize: 15,
-                            fontFamily: 'Mukta',
-                            fontWeight: FontWeight.w500),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        child: Text(
-                          "Forgot password?",
-                          style: TextStyle(
-                              color: background_color,
-                              fontSize: 16,
-                              fontFamily: "Mukta",
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      GestureDetector(
-                        onTap: () async {
-                          try {
-                            if (passwordConfirmed()) {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return Center(
-                                      child: CircularProgressIndicator(),
-                                    );
-                                  });
-                              AuthServices.signup(emailController.text,
-                                  passwordController.text, context);
-                            }
-                          } catch (e) {
-                            Message.custommessage(e.toString(), context)
-                                .Navigator
-                                .of(context)
-                                .pop();
-                          }
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.symmetric(vertical: 18),
-                          decoration: BoxDecoration(
-                              color: background_color,
-                              borderRadius: BorderRadius.circular(15)),
+                        Container(
                           child: Text(
-                            'Sign up',
+                            "Welcome",
                             style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
-                                color: text_color2),
+                                color: background_color,
+                                fontSize: 30,
+                                fontFamily: 'Mukta',
+                                fontWeight: FontWeight.w900),
                           ),
                         ),
-                      )
-                    ],
+                        Container(
+                          child: Text(
+                            "Hey there, Sign up to continue!",
+                            style: TextStyle(
+                                color: Colors.black.withOpacity(0.5),
+                                fontSize: 18,
+                                fontFamily: 'Mukta',
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 50,
+                        ),
+                        Container(
+                          child: Text(
+                            'Email',
+                            style: TextStyle(
+                                color: Colors.black.withOpacity(0.7),
+                                fontSize: 18,
+                                fontFamily: 'Mukta',
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        TextFormField(
+                          controller: emailController,
+                          decoration: InputDecoration(
+                            hintText: 'Enter your email',
+                            suffixIcon: Icon(CupertinoIcons.mail),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(18)),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Email is required";
+                            }
+                            if (!RegExp(
+                                    "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                                .hasMatch(value)) {
+                              return 'Please a valid Email';
+                            }
+                            return null;
+                          },
+                          onSaved: (value) {
+                            email = value;
+                          },
+                          style: TextStyle(
+                              color: Colors.black.withOpacity(0.4),
+                              fontSize: 15,
+                              fontFamily: 'Mukta',
+                              fontWeight: FontWeight.w500),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Container(
+                          child: Text(
+                            'Password',
+                            style: TextStyle(
+                                color: Colors.black.withOpacity(0.7),
+                                fontSize: 18,
+                                fontFamily: 'Mukta',
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        TextFormField(
+                          controller: passwordController,
+                          obscureText: _obscuretext,
+                          decoration: InputDecoration(
+                            hintText: 'Enter your password',
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(18)),
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                setState(() {});
+                                _obscuretext = !_obscuretext;
+                              },
+                              child: Icon(
+                                _obscuretext
+                                    ? CupertinoIcons.eye_fill
+                                    : CupertinoIcons.eye_slash_fill,
+                              ),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Password is required';
+                            }
+                            if (value.trim().length < 6) {
+                              return 'Password must be at least 8 characters in length';
+                            }
+                            return null;
+                          },
+                          style: TextStyle(
+                              color: Colors.black.withOpacity(0.4),
+                              fontSize: 15,
+                              fontFamily: 'Mukta',
+                              fontWeight: FontWeight.w500),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Container(
+                          child: Text(
+                            'Confirm password',
+                            style: TextStyle(
+                                color: Colors.black.withOpacity(0.7),
+                                fontSize: 18,
+                                fontFamily: 'Mukta',
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        TextFormField(
+                          controller: confirmpassController,
+                          obscureText: _obsecuretxt,
+                          decoration: InputDecoration(
+                            hintText: 'Confirm your password',
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(18)),
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                setState(() {});
+                                _obsecuretxt = !_obsecuretxt;
+                              },
+                              child: Icon(
+                                _obsecuretxt
+                                    ? CupertinoIcons.eye_fill
+                                    : CupertinoIcons.eye_slash_fill,
+                              ),
+                            ),
+                          ),
+                          validator: MultiValidator([
+                            RequiredValidator(errorText: 'Enter Something'),
+                          ]),
+                          style: TextStyle(
+                              color: Colors.black.withOpacity(0.4),
+                              fontSize: 15,
+                              fontFamily: 'Mukta',
+                              fontWeight: FontWeight.w500),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          child: Text(
+                            "Forgot password?",
+                            style: TextStyle(
+                                color: background_color,
+                                fontSize: 16,
+                                fontFamily: "Mukta",
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        GestureDetector(
+                          onTap: () async {
+                            try {
+                              if (passwordConfirmed()) {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    });
+                                AuthServices.signup(emailController.text,
+                                    passwordController.text, context);
+                              }
+                            } catch (e) {
+                              Message.custommessage(e.toString(), context)
+                                  .Navigator
+                                  .of(context)
+                                  .pop();
+                            }
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.symmetric(vertical: 18),
+                            decoration: BoxDecoration(
+                                color: background_color,
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Text(
+                              'Sign up',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                  color: text_color2),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),

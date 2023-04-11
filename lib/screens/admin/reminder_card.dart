@@ -18,7 +18,9 @@ class _Reminder_CardState extends State<Reminder_Card> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 15),
         decoration: BoxDecoration(
-            color: text_color2, borderRadius: BorderRadius.circular(20)),
+          color: text_color2,
+          borderRadius: BorderRadius.circular(20),
+        ),
         height: 110,
         width: MediaQuery.of(context).size.width,
         child: Column(

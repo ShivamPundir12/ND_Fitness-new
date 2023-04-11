@@ -20,7 +20,7 @@ class _GenderState extends State<Gender> {
           children: [
             Container(
               padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.13),
+                  top: MediaQuery.of(context).size.height * 0.03),
               child: Text(
                 "Tell us about yourself",
                 style: TextStyle(
@@ -57,12 +57,15 @@ class _GenderState extends State<Gender> {
               height: 10,
             ),
             Container(
-              child: Text('Male', style: TextStyle(
-                color: text_color2,
-                fontFamily: 'Mukta',
-                fontWeight: FontWeight.w500,
-                fontSize: 20,
-              ),),
+              child: Text(
+                'Male',
+                style: TextStyle(
+                  color: text_color2,
+                  fontFamily: 'Mukta',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20,
+                ),
+              ),
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.05,
@@ -77,15 +80,18 @@ class _GenderState extends State<Gender> {
               ),
             ),
             SizedBox(
-              height: 10,
+              height: MediaQuery.of(context).size.height * 0.01,
             ),
             Container(
-              child: Text('Female', style: TextStyle(
-                color: text_color2,
-                fontFamily: 'Mukta',
-                fontWeight: FontWeight.w500,
-                fontSize: 20,
-              ),),
+              child: Text(
+                'Female',
+                style: TextStyle(
+                  color: text_color2,
+                  fontFamily: 'Mukta',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20,
+                ),
+              ),
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.13,
