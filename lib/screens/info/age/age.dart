@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/screens/info/age/widgets/wheeltile.dart';
 import 'package:nd_fitness/screens/info/gender.dart';
-import 'package:nd_fitness/services/firestore.dart';
 import '../../../materials/colors.dart';
-import 'data/statemodel.dart';
+import '../../../services/firestore.dart';
+import 'data/agestatemodel.dart';
 
 class Usr_Age extends StatefulWidget {
   const Usr_Age({Key? key}) : super(key: key);
@@ -163,8 +163,8 @@ class _Usr_AgeState extends State<Usr_Age> {
                     width: 20,
                   ),
                   GestureDetector(
-                    onTap: () {
-                      Firecloud.addage("$currentage");
+                    onTap: () async {
+                      await Firecloud.addage("$currentage");
                       Navigator.pushNamed(context, '/weigt');
                     },
                     child: Container(

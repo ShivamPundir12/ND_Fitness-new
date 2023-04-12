@@ -336,24 +336,25 @@ class _ProfileState extends State<Profile> {
                       padding: EdgeInsets.only(
                           top: MediaQuery.of(context).size.height * 0.05,
                           bottom: MediaQuery.of(context).size.height * 0.06),
-                      child: GestureDetector(
+                      child: InkWell(
                         onTap: () async {
                           try {
-                            var e;
                             if (_formkey.currentState!.validate()) {
                               await Firecloud.adduserdetail(
-                                  _namecontroller.text.trim(),
-                                  _emailcontroller.text.trim(),
-                                  _mobnocontroller.text.trim(),
-                                  _dobcontroller.text.trim(),
-                                  _addresscontroller.text.trim(),
-                                  _relatvnamecontroller.text.trim(),
-                                  _reltioncontroller.text.trim(),
-                                  _emrccontroller.text.trim());
+                                  _namecontroller.text,
+                                  _emailcontroller.text,
+                                  _mobnocontroller.text,
+                                  _dobcontroller.text,
+                                  _addresscontroller.text,
+                                  _relatvnamecontroller.text,
+                                  _reltioncontroller.text,
+                                  _emrccontroller.text);
+                              Message.custommessage("You are all Set", context);
                               Navigator.pushNamedAndRemoveUntil(
-                                      context, "/member", ((route) => false))
-                                  .whenComplete(
-                                      () => Message.custommessage(e, context));
+                                context,
+                                "/member",
+                                ((route) => false),
+                              );
                             }
                           } catch (e) {
                             Message.custommessage(e.toString(), context);
