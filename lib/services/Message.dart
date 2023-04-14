@@ -9,7 +9,7 @@ class Message {
         style: TextStyle(fontWeight: FontWeight.w400),
       ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      duration: Duration(seconds: 1),
+      duration: Duration(seconds: 3),
       behavior: SnackBarBehavior.floating,
     ));
   }

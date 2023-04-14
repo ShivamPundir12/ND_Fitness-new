@@ -13,7 +13,7 @@ import 'package:nd_fitness/screens/onboard/onboarding_scrn.dart';
 import 'package:nd_fitness/screens/onboard/splash_scrn.dart';
 import 'screens/info/all_set.dart';
 import 'screens/user/profile.dart';
-import 'screens/info/weight.dart';
+import 'screens/info/Weight/weight.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();

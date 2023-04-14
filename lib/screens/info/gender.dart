@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:nd_fitness/generated/assets.dart';
 import 'package:nd_fitness/materials/colors.dart';
 
+import '../../services/Message.dart';
+import '../../services/firestore.dart';
+
 class Gender extends StatefulWidget {
   const Gender({Key? key}) : super(key: key);
 
@@ -10,6 +13,9 @@ class Gender extends StatefulWidget {
 }
 
 class _GenderState extends State<Gender> {
+  final String gen1 = "Male";
+  final String gen2 = "Female";
+  bool _isSelected = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,13 +50,28 @@ class _GenderState extends State<Gender> {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.03,
             ),
-            Container(
-              height: 130,
-              width: 130,
-              decoration: BoxDecoration(color: gend, shape: BoxShape.circle),
-              child: Image.asset(
-                Assets.assetsMale,
-                scale: 1.1,
+            InkWell(
+              onTap: () async {
+                try {
+                  await Firecloud.selectgen(gen1);
+                  Message.custommessage("You Will Start as $gen1", context);
+
+                  // Set _isSelected to true when activity level is selected
+                  setState(() {
+                    _isSelected = true;
+                  });
+                } catch (e) {
+                  Message.custommessage(e.toString(), context);
+                }
+              },
+              child: Container(
+                height: 130,
+                width: 130,
+                decoration: BoxDecoration(color: gend, shape: BoxShape.circle),
+                child: Image.asset(
+                  Assets.assetsMale,
+                  scale: 1.1,
+                ),
               ),
             ),
             SizedBox(
@@ -58,7 +79,7 @@ class _GenderState extends State<Gender> {
             ),
             Container(
               child: Text(
-                'Male',
+                gen1,
                 style: TextStyle(
                   color: text_color2,
                   fontFamily: 'Mukta',
@@ -70,13 +91,28 @@ class _GenderState extends State<Gender> {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.05,
             ),
-            Container(
-              height: 130,
-              width: 130,
-              decoration: BoxDecoration(color: gend, shape: BoxShape.circle),
-              child: Image.asset(
-                Assets.assetsFemale,
-                scale: 1.1,
+            InkWell(
+              onTap: () async {
+                try {
+                  await Firecloud.selectgen(gen2);
+                  Message.custommessage("You Will Start as $gen2", context);
+
+                  // Set _isSelected to true when activity level is selected
+                  setState(() {
+                    _isSelected = true;
+                  });
+                } catch (e) {
+                  Message.custommessage(e.toString(), context);
+                }
+              },
+              child: Container(
+                height: 130,
+                width: 130,
+                decoration: BoxDecoration(color: gend, shape: BoxShape.circle),
+                child: Image.asset(
+                  Assets.assetsFemale,
+                  scale: 1.1,
+                ),
               ),
             ),
             SizedBox(
@@ -84,7 +120,7 @@ class _GenderState extends State<Gender> {
             ),
             Container(
               child: Text(
-                'Female',
+                gen2,
                 style: TextStyle(
                   color: text_color2,
                   fontFamily: 'Mukta',
@@ -98,7 +134,12 @@ class _GenderState extends State<Gender> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, '/age');
+                if (_isSelected) {
+                  Navigator.pushNamed(context, "/age");
+                } else {
+                  // Show an error message to the user that they need to select an activity level
+                  Message.custommessage('Please Select Your Gender', context);
+                }
               },
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 15),

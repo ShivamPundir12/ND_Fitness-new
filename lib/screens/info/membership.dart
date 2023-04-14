@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../materials/colors.dart';
@@ -16,21 +15,6 @@ class _MembershipState extends State<Membership> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-              onPressed: () async {
-                await FirebaseAuth.instance.signOut().whenComplete(
-                    () => secureStorage.deleteSecureData('email').whenComplete(
-                          () => Navigator.pushNamedAndRemoveUntil(
-                              context, '/signin', (route) => false),
-                        ));
-              },
-              icon: Icon(Icons.logout_outlined))
-        ],
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
       backgroundColor: background_color,
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 30),
@@ -73,249 +57,256 @@ class _MembershipState extends State<Membership> {
             ),
             Expanded(
               child: SingleChildScrollView(
-                child: Container(
-                  child: Column(
-                    children: [
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        height: 150,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            color: text_color2,
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Bronze Plan',
-                              style: TextStyle(
-                                  color: background_color,
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: 'Mukta'),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'Duration : ',
-                                  style: TextStyle(
-                                      color: background_color.withOpacity(0.7),
-                                      fontSize: 23,
-                                      fontWeight: FontWeight.w700,
-                                      fontFamily: 'Mukta'),
-                                ),
-                                Text(
-                                  '1 mo',
-                                  style: TextStyle(
-                                      color: background_color,
-                                      fontSize: 23,
-                                      fontWeight: FontWeight.w700,
-                                      fontFamily: 'Mukta'),
-                                ),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.04,
-                                ),
-                                Text(
-                                  '1250',
-                                  style: TextStyle(
-                                      color: background_color,
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.w900,
-                                      fontFamily: 'Mukta'),
-                                ),
-                              ],
-                            )
-                          ],
+                child: InkWell(
+                  onTap: () => Navigator.pushNamed(context, "/usrprofile"),
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          height: 150,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              color: text_color2,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Bronze Plan',
+                                style: TextStyle(
+                                    color: background_color,
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'Mukta'),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    'Duration : ',
+                                    style: TextStyle(
+                                        color:
+                                            background_color.withOpacity(0.7),
+                                        fontSize: 23,
+                                        fontWeight: FontWeight.w700,
+                                        fontFamily: 'Mukta'),
+                                  ),
+                                  Text(
+                                    '1 mo',
+                                    style: TextStyle(
+                                        color: background_color,
+                                        fontSize: 23,
+                                        fontWeight: FontWeight.w700,
+                                        fontFamily: 'Mukta'),
+                                  ),
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.04,
+                                  ),
+                                  Text(
+                                    '1250',
+                                    style: TextStyle(
+                                        color: background_color,
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.w900,
+                                        fontFamily: 'Mukta'),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        height: 150,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            color: text_color2,
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Silver Plan',
-                              style: TextStyle(
-                                  color: background_color,
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: 'Mukta'),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'Duration : ',
-                                  style: TextStyle(
-                                      color: background_color.withOpacity(0.7),
-                                      fontSize: 23,
-                                      fontWeight: FontWeight.w700,
-                                      fontFamily: 'Mukta'),
-                                ),
-                                Text(
-                                  '3 mo',
-                                  style: TextStyle(
-                                      color: background_color,
-                                      fontSize: 23,
-                                      fontWeight: FontWeight.w700,
-                                      fontFamily: 'Mukta'),
-                                ),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.04,
-                                ),
-                                Text(
-                                  '3500',
-                                  style: TextStyle(
-                                      color: background_color,
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.w900,
-                                      fontFamily: 'Mukta'),
-                                ),
-                              ],
-                            )
-                          ],
+                        SizedBox(
+                          height: 30,
                         ),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        height: 150,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            color: text_color2,
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Gold Plan',
-                              style: TextStyle(
-                                  color: background_color,
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: 'Mukta'),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'Duration : ',
-                                  style: TextStyle(
-                                      color: background_color.withOpacity(0.7),
-                                      fontSize: 23,
-                                      fontWeight: FontWeight.w700,
-                                      fontFamily: 'Mukta'),
-                                ),
-                                Text(
-                                  '6 mo',
-                                  style: TextStyle(
-                                      color: background_color,
-                                      fontSize: 23,
-                                      fontWeight: FontWeight.w700,
-                                      fontFamily: 'Mukta'),
-                                ),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.04,
-                                ),
-                                Text(
-                                  '7000',
-                                  style: TextStyle(
-                                      color: background_color,
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.w900,
-                                      fontFamily: 'Mukta'),
-                                ),
-                              ],
-                            )
-                          ],
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          height: 150,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              color: text_color2,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Silver Plan',
+                                style: TextStyle(
+                                    color: background_color,
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'Mukta'),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    'Duration : ',
+                                    style: TextStyle(
+                                        color:
+                                            background_color.withOpacity(0.7),
+                                        fontSize: 23,
+                                        fontWeight: FontWeight.w700,
+                                        fontFamily: 'Mukta'),
+                                  ),
+                                  Text(
+                                    '3 mo',
+                                    style: TextStyle(
+                                        color: background_color,
+                                        fontSize: 23,
+                                        fontWeight: FontWeight.w700,
+                                        fontFamily: 'Mukta'),
+                                  ),
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.04,
+                                  ),
+                                  Text(
+                                    '3500',
+                                    style: TextStyle(
+                                        color: background_color,
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.w900,
+                                        fontFamily: 'Mukta'),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        height: 150,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            color: text_color2,
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Platinum Plan',
-                              style: TextStyle(
-                                  color: background_color,
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: 'Mukta'),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'Duration : ',
-                                  style: TextStyle(
-                                      color: background_color.withOpacity(0.7),
-                                      fontSize: 23,
-                                      fontWeight: FontWeight.w700,
-                                      fontFamily: 'Mukta'),
-                                ),
-                                Text(
-                                  '12 mo',
-                                  style: TextStyle(
-                                      color: background_color,
-                                      fontSize: 23,
-                                      fontWeight: FontWeight.w700,
-                                      fontFamily: 'Mukta'),
-                                ),
-                                SizedBox(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.02,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.03,
-                                ),
-                                Text(
-                                  '13000',
-                                  style: TextStyle(
-                                      color: background_color,
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.w900,
-                                      fontFamily: 'Mukta'),
-                                ),
-                              ],
-                            )
-                          ],
+                        SizedBox(
+                          height: 30,
                         ),
-                      ),
-                    ],
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          height: 150,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              color: text_color2,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Gold Plan',
+                                style: TextStyle(
+                                    color: background_color,
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'Mukta'),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    'Duration : ',
+                                    style: TextStyle(
+                                        color:
+                                            background_color.withOpacity(0.7),
+                                        fontSize: 23,
+                                        fontWeight: FontWeight.w700,
+                                        fontFamily: 'Mukta'),
+                                  ),
+                                  Text(
+                                    '6 mo',
+                                    style: TextStyle(
+                                        color: background_color,
+                                        fontSize: 23,
+                                        fontWeight: FontWeight.w700,
+                                        fontFamily: 'Mukta'),
+                                  ),
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.04,
+                                  ),
+                                  Text(
+                                    '7000',
+                                    style: TextStyle(
+                                        color: background_color,
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.w900,
+                                        fontFamily: 'Mukta'),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          height: 150,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              color: text_color2,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Platinum Plan',
+                                style: TextStyle(
+                                    color: background_color,
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'Mukta'),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    'Duration : ',
+                                    style: TextStyle(
+                                        color:
+                                            background_color.withOpacity(0.7),
+                                        fontSize: 23,
+                                        fontWeight: FontWeight.w700,
+                                        fontFamily: 'Mukta'),
+                                  ),
+                                  Text(
+                                    '12 mo',
+                                    style: TextStyle(
+                                        color: background_color,
+                                        fontSize: 23,
+                                        fontWeight: FontWeight.w700,
+                                        fontFamily: 'Mukta'),
+                                  ),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.02,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.03,
+                                  ),
+                                  Text(
+                                    '13000',
+                                    style: TextStyle(
+                                        color: background_color,
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.w900,
+                                        fontFamily: 'Mukta'),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
