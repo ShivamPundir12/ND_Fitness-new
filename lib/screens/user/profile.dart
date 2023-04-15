@@ -19,14 +19,18 @@ class _Usr_ProfileState extends State<Usr_Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           actions: [
             IconButton(
                 onPressed: () async {
-                  await FirebaseAuth.instance.signOut().whenComplete(() =>
-                      secureStorage.deleteSecureData('email').whenComplete(
-                            () => Navigator.pushNamedAndRemoveUntil(
-                                context, '/signin', (route) => false),
-                          ));
+                  await FirebaseAuth.instance.signOut().whenComplete(
+                        () => secureStorage
+                            .deleteSecureData('email')
+                            .whenComplete(
+                              () => Navigator.pushNamedAndRemoveUntil(
+                                  context, '/signin', (route) => false),
+                            ),
+                      );
                 },
                 icon: Icon(Icons.logout_outlined))
           ],

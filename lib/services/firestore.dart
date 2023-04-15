@@ -62,6 +62,7 @@ class Firecloud {
         .update({'Physical Activity': activity});
   }
 
+  // Add Gender To the database
   static selectgen(String gend) async {
     var firebaseUser = FirebaseAuth.instance.currentUser;
     var collection = FirebaseFirestore.instance.collection('userdetail');

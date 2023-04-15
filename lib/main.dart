@@ -7,7 +7,7 @@ import 'package:nd_fitness/screens/auth/sign_up.dart';
 import 'package:nd_fitness/screens/info/activity_level.dart';
 import 'package:nd_fitness/screens/info/age/age.dart';
 import 'package:nd_fitness/screens/info/gender.dart';
-import 'package:nd_fitness/screens/info/membership.dart';
+import 'package:nd_fitness/screens/info/membership/membership.dart';
 import 'package:nd_fitness/screens/info/profile.dart';
 import 'package:nd_fitness/screens/onboard/onboarding_scrn.dart';
 import 'package:nd_fitness/screens/onboard/splash_scrn.dart';

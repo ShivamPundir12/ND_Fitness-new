@@ -1,5 +1,3 @@
-// ignore_for_file: unnecessary_null_comparison
-
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/screens/info/profile.dart';
 import 'package:nd_fitness/services/Message.dart';
@@ -14,9 +12,15 @@ class Activity_level extends StatefulWidget {
 }
 
 class _Activity_levelState extends State<Activity_level> {
+  List<String> activityLevels = ['Beginner', 'Intermediate', 'Advanced'];
+  String selectedLevel = ''; // initialize as empty string
   final String activ1 = 'Beginner';
   final String activ2 = 'Intermediate';
   final String activ3 = 'Advance';
+  bool beginnerSelected = false;
+  bool intermediateSelected = false;
+  bool advancedSelected = false;
+  Color selected_color = text_color2;
   bool _isSelected = false;
   @override
   Widget build(BuildContext context) {
@@ -53,13 +57,16 @@ class _Activity_levelState extends State<Activity_level> {
               height: MediaQuery.of(context).size.height * 0.1,
             ),
             InkWell(
-              onTap: () async {
+              onTap: () {
                 try {
-                  await Firecloud.addphysicalactiv(activ1);
+                  Firecloud.addphysicalactiv(activ1);
                   Message.custommessage("You Will Start as $activ1", context);
 
                   // Set _isSelected to true when activity level is selected
                   setState(() {
+                    beginnerSelected = true;
+                    intermediateSelected = false;
+                    advancedSelected = false;
                     _isSelected = true;
                   });
                 } catch (e) {
@@ -70,7 +77,7 @@ class _Activity_levelState extends State<Activity_level> {
                 padding: EdgeInsets.symmetric(vertical: 15),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: gend,
+                  color: beginnerSelected ? selected_color : gend,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(15),
                     topRight: Radius.circular(15),
@@ -91,13 +98,16 @@ class _Activity_levelState extends State<Activity_level> {
               height: 20,
             ),
             InkWell(
-              onTap: () async {
+              onTap: () {
                 try {
-                  await Firecloud.addphysicalactiv(activ2);
+                  Firecloud.addphysicalactiv(activ2);
                   Message.custommessage("You Will Start as $activ2", context);
 
                   // Set _isSelected to true when activity level is selected
                   setState(() {
+                    beginnerSelected = false;
+                    intermediateSelected = true;
+                    advancedSelected = false;
                     _isSelected = true;
                   });
                 } catch (e) {
@@ -107,8 +117,9 @@ class _Activity_levelState extends State<Activity_level> {
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 15),
                 alignment: Alignment.center,
+                //Use a ternary operator to change the color based on _isSelected state
                 decoration: BoxDecoration(
-                  color: text_color2,
+                  color: intermediateSelected ? selected_color : gend,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(15),
                     topRight: Radius.circular(15),
@@ -129,14 +140,17 @@ class _Activity_levelState extends State<Activity_level> {
               height: 20,
             ),
             InkWell(
-              onTap: () async {
+              onTap: () {
                 try {
-                  await Firecloud.addphysicalactiv(activ3);
+                  Firecloud.addphysicalactiv(activ3);
                   Message.custommessage("You Will Start as $activ3", context);
 
                   // Set _isSelected to true when activity level is selected
                   setState(() {
                     _isSelected = true;
+                    beginnerSelected = false;
+                    intermediateSelected = false;
+                    advancedSelected = true;
                   });
                 } catch (e) {
                   Message.custommessage(e.toString(), context);
@@ -146,7 +160,7 @@ class _Activity_levelState extends State<Activity_level> {
                 padding: EdgeInsets.symmetric(vertical: 15),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: gend,
+                  color: advancedSelected ? selected_color : gend,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(15),
                     topRight: Radius.circular(15),
