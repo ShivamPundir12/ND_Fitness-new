@@ -51,9 +51,9 @@ class _GenderState extends State<Gender> {
               height: MediaQuery.of(context).size.height * 0.03,
             ),
             InkWell(
-              onTap: () async {
+              onTap: () {
                 try {
-                  await Firecloud.selectgen(gen1);
+                  Firecloud.selectgen(gen1);
                   Message.custommessage("You Will Start as $gen1", context);
 
                   // Set _isSelected to true when activity level is selected
@@ -92,9 +92,9 @@ class _GenderState extends State<Gender> {
               height: MediaQuery.of(context).size.height * 0.05,
             ),
             InkWell(
-              onTap: () async {
+              onTap: () {
                 try {
-                  await Firecloud.selectgen(gen2);
+                  Firecloud.selectgen(gen2);
                   Message.custommessage("You Will Start as $gen2", context);
 
                   // Set _isSelected to true when activity level is selected

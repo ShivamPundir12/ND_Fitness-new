@@ -53,9 +53,9 @@ class _Activity_levelState extends State<Activity_level> {
               height: MediaQuery.of(context).size.height * 0.1,
             ),
             InkWell(
-              onTap: () async {
+              onTap: () {
                 try {
-                  await Firecloud.addphysicalactiv(activ1);
+                  Firecloud.addphysicalactiv(activ1);
                   Message.custommessage("You Will Start as $activ1", context);
 
                   // Set _isSelected to true when activity level is selected
@@ -91,9 +91,9 @@ class _Activity_levelState extends State<Activity_level> {
               height: 20,
             ),
             InkWell(
-              onTap: () async {
+              onTap: () {
                 try {
-                  await Firecloud.addphysicalactiv(activ2);
+                  Firecloud.addphysicalactiv(activ2);
                   Message.custommessage("You Will Start as $activ2", context);
 
                   // Set _isSelected to true when activity level is selected
@@ -129,9 +129,9 @@ class _Activity_levelState extends State<Activity_level> {
               height: 20,
             ),
             InkWell(
-              onTap: () async {
+              onTap: () {
                 try {
-                  await Firecloud.addphysicalactiv(activ3);
+                  Firecloud.addphysicalactiv(activ3);
                   Message.custommessage("You Will Start as $activ3", context);
 
                   // Set _isSelected to true when activity level is selected
