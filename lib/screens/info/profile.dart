@@ -349,7 +349,6 @@ class _ProfileState extends State<Profile> {
                                   _relatvnamecontroller.text,
                                   _reltioncontroller.text,
                                   _emrccontroller.text);
-                              Message.custommessage("You are all Set", context);
                               Navigator.pushNamedAndRemoveUntil(
                                 context,
                                 "/member",
