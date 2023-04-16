@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/screens/admin/admn_home.dart';
+import 'package:nd_fitness/screens/admin/navbar/admin_bar.dart';
 import 'package:nd_fitness/screens/auth/admin_sign_in.dart';
 import 'package:nd_fitness/screens/auth/sign_in.dart';
 import 'package:nd_fitness/screens/auth/sign_up.dart';
@@ -11,14 +12,14 @@ import 'package:nd_fitness/screens/info/membership/membership.dart';
 import 'package:nd_fitness/screens/info/profile.dart';
 import 'package:nd_fitness/screens/onboard/onboarding_scrn.dart';
 import 'package:nd_fitness/screens/onboard/splash_scrn.dart';
+import 'screens/info/Weight/weight.dart';
 import 'screens/info/all_set.dart';
 import 'screens/user/profile.dart';
-import 'screens/info/Weight/weight.dart';
 
 Future main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(const MyApp());
+ WidgetsFlutterBinding.ensureInitialized();
+ Firebase.initializeApp();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -48,7 +49,7 @@ class MyApp extends StatelessWidget {
         // '/gen': (context) => gender(),
         // '/age': (context) => age(),
       },
-      home: SplashScreen(),
+      home: AdminBar(),
     );
   }
 }

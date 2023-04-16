@@ -337,10 +337,10 @@ class _ProfileState extends State<Profile> {
                           top: MediaQuery.of(context).size.height * 0.05,
                           bottom: MediaQuery.of(context).size.height * 0.06),
                       child: InkWell(
-                        onTap: () async {
+                        onTap: () {
                           try {
                             if (_formkey.currentState!.validate()) {
-                              await Firecloud.adduserdetail(
+                               Firecloud.adduserdetail(
                                   _namecontroller.text,
                                   _emailcontroller.text,
                                   _mobnocontroller.text,

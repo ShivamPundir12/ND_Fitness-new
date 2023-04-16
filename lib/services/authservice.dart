@@ -11,7 +11,7 @@ class AuthServices {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(
-              email: emailController, password: passwordController);
+              email: emailController.trim(), password: passwordController.trim());
       await secureStorage.writeSecureData(
           'email', userCredential.user!.email.toString());
       secureStorage.writeSecureData(
@@ -23,7 +23,7 @@ class AuthServices {
     }
   }
 
-  // Create an account Funtion / SignUP function
+  // Create an account Function / SignUP function
   static signup(String emailController, String passwordController,
       BuildContext context) async {
     try {
