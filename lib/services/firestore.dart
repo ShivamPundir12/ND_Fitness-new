@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 // Add user to database Function
 class Firecloud {
-  static String? data;
   static adduserdetail(
     String name,
     String email,
@@ -90,6 +89,22 @@ class Firecloud {
           });
         });
       });
+    });
+  }
+
+  // Add membership Plan to data base..
+  static addplandetail(
+    String plan,
+    String duration,
+    String price,
+  ) async {
+    var firebaseUser = FirebaseAuth.instance.currentUser;
+    var collection = FirebaseFirestore.instance.collection('userdetail');
+    var docSnapshot = await collection.doc(firebaseUser?.uid).get();
+    await collection.doc(docSnapshot.id).update({
+      'Plan': plan,
+      'Duration': duration,
+      'Price': price,
     });
   }
 }
