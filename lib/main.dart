@@ -1,12 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/screens/admin/admn_home.dart';
-import 'package:nd_fitness/screens/admin/navbar/admin_bar.dart';
 import 'package:nd_fitness/screens/auth/admin_sign_in.dart';
 import 'package:nd_fitness/screens/auth/sign_in.dart';
 import 'package:nd_fitness/screens/auth/sign_up.dart';
 import 'package:nd_fitness/screens/info/activity_level.dart';
-import 'package:nd_fitness/screens/info/age/age.dart';
 import 'package:nd_fitness/screens/info/gender.dart';
 import 'package:nd_fitness/screens/info/membership/membership.dart';
 import 'package:nd_fitness/screens/info/profile.dart';
@@ -17,8 +15,8 @@ import 'screens/info/all_set.dart';
 import 'screens/user/profile.dart';
 
 Future main() async {
- WidgetsFlutterBinding.ensureInitialized();
- Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -37,7 +35,6 @@ class MyApp extends StatelessWidget {
         '/signin': (context) => Sign_in(),
         '/signup': (context) => Sign_up(),
         '/gend': (context) => Gender(),
-        '/age': (context) => Usr_Age(),
         '/level': (context) => Activity_level(),
         '/profile': (context) => Profile(),
         '/member': (context) => Membership(),
@@ -49,7 +46,7 @@ class MyApp extends StatelessWidget {
         // '/gen': (context) => gender(),
         // '/age': (context) => age(),
       },
-      home: AdminBar(),
+      home: Profile(),
     );
   }
 }

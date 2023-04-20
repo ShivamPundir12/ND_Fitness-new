@@ -1,5 +1,6 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nd_fitness/generated/assets.dart';
 import 'package:nd_fitness/screens/admin/admin_reminder.dart';
@@ -38,19 +39,17 @@ class _AdminBarState extends State<AdminBar> {
         items: _icons
             .asMap()
             .map((index, icon) => MapEntry(
-          index,
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              icon,
-              width: 24,
-              height: 24,
-              color: _currentIndex == index
-                  ? Colors.blue
-                  : Colors.grey,
-            ),
-            label: '',
-          ),
-        ))
+                  index,
+                  BottomNavigationBarItem(
+                    icon: SvgPicture.asset(
+                      icon,
+                      width: 24,
+                      height: 24,
+                      color: _currentIndex == index ? Colors.blue : Colors.grey,
+                    ),
+                    label: '',
+                  ),
+                ))
             .values
             .toList(),
       ),
