@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 class Firecloud {
   static adduserdetail(
     String name,
-    String email,
     String mobileno,
     String dob,
     String address,
@@ -18,7 +17,6 @@ class Firecloud {
     var docSnapshot = await collection.doc(firebaseUser?.uid).get();
     await collection.doc(docSnapshot.id).update({
       'Name': name,
-      'email': email,
       'Mobile no': mobileno,
       'DOB': dob,
       'Address': address,

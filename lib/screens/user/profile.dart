@@ -113,7 +113,7 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                           ),
                           Container(
                             child: Text(
-                              userDocument?["email"],
+                              user.email.toString(),
                               style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w700,
