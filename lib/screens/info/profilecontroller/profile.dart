@@ -119,44 +119,51 @@ class _ProfileState extends State<Profile> {
                             SizedBox(
                               height: 40,
                             ),
-                            InkWell(
-                              onTap: () {
-                                provider.pickImage(context);
-                              },
-                              child: Stack(alignment: Alignment.bottomRight, children: [
-                                Container(
-                                  height: 120,
-                                  width: 120,
-                                  child: provider.image == null
-                                      ? Icon(Icons.person,
-                                          color: text_color2, size: 80)
-                                      : Image.file(
-                                          File(provider.image!.path).absolute,
-                                          fit: BoxFit.cover,
-                                          errorBuilder:
-                                              (context, error, stackTrace) {
-                                            return Container(
-                                              child: Icon(
-                                                Icons.error_outline,
-                                                color: background_color,
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                  decoration: BoxDecoration(
-                                      color: background_color,
-                                      shape: BoxShape.rectangle,
-                                      borderRadius: BorderRadius.circular(25)),
-                                ),
-                                IconButton(
-                                    onPressed: () {
-                                      provider.pickImage(context);
-                                    },
-                                    icon: Icon(CupertinoIcons.plus_circled),
-                                    color: Colors.white,
-                                    iconSize: 25),
-                              ]),
-                            ),
+                            Stack(children: [
+                              Container(
+                                height: 120,
+                                width: 120,
+                                child: provider.image == null
+                                    ? Icon(Icons.person,
+                                        color: text_color2, size: 75)
+                                    : Image.file(
+                                        File(provider.image!.path).absolute,
+                                        fit: BoxFit.cover,
+                                        errorBuilder:
+                                            (context, error, stackTrace) {
+                                          return Container(
+                                            child: Icon(
+                                              Icons.error_outline,
+                                              color: background_color,
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                decoration: BoxDecoration(
+                                    color: background_color,
+                                    shape: BoxShape.circle),
+                              ),
+                              Positioned(
+                                  bottom: 0,
+                                  right: 0,
+                                  child: Container(
+                                    height: 35,
+                                    width: 35,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                            width: 3, color: Colors.white),
+                                        color: Colors.blue),
+                                    child: IconButton(
+                                      onPressed: () {
+                                        provider.pickImage(context);
+                                      },
+                                      icon: Icon(CupertinoIcons.plus),
+                                      color: Colors.white,
+                                      iconSize: 15,
+                                    ),
+                                  ))
+                            ]),
                             SizedBox(
                               height: 30,
                             ),
