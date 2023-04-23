@@ -15,15 +15,19 @@ class Membership extends StatefulWidget {
 class _MembershipState extends State<Membership> {
   final secure_storage secureStorage = secure_storage();
 
+  // Plan 1
   String p1t1 = "Bronze Plan";
   String p1t2 = "1 mo";
   String p1t3 = "1250";
+  // Plan 2
   String p2t1 = "Silver Plan";
   String p2t2 = "3 mo";
   String p2t3 = "3500";
+  // Plan 3
   String p3t1 = "Gold Plan";
   String p3t2 = "6 mo";
   String p3t3 = "7000";
+  // Plan 4
   String p4t1 = "Platinum Plan";
   String p4t2 = "12 mo";
   String p4t3 = "13000";
@@ -81,8 +85,9 @@ class _MembershipState extends State<Membership> {
                           t2: p1t2,
                           t3: p1t3,
                         ),
-                        onTap: () async {
-                          await Firecloud.addplandetail(p1t1, p1t2, p1t3);
+                        // ontap function for Adding data to database
+                        onTap: () {
+                          Firecloud.addplandetail(p1t1, p1t2, p1t3);
                           Navigator.pushNamedAndRemoveUntil(
                               context, "/allset", (route) => false);
                         },
@@ -91,13 +96,14 @@ class _MembershipState extends State<Membership> {
                         height: 30,
                       ),
                       GestureDetector(
+                        //Card to show the Plan details
                         child: PlanCard(
                           t1: p2t1,
                           t2: p2t2,
                           t3: p2t3,
                         ),
-                        onTap: () async {
-                          await Firecloud.addplandetail(p2t1, p2t2, p2t3);
+                        onTap: () {
+                          Firecloud.addplandetail(p2t1, p2t2, p2t3);
                           Navigator.pushNamedAndRemoveUntil(
                               context, "/allset", (route) => false);
                         },
@@ -111,8 +117,8 @@ class _MembershipState extends State<Membership> {
                           t2: p3t2,
                           t3: p3t3,
                         ),
-                        onTap: () async {
-                          await Firecloud.addplandetail(p3t1, p3t2, p3t3);
+                        onTap: () {
+                          Firecloud.addplandetail(p3t1, p3t2, p3t3);
                           Navigator.pushNamedAndRemoveUntil(
                               context, "/allset", (route) => false);
                         },
@@ -126,8 +132,8 @@ class _MembershipState extends State<Membership> {
                           t2: p4t2,
                           t3: p4t3,
                         ),
-                        onTap: () async {
-                          await Firecloud.addplandetail(p4t1, p4t2, p4t3);
+                        onTap: () {
+                          Firecloud.addplandetail(p4t1, p4t2, p4t3);
                           Navigator.pushNamedAndRemoveUntil(
                               context, "/allset", (route) => false);
                         },

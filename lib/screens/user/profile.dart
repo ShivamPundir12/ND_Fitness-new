@@ -42,11 +42,42 @@ class _Usr_ProfileState extends State<Usr_Profile> {
           fit: StackFit.passthrough,
           alignment: Alignment.bottomCenter,
           children: [
-            Container(
-              decoration: BoxDecoration(
-                  image:
-                      DecorationImage(image: AssetImage(Assets.assetsPerson))),
-            ),
+            StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection('userdetail')
+                    .doc(user.uid)
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  var userDocument = snapshot.data!.data();
+                  var profileImageUrl = userDocument?['ProfileImage'];
+                  if (profileImageUrl != null) {
+                    return Stack(
+                      children: [
+                        Center(
+                          child: CircularProgressIndicator(
+                              color: background_color),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(profileImageUrl),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        )
+                      ],
+                    );
+                  } else {
+                    return Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(Assets.assetsPerson),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
+                  }
+                }),
             Padding(
               padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).size.height * 0.03),
@@ -113,7 +144,7 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                           ),
                           Container(
                             child: Text(
-                              userDocument?["email"],
+                              user.email.toString(),
                               style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w700,

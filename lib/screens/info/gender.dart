@@ -135,7 +135,7 @@ class _GenderState extends State<Gender> {
             GestureDetector(
               onTap: () {
                 if (_isSelected) {
-                  Navigator.pushNamed(context, "/age");
+                  Navigator.pushNamed(context, "/weigt");
                 } else {
                   // Show an error message to the user that they need to select an activity level
                   Message.custommessage('Please Select Your Gender', context);
