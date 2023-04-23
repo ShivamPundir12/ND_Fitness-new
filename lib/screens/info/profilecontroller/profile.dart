@@ -153,7 +153,7 @@ class _ProfileState extends State<Profile> {
                                         shape: BoxShape.circle,
                                         border: Border.all(
                                             width: 3, color: Colors.white),
-                                        color: Colors.blue),
+                                        color: Colors.blue.shade800),
                                     child: IconButton(
                                       onPressed: () {
                                         provider.pickImage(context);
