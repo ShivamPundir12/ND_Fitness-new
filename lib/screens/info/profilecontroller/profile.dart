@@ -2,6 +2,8 @@
 
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
+import 'package:nd_fitness/services/agecalc.dart';
+import 'package:nd_fitness/services/validationservice.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/materials/colors.dart';
@@ -9,7 +11,6 @@ import 'package:nd_fitness/screens/info/profilecontroller/profilecontroller.dart
 import 'package:nd_fitness/services/Message.dart';
 import 'package:nd_fitness/services/firestore.dart';
 import 'package:intl/intl.dart';
-import '../../../services/agecal.dart';
 
 class Profile extends StatefulWidget {
   const Profile({
@@ -30,8 +31,12 @@ class _ProfileState extends State<Profile> {
   final _mobnocontroller = TextEditingController();
   final _relatvnamecontroller = TextEditingController();
   final _reltioncontroller = TextEditingController();
+  // instance of Agecalculator Class
+  AgeCalc _ageCalc = AgeCalc();
+  // instance of Validtor Class
+  Valid validate = Valid();
+  // instance of Firestore Class
   Firecloud userData = Firecloud();
-  AgeCalc ageCalculator = AgeCalc();
   // Form key for validation
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   // Current date time
@@ -65,31 +70,7 @@ class _ProfileState extends State<Profile> {
       });
     }
     _dobcontroller.text = "${(DateFormat('dd/MM/yy').format(datepicker!))}";
-    _agecontroller.text = "${ageCalculator.calculateAge(datepicker)}";
-  }
-
-  // String _calculateAge(DateTime dob) {
-  //   Duration dur = DateTime.now().difference(dob);
-  //   final diff = (dur.inDays / 365).floor();
-  //   return "$diff";
-  // }
-
-  // This is Textformfield validator
-  String? formvaild(String? value) {
-    if (value!.isEmpty) {
-      return "Please Enter Something";
-    }
-    return null;
-  }
-
-  //This is Mobile number Validator
-  String? mobilevalid(String? value) {
-    if (value!.isEmpty) {
-      return "Please Enter a Phone Number";
-    } else if (value.length != 10) {
-      return "Please Enter a Valid Phone Number";
-    }
-    return null;
+    _agecontroller.text = "${_ageCalc.calculateAge(datepicker)}";
   }
 
   @override
@@ -178,7 +159,7 @@ class _ProfileState extends State<Profile> {
                                   children: [
                                     TextFormField(
                                       enableInteractiveSelection: true,
-                                      validator: formvaild,
+                                      validator: validate.formvaild,
                                       controller: _namecontroller,
                                       decoration: InputDecoration(
                                         labelText: 'Enter your full name',
@@ -199,7 +180,7 @@ class _ProfileState extends State<Profile> {
                                     ),
                                     TextFormField(
                                       readOnly: true,
-                                      validator: formvaild,
+                                      validator: validate.formvaild,
                                       keyboardType: TextInputType.none,
                                       onTap: () async {
                                         FocusScope.of(context)
@@ -225,7 +206,7 @@ class _ProfileState extends State<Profile> {
                                       height: 20,
                                     ),
                                     TextFormField(
-                                      validator: formvaild,
+                                      validator: validate.formvaild,
                                       controller: _addresscontroller,
                                       decoration: InputDecoration(
                                         labelText: 'Enter your Address',
@@ -248,7 +229,7 @@ class _ProfileState extends State<Profile> {
                                       onChanged: (value) {
                                         _formkey.currentState?.validate();
                                       },
-                                      validator: mobilevalid,
+                                      validator: validate.mobilevalid,
                                       controller: _mobnocontroller,
                                       decoration: InputDecoration(
                                         prefixText: _pretext,
@@ -282,7 +263,7 @@ class _ProfileState extends State<Profile> {
                                       height: 10,
                                     ),
                                     TextFormField(
-                                      validator: formvaild,
+                                      validator: validate.formvaild,
                                       controller: _relatvnamecontroller,
                                       decoration: InputDecoration(
                                         labelText: 'Enter your full name',
@@ -306,7 +287,7 @@ class _ProfileState extends State<Profile> {
                                       onChanged: (value) {
                                         _formkey.currentState?.validate();
                                       },
-                                      validator: mobilevalid,
+                                      validator: validate.mobilevalid,
                                       decoration: InputDecoration(
                                         prefixText: _pretext,
                                         labelText: 'Enter your Mobile no.',
@@ -326,7 +307,7 @@ class _ProfileState extends State<Profile> {
                                       height: 20,
                                     ),
                                     TextFormField(
-                                      validator: formvaild,
+                                      validator: validate.formvaild,
                                       controller: _reltioncontroller,
                                       decoration: InputDecoration(
                                         labelText: 'Enter your Relationship.',
