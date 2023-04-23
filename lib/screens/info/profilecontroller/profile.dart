@@ -119,42 +119,44 @@ class _ProfileState extends State<Profile> {
                             SizedBox(
                               height: 40,
                             ),
-                            Stack(alignment: Alignment.bottomRight, children: [
-                              Container(
-                                clipBehavior: Clip.antiAlias,
-                                height: 130,
-                                width: 130,
-                                child: provider.image == null
-                                    ? Icon(Icons.person,
-                                        color: text_color2, size: 100)
-                                    : Image.file(
-                                        File(provider.image!.path).absolute,
-                                        fit: BoxFit.cover,
-                                        errorBuilder:
-                                            (context, error, stackTrace) {
-                                          return Container(
-                                            child: Icon(
-                                              Icons.error_outline,
-                                              color: background_color,
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                decoration: BoxDecoration(
-                                    color: background_color,
-                                    shape: BoxShape.rectangle,
-                                    borderRadius: BorderRadius.circular(30)),
-                              ),
-                              Container(
-                                child: IconButton(
+                            InkWell(
+                              onTap: () {
+                                provider.pickImage(context);
+                              },
+                              child: Stack(alignment: Alignment.bottomRight, children: [
+                                Container(
+                                  height: 120,
+                                  width: 120,
+                                  child: provider.image == null
+                                      ? Icon(Icons.person,
+                                          color: text_color2, size: 80)
+                                      : Image.file(
+                                          File(provider.image!.path).absolute,
+                                          fit: BoxFit.cover,
+                                          errorBuilder:
+                                              (context, error, stackTrace) {
+                                            return Container(
+                                              child: Icon(
+                                                Icons.error_outline,
+                                                color: background_color,
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                  decoration: BoxDecoration(
+                                      color: background_color,
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.circular(25)),
+                                ),
+                                IconButton(
                                     onPressed: () {
                                       provider.pickImage(context);
                                     },
                                     icon: Icon(CupertinoIcons.plus_circled),
                                     color: Colors.white,
-                                    iconSize: 30),
-                              ),
-                            ]),
+                                    iconSize: 25),
+                              ]),
+                            ),
                             SizedBox(
                               height: 30,
                             ),
