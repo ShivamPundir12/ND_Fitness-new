@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nd_fitness/screens/info/profile.dart';
+import 'package:nd_fitness/screens/info/profilecontroller/profile.dart';
 import 'package:nd_fitness/services/Message.dart';
 import 'package:nd_fitness/services/firestore.dart';
 import '../../materials/colors.dart';

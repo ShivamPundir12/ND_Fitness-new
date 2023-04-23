@@ -3,10 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 // Add user to database Function
 class Firecloud {
-  static adduserdetail(
+  String url =
+      "https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Z3ltJTIwYm95fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
+  adduserdetail(
     String name,
     String mobileno,
-    String dob,
+    String age,
     String address,
     String rname,
     String relation,
@@ -15,14 +17,16 @@ class Firecloud {
     var firebaseUser = FirebaseAuth.instance.currentUser;
     var collection = FirebaseFirestore.instance.collection('userdetail');
     var docSnapshot = await collection.doc(firebaseUser?.uid).get();
+
     await collection.doc(docSnapshot.id).update({
       'Name': name,
       'Mobile no': mobileno,
-      'DOB': dob,
+      'Age': age,
       'Address': address,
       'Relative name': rname,
       'Relation': relation,
       'Relation Phone no': rnumber,
+      'Picurl': url,
     });
   }
 
