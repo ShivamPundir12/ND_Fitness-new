@@ -119,11 +119,8 @@ class _ProfileState extends State<Profile> {
                             SizedBox(
                               height: 40,
                             ),
-                            InkWell(
-                              onTap: () {
-                                provider.pickImage(context);
-                              },
-                              child: Container(
+                            Stack(alignment: Alignment.bottomRight, children: [
+                              Container(
                                 clipBehavior: Clip.antiAlias,
                                 height: 130,
                                 width: 130,
@@ -145,9 +142,19 @@ class _ProfileState extends State<Profile> {
                                       ),
                                 decoration: BoxDecoration(
                                     color: background_color,
-                                    shape: BoxShape.circle),
+                                    shape: BoxShape.rectangle,
+                                    borderRadius: BorderRadius.circular(30)),
                               ),
-                            ),
+                              Container(
+                                child: IconButton(
+                                    onPressed: () {
+                                      provider.pickImage(context);
+                                    },
+                                    icon: Icon(CupertinoIcons.plus_circled),
+                                    color: Colors.white,
+                                    iconSize: 30),
+                              ),
+                            ]),
                             SizedBox(
                               height: 30,
                             ),
