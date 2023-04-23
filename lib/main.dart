@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
         '/weigt': (context) => Usr_Weight(),
         // '/age': (context) => age(),
       },
-      home: Profile(),
+      home: SplashScreen(),
     );
   }
 }
