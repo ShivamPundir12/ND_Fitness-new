@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/generated/assets.dart';
 import 'package:nd_fitness/materials/colors.dart';
+import 'package:nd_fitness/screens/user/user_drawer.dart';
 import '../../services/secure_storage.dart';
 
 class Usr_Profile extends StatefulWidget {
@@ -15,29 +18,42 @@ class Usr_Profile extends StatefulWidget {
 class _Usr_ProfileState extends State<Usr_Profile> {
   final secure_storage secureStorage = secure_storage();
   final user = FirebaseAuth.instance.currentUser!;
+  bool _isClicked = false;
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+
+  // Method to toggle the drawer state
+  void _toggleDrawer() {
+    setState(() {
+      _isClicked = !_isClicked;
+    });
+    _scaffoldKey.currentState!.openEndDrawer(); // Open Drawer
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _scaffoldKey,
+        endDrawer: CustomDrawer.drawer(context),
         appBar: AppBar(
           automaticallyImplyLeading: false,
           actions: [
             IconButton(
-                onPressed: () async {
-                  await FirebaseAuth.instance.signOut().whenComplete(
-                        () => secureStorage
-                            .deleteSecureData('email')
-                            .whenComplete(
-                              () => Navigator.pushNamedAndRemoveUntil(
-                                  context, '/signin', (route) => false),
-                            ),
-                      );
-                },
-                icon: Icon(Icons.logout_outlined))
+              onPressed: () => _toggleDrawer(),
+              icon: Transform.rotate(
+                angle: _isClicked ? pi / 2 : 0,
+                child: Icon(
+                  Icons.settings,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.85,
+            ),
           ],
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),
-        backgroundColor: Colors.transparent,
         body: Stack(
           fit: StackFit.passthrough,
           alignment: Alignment.bottomCenter,
@@ -98,7 +114,9 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
-                        return new Text("Loading...");
+                        return new CircularProgressIndicator(
+                          color: text_color,
+                        );
                       }
                       var userDocument = snapshot.data;
                       return Column(
@@ -146,7 +164,7 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                             child: Text(
                               user.email.toString(),
                               style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.w700,
                                   fontFamily: 'Mukta',
                                   color: Colors.black),
@@ -156,14 +174,14 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                             child: Text(
                               userDocument?["Mobile no"],
                               style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.w700,
                                   fontFamily: 'Mukta',
                                   color: Colors.black),
                             ),
                           ),
                           SizedBox(
-                            height: 15,
+                            height: 20,
                           ),
                           Container(
                             child: Text(
@@ -173,27 +191,6 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                                   fontWeight: FontWeight.w700,
                                   fontFamily: 'Mukta',
                                   color: Colors.black),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 5, horizontal: 20),
-                              decoration: BoxDecoration(
-                                  color: Colors.black87,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Text(
-                                'Settings',
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontFamily: 'Mukta',
-                                    fontWeight: FontWeight.w700,
-                                    color: text_color2),
-                              ),
                             ),
                           ),
                         ],

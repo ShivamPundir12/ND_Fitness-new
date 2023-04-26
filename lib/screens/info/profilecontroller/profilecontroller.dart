@@ -29,7 +29,9 @@ class ProfileController with ChangeNotifier {
       _image = File(pickFile.path);
       notifyListeners();
       uploadImage(context);
-    }
+    } else
+      Message.custommessage("No Photo Selected", context);
+    notifyListeners();
   }
 
   Future pickCameraImage(BuildContext context) async {
@@ -40,7 +42,9 @@ class ProfileController with ChangeNotifier {
       _image = File(pickFile.path);
       notifyListeners();
       uploadImage(context);
-    }
+    } else
+      Message.custommessage("No Photo Selected", context);
+    notifyListeners();
   }
 
   void pickImage(context) {
