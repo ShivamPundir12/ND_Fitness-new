@@ -121,6 +121,7 @@ class _ProfileState extends State<Profile> {
                             ),
                             Stack(children: [
                               Container(
+                                clipBehavior: Clip.antiAlias,
                                 height: 120,
                                 width: 120,
                                 child: provider.image == null
@@ -153,7 +154,7 @@ class _ProfileState extends State<Profile> {
                                         shape: BoxShape.circle,
                                         border: Border.all(
                                             width: 3, color: Colors.white),
-                                        color: Colors.blue.shade800),
+                                        color: background_color),
                                     child: IconButton(
                                       onPressed: () {
                                         provider.pickImage(context);
