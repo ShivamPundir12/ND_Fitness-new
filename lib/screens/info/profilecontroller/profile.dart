@@ -4,6 +4,7 @@
 
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
+import 'package:nd_fitness/screens/info/profilecontroller/widgets/text_style.dart';
 import 'package:nd_fitness/services/agecalc.dart';
 import 'package:nd_fitness/services/validationservice.dart';
 import 'package:provider/provider.dart';
@@ -200,11 +201,9 @@ class _ProfileState extends State<Profile> {
                                               BorderRadius.circular(18),
                                         ),
                                       ),
-                                      style: TextStyle(
-                                          color: Colors.black.withOpacity(0.4),
-                                          fontSize: 15,
-                                          fontFamily: 'Mukta',
-                                          fontWeight: FontWeight.w500),
+                                      style: profilestyle (
+                                        color: black.withOpacity(0.4)
+                                      )
                                     ),
                                     SizedBox(
                                       height: 20,
@@ -227,11 +226,9 @@ class _ProfileState extends State<Profile> {
                                             borderRadius:
                                                 BorderRadius.circular(18)),
                                       ),
-                                      style: TextStyle(
-                                          color: Colors.black.withOpacity(0.4),
-                                          fontSize: 15,
-                                          fontFamily: 'Mukta',
-                                          fontWeight: FontWeight.w500),
+                                      style: profilestyle (
+                                          color: black.withOpacity(0.4)
+                                      )
                                     ),
                                     SizedBox(
                                       height: 20,
@@ -246,11 +243,9 @@ class _ProfileState extends State<Profile> {
                                             borderRadius:
                                                 BorderRadius.circular(18)),
                                       ),
-                                      style: TextStyle(
-                                          color: Colors.black.withOpacity(0.4),
-                                          fontSize: 15,
-                                          fontFamily: 'Mukta',
-                                          fontWeight: FontWeight.w500),
+                                      style: profilestyle (
+                                          color: black.withOpacity(0.4)
+                                      )
                                     ),
                                     SizedBox(
                                       height: 20,
@@ -270,11 +265,9 @@ class _ProfileState extends State<Profile> {
                                             borderRadius:
                                                 BorderRadius.circular(18)),
                                       ),
-                                      style: TextStyle(
-                                          color: Colors.black.withOpacity(0.4),
-                                          fontSize: 15,
-                                          fontFamily: 'Mukta',
-                                          fontWeight: FontWeight.w500),
+                                      style: profilestyle (
+                                          color: black.withOpacity(0.4)
+                                      )
                                     ),
                                     SizedBox(
                                       height: 30,
@@ -282,12 +275,9 @@ class _ProfileState extends State<Profile> {
                                     Container(
                                       child: Text(
                                         'Emergency contact',
-                                        style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.7),
-                                            fontSize: 20,
-                                            fontFamily: 'Mukta',
-                                            fontWeight: FontWeight.w700),
+                                        style: profilestyle (
+                                            color: black.withOpacity(0.4)
+                                        )
                                       ),
                                     ),
                                     SizedBox(
@@ -303,11 +293,9 @@ class _ProfileState extends State<Profile> {
                                             borderRadius:
                                                 BorderRadius.circular(18)),
                                       ),
-                                      style: TextStyle(
-                                          color: Colors.black.withOpacity(0.4),
-                                          fontSize: 15,
-                                          fontFamily: 'Mukta',
-                                          fontWeight: FontWeight.w500),
+                                      style: profilestyle (
+                                          color: black.withOpacity(0.4)
+                                      )
                                     ),
                                     SizedBox(
                                       height: 20,
@@ -328,11 +316,9 @@ class _ProfileState extends State<Profile> {
                                               BorderRadius.circular(18),
                                         ),
                                       ),
-                                      style: TextStyle(
-                                          color: Colors.black.withOpacity(0.4),
-                                          fontSize: 15,
-                                          fontFamily: 'Mukta',
-                                          fontWeight: FontWeight.w500),
+                                      style: profilestyle (
+                                          color: black.withOpacity(0.4)
+                                      )
                                     ),
                                     SizedBox(
                                       height: 20,
@@ -349,11 +335,9 @@ class _ProfileState extends State<Profile> {
                                               BorderRadius.circular(18),
                                         ),
                                       ),
-                                      style: TextStyle(
-                                          color: Colors.black.withOpacity(0.4),
-                                          fontSize: 15,
-                                          fontFamily: 'Mukta',
-                                          fontWeight: FontWeight.w500),
+                                      style: profilestyle (
+                                          color: black.withOpacity(0.4)
+                                      )
                                     ),
                                     SizedBox(
                                       height: 30,

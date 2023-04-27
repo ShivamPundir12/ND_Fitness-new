@@ -5,6 +5,7 @@ import 'package:nd_fitness/screens/auth/sign_up.dart';
 import 'package:nd_fitness/services/Message.dart';
 import 'package:nd_fitness/services/authservice.dart';
 import 'package:nd_fitness/services/secure_storage.dart';
+import 'package:nd_fitness/widgets/textstyle.dart';
 
 import '../onboard/material/photo_hero.dart';
 
@@ -116,11 +117,9 @@ class _Sign_inState extends State<Sign_in> {
                         Container(
                           child: Text(
                             'Username or Email',
-                            style: TextStyle(
-                                color: Colors.black.withOpacity(0.7),
-                                fontSize: 18,
-                                fontFamily: 'Mukta',
-                                fontWeight: FontWeight.w500),
+                            style: customstyle(
+                              color: black.withOpacity(0.7)
+                            )
                           ),
                         ),
                         SizedBox(
@@ -133,11 +132,10 @@ class _Sign_inState extends State<Sign_in> {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(18)),
                           ),
-                          style: TextStyle(
-                              color: Colors.black.withOpacity(0.4),
-                              fontSize: 15,
-                              fontFamily: 'Mukta',
-                              fontWeight: FontWeight.w500),
+                          style: customstyle(
+                          size: 15,
+                            color: black.withOpacity(0.4)
+                          ),
                           validator: (value) {
                             if (value!.isEmpty) {
                               return "Email is required";
@@ -158,11 +156,9 @@ class _Sign_inState extends State<Sign_in> {
                         Container(
                           child: Text(
                             'Password',
-                            style: TextStyle(
-                                color: Colors.black.withOpacity(0.7),
-                                fontSize: 18,
-                                fontFamily: 'Mukta',
-                                fontWeight: FontWeight.w500),
+                            style: customstyle(
+                                color: black.withOpacity(0.7)
+                            )
                           ),
                         ),
                         SizedBox(
@@ -186,11 +182,10 @@ class _Sign_inState extends State<Sign_in> {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(18)),
                           ),
-                          style: TextStyle(
-                              color: Colors.black.withOpacity(0.4),
-                              fontSize: 15,
-                              fontFamily: 'Mukta',
-                              fontWeight: FontWeight.w500),
+                          style: customstyle(
+                              size: 15,
+                              color: black.withOpacity(0.4)
+                          ),
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Password is required';
