@@ -1,5 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison, unused_field
 
+// ignore_for_file: unnecessary_null_comparison, unused_field
+
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:nd_fitness/services/agecalc.dart';
@@ -11,6 +13,7 @@ import 'package:nd_fitness/screens/info/profilecontroller/profilecontroller.dart
 import 'package:nd_fitness/services/Message.dart';
 import 'package:nd_fitness/services/firestore.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Profile extends StatefulWidget {
   const Profile({
@@ -43,6 +46,17 @@ class _ProfileState extends State<Profile> {
   DateTime _date = DateTime.now();
   // Prefix text for Mobile number field
   String _pretext = "+91 ";
+
+  void _saveFieldValues() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('name', _namecontroller.text);
+    await prefs.setString('mobno', _mobnocontroller.text);
+    await prefs.setString('age', _agecontroller.text);
+    await prefs.setString('address', _addresscontroller.text);
+    await prefs.setString('relatvname', _relatvnamecontroller.text);
+    await prefs.setString('reltion', _reltioncontroller.text);
+    await prefs.setString('emrc', _emrccontroller.text);
+  }
 
   @override
   void dispose() {
@@ -358,6 +372,7 @@ class _ProfileState extends State<Profile> {
                                 onTap: () async {
                                   try {
                                     if (_formkey.currentState!.validate()) {
+                                      _saveFieldValues();
                                       userData.adduserdetail(
                                         _namecontroller.text,
                                         _mobnocontroller.text,
