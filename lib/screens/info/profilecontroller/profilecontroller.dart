@@ -6,9 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/services/Message.dart';
+import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart';
+import 'package:http/http.dart' as http;
 
 class ProfileController with ChangeNotifier {
   final picker = ImagePicker();
+  final firebaseuser = FirebaseAuth.instance.currentUser?.uid;
 
   bool _loading = false;
   bool get loading => _loading;
@@ -21,6 +25,26 @@ class ProfileController with ChangeNotifier {
   File? _image;
   File? get image => _image;
 
+//  Saving image In Local Storage Function
+  Future<File?> saveImageLocally(File? image) async {
+    if (image == null) return null;
+
+    final savedImagePath = '/profileImage' + firebaseuser.toString();
+
+    try {
+      // copy the picked image file to a new file at the saved path
+      await image.copy(savedImagePath);
+
+      // return the new File object representing the saved image
+      return File(savedImagePath);
+    } catch (e) {
+      // handle errors here
+      print('Error saving image: $e');
+      return null;
+    }
+  }
+
+  // Choosing  image from the gallery
   Future pickGlleryImage(BuildContext context) async {
     final pickFile =
         await picker.pickImage(source: ImageSource.gallery, imageQuality: 100);
@@ -28,12 +52,14 @@ class ProfileController with ChangeNotifier {
     if (pickFile != null) {
       _image = File(pickFile.path);
       notifyListeners();
-      uploadImage(context);
+      final savedImage = await saveImageLocally(image);
+      uploadImage(context, savedImage ?? image);
     } else
       Message.custommessage("No Photo Selected", context);
     notifyListeners();
   }
 
+  // Taking image from the camera
   Future pickCameraImage(BuildContext context) async {
     final pickFile =
         await picker.pickImage(source: ImageSource.camera, imageQuality: 100);
@@ -41,12 +67,14 @@ class ProfileController with ChangeNotifier {
     if (pickFile != null) {
       _image = File(pickFile.path);
       notifyListeners();
-      uploadImage(context);
+      final savedImage = await saveImageLocally(image);
+      uploadImage(context, savedImage ?? image);
     } else
       Message.custommessage("No Photo Selected", context);
     notifyListeners();
   }
 
+  // Alert box for Choosing to Take the Image from camera or gallery
   void pickImage(context) {
     showDialog(
       context: context,
@@ -79,8 +107,7 @@ class ProfileController with ChangeNotifier {
   }
 
   // upload profile image funtion
-  void uploadImage(BuildContext context) async {
-    final firebaseuser = FirebaseAuth.instance.currentUser?.uid;
+  void uploadImage(BuildContext context, File? imageFile) async {
     setLoading(true);
     var collection = FirebaseFirestore.instance.collection('userdetail');
     var docSnapshot = await collection.doc(firebaseuser).get();
