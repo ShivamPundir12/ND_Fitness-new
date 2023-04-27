@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:nd_fitness/generated/assets.dart';
 import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/screens/user/profile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../services/secure_storage.dart';
 import '../onboard/splash_scrn.dart';
@@ -26,19 +27,34 @@ class _AllSetState extends State<AllSet> {
       finalName = value;
     });
     Timer(
-      Duration(seconds: 2),
-      () => Navigator.pushReplacement(
-        context,
-        PageRouteBuilder(
-          barrierDismissible: false,
-          opaque: false,
-          transitionDuration: Duration(milliseconds: 200),
-          pageBuilder: ((BuildContext context, animation, secondaryAnimation) {
-            return finalEmail == null ? AllSet() : Usr_Profile();
-          }),
-        ),
-      ),
-    );
+        Duration(seconds: 2),
+        () => Navigator.pushReplacement(
+            context,
+            PageRouteBuilder(
+              transitionDuration: Duration(seconds: 2),
+              pageBuilder:
+                  ((BuildContext context, animation, secondaryAnimation) {
+                // Check if user has filled in all details
+                bool profileComplete = true; // Assume profile is complete
+                if (finalEmail == null || finalName == null) {
+                  profileComplete = false;
+                } else {
+                  SharedPreferences.getInstance().then((prefs) {
+                    if (prefs.getString('name') == null ||
+                        prefs.getString('age') == null ||
+                        prefs.getString('address') == null) {
+                      profileComplete = false;
+                    }
+                  });
+                }
+                // Navigate to appropriate screen
+                if (profileComplete) {
+                  return Usr_Profile();
+                } else {
+                  return AllSet();
+                }
+              }),
+            )));
     super.initState();
   }
 
