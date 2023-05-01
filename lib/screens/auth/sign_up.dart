@@ -5,6 +5,7 @@ import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/services/authservice.dart';
 
 import '../../services/Message.dart';
+import '../../widgets/textstyle.dart';
 import '../onboard/material/photo_hero.dart';
 
 class Sign_up extends StatefulWidget {
@@ -114,11 +115,9 @@ class _Sign_upState extends State<Sign_up> {
                         Container(
                           child: Text(
                             'Email',
-                            style: TextStyle(
-                                color: Colors.black.withOpacity(0.7),
-                                fontSize: 18,
-                                fontFamily: 'Mukta',
-                                fontWeight: FontWeight.w500),
+                            style: customstyle(
+                                color: black.withOpacity(0.7)
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -146,11 +145,10 @@ class _Sign_upState extends State<Sign_up> {
                           onSaved: (value) {
                             email = value;
                           },
-                          style: TextStyle(
-                              color: Colors.black.withOpacity(0.4),
-                              fontSize: 15,
-                              fontFamily: 'Mukta',
-                              fontWeight: FontWeight.w500),
+                          style: customstyle(
+                              size: 15,
+                              color: black.withOpacity(0.4)
+                          ),
                         ),
                         SizedBox(
                           height: 15,
@@ -158,11 +156,9 @@ class _Sign_upState extends State<Sign_up> {
                         Container(
                           child: Text(
                             'Password',
-                            style: TextStyle(
-                                color: Colors.black.withOpacity(0.7),
-                                fontSize: 18,
-                                fontFamily: 'Mukta',
-                                fontWeight: FontWeight.w500),
+                            style: customstyle(
+                                color: black.withOpacity(0.7)
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -196,11 +192,10 @@ class _Sign_upState extends State<Sign_up> {
                             }
                             return null;
                           },
-                          style: TextStyle(
-                              color: Colors.black.withOpacity(0.4),
-                              fontSize: 15,
-                              fontFamily: 'Mukta',
-                              fontWeight: FontWeight.w500),
+                          style: customstyle(
+                              size: 15,
+                              color: black.withOpacity(0.4)
+                          ),
                         ),
                         SizedBox(
                           height: 15,
@@ -208,11 +203,9 @@ class _Sign_upState extends State<Sign_up> {
                         Container(
                           child: Text(
                             'Confirm password',
-                            style: TextStyle(
-                                color: Colors.black.withOpacity(0.7),
-                                fontSize: 18,
-                                fontFamily: 'Mukta',
-                                fontWeight: FontWeight.w500),
+                            style: customstyle(
+                                color: black.withOpacity(0.7)
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -240,11 +233,10 @@ class _Sign_upState extends State<Sign_up> {
                           validator: MultiValidator([
                             RequiredValidator(errorText: 'Enter Something'),
                           ]),
-                          style: TextStyle(
-                              color: Colors.black.withOpacity(0.4),
-                              fontSize: 15,
-                              fontFamily: 'Mukta',
-                              fontWeight: FontWeight.w500),
+                          style: customstyle(
+                              size: 15,
+                              color: black.withOpacity(0.4)
+                          ),
                         ),
                         SizedBox(
                           height: 20,
