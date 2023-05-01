@@ -1,10 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/screens/auth/sign_up.dart';
-import 'package:nd_fitness/services/Message.dart';
 import 'package:nd_fitness/services/authservice.dart';
 import 'package:nd_fitness/services/secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../onboard/material/photo_hero.dart';
 
@@ -23,6 +24,7 @@ class _Sign_inState extends State<Sign_in> {
   final passwordController = TextEditingController();
   final confirmpassController = TextEditingController();
   final secure_storage secureStorage = secure_storage();
+  final user = FirebaseAuth.instance.currentUser;
 
   @override
   void dispose() {
@@ -40,6 +42,11 @@ class _Sign_inState extends State<Sign_in> {
     } else {
       print('error');
     }
+  }
+
+  Future _saveFieldValues() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('email', emailController.text);
   }
 
   @override
@@ -204,18 +211,29 @@ class _Sign_inState extends State<Sign_in> {
                             height: MediaQuery.of(context).size.height * 0.02),
                         GestureDetector(
                           onTap: () async {
-                            try {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return Center(
-                                      child: CircularProgressIndicator(),
-                                    );
-                                  });
-                              await AuthServices.login(emailController.text,
-                                  passwordController.text, context);
-                            } catch (e) {
-                              Message.custommessage(e.toString(), context);
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            // save the email field value
+                            _saveFieldValues();
+                            // User login Function
+                            await AuthServices.login(
+                              emailController.text,
+                              passwordController.text,
+                              context,
+                            );
+                            final prefs = await SharedPreferences.getInstance();
+                            String loggedInUserKey = 'email';
+                            String? userDataJsonString =
+                                prefs.getString(loggedInUserKey).toString();
+                            // check if the user has data
+                            if (prefs.containsKey(userDataJsonString)) {
+                              // proceed to user profile page
+                              Navigator.pushNamed(context, '/usrprofile');
                             }
                           },
                           child: Container(

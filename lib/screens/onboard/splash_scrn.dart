@@ -1,9 +1,9 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:nd_fitness/screens/info/gender.dart';
 import 'package:nd_fitness/screens/onboard/material/photo_hero.dart';
 import 'package:nd_fitness/screens/onboard/onboarding_scrn.dart';
-import 'package:nd_fitness/screens/user/profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../services/secure_storage.dart';
@@ -36,28 +36,20 @@ class _SplashScreenState extends State<SplashScreen> {
                 pageBuilder:
                     ((BuildContext context, animation, secondaryAnimation) {
                   // Check if user has filled in all details
-                  bool profileComplete = true; // Assume profile is complete
+                  bool profileComplete = false; // Assume profile is complete
                   if (finalEmail == null || finalName == null) {
-                    profileComplete = false;
-                    return Onboard_screen();
                   } else {
                     SharedPreferences.getInstance().then((prefs) {
-                      if (prefs.getString('name') == null ||
-                          prefs.getString('age') == null ||
-                          prefs.getString('address') == null ||
-                          prefs.getString('relatvname') == null ||
-                          prefs.getString('reltion') == null ||
-                          prefs.getString('emrc') == null) {
-                        profileComplete = false;
+                      String loggedInUserKey = 'email';
+                      String? userDataJsonString =
+                          prefs.getString(loggedInUserKey).toString();
+                      if (prefs.containsKey(userDataJsonString)) {
+                        profileComplete = true;
+                        Navigator.pushNamed(context, '/usrprofile');
                       }
                     });
                   }
-                  // Navigate to appropriate screen
-                  if (profileComplete) {
-                    return Usr_Profile();
-                  } else {
-                    return Gender();
-                  }
+                  return Onboard_screen();
                 }),
               ),
             ));

@@ -6,9 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/services/Message.dart';
-import 'package:path/path.dart' as path;
-import 'package:path_provider/path_provider.dart';
-import 'package:http/http.dart' as http;
 
 class ProfileController with ChangeNotifier {
   final picker = ImagePicker();

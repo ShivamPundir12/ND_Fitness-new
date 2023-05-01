@@ -34,7 +34,7 @@ class _Onboard_screenState extends State<Onboard_screen>
           children: [
             Container(
               alignment: Alignment.center,
-              padding: const EdgeInsets.only(top: 200),
+              padding: EdgeInsets.only(top: 200),
               child: PhotoHero(
                 photo: 'assets/logo.png',
                 width: 95,
