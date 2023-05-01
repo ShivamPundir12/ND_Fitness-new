@@ -1,8 +1,8 @@
 // ignore_for_file: unnecessary_null_comparison, unused_field
 
-// ignore_for_file: unnecessary_null_comparison, unused_field
-
+import 'dart:convert';
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:nd_fitness/screens/info/profilecontroller/widgets/text_style.dart';
 import 'package:nd_fitness/services/agecalc.dart';
@@ -35,6 +35,7 @@ class _ProfileState extends State<Profile> {
   final _mobnocontroller = TextEditingController();
   final _relatvnamecontroller = TextEditingController();
   final _reltioncontroller = TextEditingController();
+  final user = FirebaseAuth.instance.currentUser?.email;
   // instance of Agecalculator Class
   AgeCalc _ageCalc = AgeCalc();
   // instance of Validtor Class
@@ -50,13 +51,18 @@ class _ProfileState extends State<Profile> {
 
   void _saveFieldValues() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('name', _namecontroller.text);
-    await prefs.setString('mobno', _mobnocontroller.text);
-    await prefs.setString('age', _agecontroller.text);
-    await prefs.setString('address', _addresscontroller.text);
-    await prefs.setString('relatvname', _relatvnamecontroller.text);
-    await prefs.setString('reltion', _reltioncontroller.text);
-    await prefs.setString('emrc', _emrccontroller.text);
+    String loggedInUserKey = user.toString(); // unique key for current user
+    Map<String, dynamic> userData = {
+      'name': _namecontroller.text,
+      'mobno': _mobnocontroller.text,
+      'age': _agecontroller.text,
+      'address': _addresscontroller.text,
+      'relatvname': _relatvnamecontroller.text,
+      'reltion': _reltioncontroller.text,
+      'emrc': _emrccontroller.text
+    };
+    String userDataJsonString = json.encode(userData);
+    await prefs.setString(loggedInUserKey, userDataJsonString);
   }
 
   @override
