@@ -13,11 +13,19 @@ import 'package:nd_fitness/screens/onboard/splash_scrn.dart';
 import 'screens/info/Weight/weight.dart';
 import 'screens/info/all_set.dart';
 import 'screens/user/profile.dart';
+import 'package:provider/provider.dart';
+
+import 'services/container_color.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => PlanProvider(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -45,7 +53,7 @@ class MyApp extends StatelessWidget {
         '/weigt': (context) => Usr_Weight(),
         // '/age': (context) => age(),
       },
-      home: SplashScreen(),
+      home: Membership(),
     );
   }
 }
