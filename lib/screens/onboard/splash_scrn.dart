@@ -1,11 +1,9 @@
 // ignore_for_file: unused_local_variable
-
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/screens/onboard/material/photo_hero.dart';
 import 'package:nd_fitness/screens/onboard/onboarding_scrn.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../services/secure_storage.dart';
 
 String? finalEmail, finalName;

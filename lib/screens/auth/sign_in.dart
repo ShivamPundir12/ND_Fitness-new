@@ -5,7 +5,9 @@ import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/screens/auth/sign_up.dart';
 import 'package:nd_fitness/services/authservice.dart';
 import 'package:nd_fitness/services/secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../widgets/textstyle.dart';
 import '../onboard/material/photo_hero.dart';
 
 class Sign_in extends StatefulWidget {
@@ -120,12 +122,9 @@ class _Sign_inState extends State<Sign_in> {
                         SizedBox(
                             height: MediaQuery.of(context).size.height * 0.05),
                         Container(
-                          child: Text(
-                            'Username or Email',
-                            style: customstyle(
-                              color: black.withOpacity(0.7)
-                            )
-                          ),
+                          child: Text('Username or Email',
+                              style:
+                                  customstyle(color: black.withOpacity(0.7))),
                         ),
                         SizedBox(
                             height: MediaQuery.of(context).size.height * 0.01),
@@ -138,9 +137,7 @@ class _Sign_inState extends State<Sign_in> {
                                 borderRadius: BorderRadius.circular(18)),
                           ),
                           style: customstyle(
-                          size: 15,
-                            color: black.withOpacity(0.4)
-                          ),
+                              size: 15, color: black.withOpacity(0.4)),
                           validator: (value) {
                             if (value!.isEmpty) {
                               return "Email is required";
@@ -159,12 +156,9 @@ class _Sign_inState extends State<Sign_in> {
                         SizedBox(
                             height: MediaQuery.of(context).size.height * 0.02),
                         Container(
-                          child: Text(
-                            'Password',
-                            style: customstyle(
-                                color: black.withOpacity(0.7)
-                            )
-                          ),
+                          child: Text('Password',
+                              style:
+                                  customstyle(color: black.withOpacity(0.7))),
                         ),
                         SizedBox(
                             height: MediaQuery.of(context).size.height * 0.01),
@@ -188,9 +182,7 @@ class _Sign_inState extends State<Sign_in> {
                                 borderRadius: BorderRadius.circular(18)),
                           ),
                           style: customstyle(
-                              size: 15,
-                              color: black.withOpacity(0.4)
-                          ),
+                              size: 15, color: black.withOpacity(0.4)),
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Password is required';

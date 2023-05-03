@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/screens/info/membership/plan_card.dart';
 import 'package:nd_fitness/services/firestore.dart';
-
+import 'package:provider/provider.dart';
 import '../../../materials/colors.dart';
+import '../../../services/container_color.dart';
 import '../../../services/secure_storage.dart';
 
 class Membership extends StatefulWidget {
@@ -87,6 +88,8 @@ class _MembershipState extends State<Membership> {
                         ),
                         // ontap function for Adding data to database
                         onTap: () {
+                          Provider.of<PlanProvider>(context, listen: false)
+                              .updateSelectedPlan(p1t1);
                           Firecloud.addplandetail(p1t1, p1t2, p1t3);
                           Navigator.pushNamedAndRemoveUntil(
                               context, "/allset", (route) => false);
@@ -103,6 +106,8 @@ class _MembershipState extends State<Membership> {
                           t3: p2t3,
                         ),
                         onTap: () {
+                          Provider.of<PlanProvider>(context, listen: false)
+                              .updateSelectedPlan(p2t1);
                           Firecloud.addplandetail(p2t1, p2t2, p2t3);
                           Navigator.pushNamedAndRemoveUntil(
                               context, "/allset", (route) => false);
@@ -118,6 +123,8 @@ class _MembershipState extends State<Membership> {
                           t3: p3t3,
                         ),
                         onTap: () {
+                          Provider.of<PlanProvider>(context, listen: false)
+                              .updateSelectedPlan(p3t1);
                           Firecloud.addplandetail(p3t1, p3t2, p3t3);
                           Navigator.pushNamedAndRemoveUntil(
                               context, "/allset", (route) => false);
@@ -133,6 +140,8 @@ class _MembershipState extends State<Membership> {
                           t3: p4t3,
                         ),
                         onTap: () {
+                          Provider.of<PlanProvider>(context, listen: false)
+                              .updateSelectedPlan(p4t1);
                           Firecloud.addplandetail(p4t1, p4t2, p4t3);
                           Navigator.pushNamedAndRemoveUntil(
                               context, "/allset", (route) => false);

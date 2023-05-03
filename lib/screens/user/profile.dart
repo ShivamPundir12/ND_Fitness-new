@@ -8,7 +8,10 @@ import 'package:nd_fitness/generated/assets.dart';
 import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/services/authservice.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../services/container_color.dart';
+import '../../services/planutils.dart';
 import '../../services/secure_storage.dart';
+import "package:provider/provider.dart";
 
 class Usr_Profile extends StatefulWidget {
   const Usr_Profile({Key? key}) : super(key: key);
@@ -18,7 +21,6 @@ class Usr_Profile extends StatefulWidget {
 }
 
 class _Usr_ProfileState extends State<Usr_Profile> {
-  // Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   final secure_storage secureStorage = secure_storage();
   final user = FirebaseAuth.instance.currentUser?.email;
   final firebasefirestore = FirebaseFirestore.instance
@@ -38,6 +40,12 @@ class _Usr_ProfileState extends State<Usr_Profile> {
 
   @override
   Widget build(BuildContext context) {
+    // Plan provider to change the color of container according to plan
+    final planProvider = Provider.of<PlanProvider>(context);
+    // Plan util class to access the color and specified plans
+    final planInfo = PlanUtils.getPlanInfo(planProvider.selectedPlan);
+
+    // main body
     return Scaffold(
       key: _scaffoldKey,
       // endDrawer: CustomDrawer.drawer(context),
@@ -167,10 +175,10 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                                 padding: EdgeInsets.symmetric(
                                     vertical: 2, horizontal: 20),
                                 decoration: BoxDecoration(
-                                    color: card,
+                                    color: planInfo['color'],
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Text(
-                                  'Member',
+                                  planInfo['label'],
                                   style: TextStyle(
                                       fontSize: 15,
                                       fontFamily: 'Mukta',
