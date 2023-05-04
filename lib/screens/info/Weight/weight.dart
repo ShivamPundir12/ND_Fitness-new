@@ -123,7 +123,7 @@ class _Usr_WeightState extends State<Usr_Weight> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, "/age"),
+                    onTap: () => Navigator.pushNamed(context, "/gend"),
                     child: Container(
                       padding: EdgeInsets.symmetric(
                           vertical: MediaQuery.of(context).size.width * 0.04,
