@@ -15,6 +15,9 @@ class Gender extends StatefulWidget {
 class _GenderState extends State<Gender> {
   final String gen1 = "Male";
   final String gen2 = "Female";
+  bool maleSelected = false;
+  bool femaleSelected = false;
+  Color selected_color = text_color2;
   bool _isSelected = false;
   @override
   Widget build(BuildContext context) {
@@ -50,7 +53,7 @@ class _GenderState extends State<Gender> {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.03,
             ),
-            InkWell(
+            GestureDetector(
               onTap: () {
                 try {
                   Firecloud.selectgen(gen1);
@@ -58,6 +61,8 @@ class _GenderState extends State<Gender> {
 
                   // Set _isSelected to true when activity level is selected
                   setState(() {
+                    maleSelected = true;
+                    femaleSelected = false;
                     _isSelected = true;
                   });
                 } catch (e) {
@@ -67,7 +72,9 @@ class _GenderState extends State<Gender> {
               child: Container(
                 height: 130,
                 width: 130,
-                decoration: BoxDecoration(color: gend, shape: BoxShape.circle),
+                decoration: BoxDecoration(
+                    color: maleSelected ? selected_color : gend,
+                    shape: BoxShape.circle),
                 child: Image.asset(
                   Assets.assetsMale,
                   scale: 1.1,
@@ -91,7 +98,7 @@ class _GenderState extends State<Gender> {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.05,
             ),
-            InkWell(
+            GestureDetector(
               onTap: () {
                 try {
                   Firecloud.selectgen(gen2);
@@ -99,6 +106,8 @@ class _GenderState extends State<Gender> {
 
                   // Set _isSelected to true when activity level is selected
                   setState(() {
+                    maleSelected = false;
+                    femaleSelected = true;
                     _isSelected = true;
                   });
                 } catch (e) {
@@ -108,7 +117,9 @@ class _GenderState extends State<Gender> {
               child: Container(
                 height: 130,
                 width: 130,
-                decoration: BoxDecoration(color: gend, shape: BoxShape.circle),
+                decoration: BoxDecoration(
+                    color: femaleSelected ? selected_color : gend,
+                    shape: BoxShape.circle),
                 child: Image.asset(
                   Assets.assetsFemale,
                   scale: 1.1,

@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/generated/assets.dart';
 import 'package:nd_fitness/materials/colors.dart';
+import 'package:nd_fitness/screens/user/user_drawer.dart';
 import 'package:nd_fitness/services/authservice.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../services/container_color.dart';
@@ -47,26 +48,18 @@ class _Usr_ProfileState extends State<Usr_Profile> {
 
     // main body
     return Scaffold(
+      backgroundColor: Colors.transparent,
       key: _scaffoldKey,
-      // endDrawer: CustomDrawer.drawer(context),
+      endDrawer: CustomDrawer.drawer(context),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
-            onPressed: () async {
-              await AuthServices.signout(context);
+            onPressed: ()  {
+              _toggleDrawer();
             },
             // _toggleDrawer(),
-            icon: Transform.rotate(
-              angle: _isClicked ? pi / 2 : 0,
-              child: Icon(
-                Icons.logout,
-                color: Colors.black,
-              ),
-            ),
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.85,
+            icon: Icon(Icons.settings_rounded)
           ),
         ],
         backgroundColor: Colors.transparent,
@@ -86,7 +79,7 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                     children: [
                       Center(
                         child:
-                            CircularProgressIndicator(color: background_color),
+                        CircularProgressIndicator(color: background_color),
                       ),
                       Container(
                         decoration: BoxDecoration(
@@ -103,7 +96,7 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                     children: [
                       Center(
                         child:
-                            CircularProgressIndicator(color: background_color),
+                        CircularProgressIndicator(color: background_color),
                       ),
                       Container(
                         decoration: BoxDecoration(
@@ -141,7 +134,7 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                     }
                     SharedPreferences? _prefs = snapshot.data;
                     String loggedInUserKey =
-                        user.toString(); // unique key for current user
+                    user.toString(); // unique key for current user
                     if (!_prefs!.containsKey(loggedInUserKey)) {
                       return Text("No data found for current user.");
                     }

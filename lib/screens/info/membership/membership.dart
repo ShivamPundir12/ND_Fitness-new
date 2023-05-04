@@ -19,19 +19,19 @@ class _MembershipState extends State<Membership> {
   // Plan 1
   String p1t1 = "Bronze Plan";
   String p1t2 = "1 mo";
-  String p1t3 = "1250";
+  String p1t3 = "₹ 1250";
   // Plan 2
   String p2t1 = "Silver Plan";
   String p2t2 = "3 mo";
-  String p2t3 = "3500";
+  String p2t3 = "₹ 3500";
   // Plan 3
   String p3t1 = "Gold Plan";
   String p3t2 = "6 mo";
-  String p3t3 = "7000";
+  String p3t3 = "₹ 7000";
   // Plan 4
   String p4t1 = "Platinum Plan";
   String p4t2 = "12 mo";
-  String p4t3 = "13000";
+  String p4t3 = "₹ 13000";
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -184,7 +184,7 @@ class _Activity_levelState extends State<Activity_level> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 GestureDetector(
-                  onTap: () => Navigator.pushNamed(context, "/age"),
+                  onTap: () => Navigator.pushNamed(context, "/weigt"),
                   child: Container(
                     padding: EdgeInsets.symmetric(
                         vertical: MediaQuery.of(context).size.width * 0.04,

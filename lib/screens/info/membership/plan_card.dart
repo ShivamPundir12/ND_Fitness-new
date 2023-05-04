@@ -40,10 +40,12 @@ class PlanCard extends StatelessWidget {
                 fontFamily: 'Mukta'),
           ),
           SizedBox(
-            height: 10,
+            height: MediaQuery.of(context).size.height*0.01,
           ),
           //Displays Row with prefix text "Duration : " and time value
           Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               //Displays fixed styled text "Duration : "
               Text(
@@ -67,13 +69,18 @@ class PlanCard extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.04,
               ),
               //Displays the value of the variable t3 in styled text
-              Text(
-                "${t3}",
-                style: TextStyle(
-                    color: background_color,
-                    fontSize: 26,
-                    fontWeight: FontWeight.w900,
-                    fontFamily: 'Mukta'),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width*0.05
+                ),
+                child: Text(
+                  "${t3}",
+                  style: TextStyle(
+                      color: background_color,
+                      fontSize: 26,
+                      fontWeight: FontWeight.w900,
+                      fontFamily: 'Mukta'),
+                ),
               ),
             ],
           )

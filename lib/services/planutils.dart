@@ -11,19 +11,19 @@ class PlanUtils {
     String label;
 
     if (selectedPlan == p1) {
-      containerColor = Colors.yellow;
+      containerColor = Color(0xffffd700);
       label = p1;
     } else if (selectedPlan == p2) {
-      containerColor = Colors.blueGrey.shade300;
+      containerColor = Color(0xff808080);
       label = p2;
     } else if (selectedPlan == p3) {
-      containerColor = Colors.brown;
+      containerColor = Color(0xffCD7F32);
       label = p3;
     } else if (selectedPlan == p4) {
-      containerColor = Colors.grey.shade500;
+      containerColor = Color(0xffe5e4e2);
       label = p4;
     } else {
-      containerColor = Colors.grey;
+      containerColor = Colors.grey.shade800;
       label = d;
     }
 

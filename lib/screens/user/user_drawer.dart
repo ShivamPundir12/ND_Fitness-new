@@ -1,131 +1,151 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:nd_fitness/generated/assets.dart';
-import 'package:nd_fitness/screens/info/profilecontroller/profilecontroller.dart';
-import 'package:provider/provider.dart';
-import '../../materials/colors.dart';
-import '../../services/secure_storage.dart';
+import '../../services/authservice.dart';
 
 class CustomDrawer {
   static drawer(BuildContext context) {
-    final secure_storage secureStorage = secure_storage();
-    final user = FirebaseAuth.instance.currentUser!;
     return Drawer(
+      backgroundColor: Color(0xffEDEDFF),
+      width: MediaQuery.of(context).size.width * 0.85,
       child: ListView(
-        padding: EdgeInsets.zero,
+        padding: EdgeInsets.symmetric(horizontal: 10),
         children: <Widget>[
-          DrawerHeader(
-            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-            child: ChangeNotifierProvider(
-              create: (context) => ProfileController(),
-              child: Consumer<ProfileController>(
-                builder: (
-                  context,
-                  provider,
-                  child,
-                ) {
-                  return Stack(
-                    fit: StackFit.passthrough,
-                    alignment: Alignment.bottomCenter,
-                    children: [
-                      Container(
-                          child: Text(
-                            "Edit Profile",
-                          ),
-                          alignment: Alignment.topRight),
-                      StreamBuilder(
-                        stream: FirebaseFirestore.instance
-                            .collection('userdetail')
-                            .doc(user.uid)
-                            .snapshots(),
-                        builder: (context, snapshot) {
-                          var userDocument = snapshot.data!.data();
-                          var profileImageUrl = userDocument?['ProfileImage'];
-                          if (profileImageUrl != null) {
-                            return Stack(
-                              children: [
-                                CircleAvatar(
-                                  radius: 50,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        image: DecorationImage(
-                                          image: NetworkImage(profileImageUrl),
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  top: 60,
-                                  left: 75,
-                                  child: Container(
-                                    height: 35,
-                                    width: 35,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                            width: 3, color: Colors.white),
-                                        color: indi_color),
-                                    child: IconButton(
-                                      onPressed: () {
-                                        provider.pickImage(context);
-                                      },
-                                      icon: Icon(Icons.edit_outlined),
-                                      color: Colors.white,
-                                      iconSize: 15,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            );
-                          } else {
-                            return Container(
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage(Assets.assetsPerson),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            );
-                          }
-                        },
-                      ),
-                    ],
-                  );
-                },
+          SizedBox(
+            height: 50,
+          ),
+          ListTile(
+            title: Text(
+              'Settings',
+              style: TextStyle(
+                fontSize: 36,
+                fontFamily: 'Mukta',
+                fontWeight: FontWeight.w900,
               ),
             ),
-            decoration: BoxDecoration(
-              color: Colors.blue,
+          ),
+          SizedBox(
+            height: 50,
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.person_rounded,
+              size: 30,
+              color: Colors.black,
+            ),
+            title: Text(
+              'Account',
+              style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: 'Mukta'),
+            ),
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          ListTile(
+            title: Text(
+              'Edit Profile',
+              style: TextStyle(
+                  fontFamily: 'Mukta',
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500),
+            ),
+            trailing: IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.arrow_forward_ios_rounded),
+              color: Colors.black,
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              // Navigator.pushNamed(context, "/weigt");
+            },
+            child: ListTile(
+              title: Text(
+                'Change Password',
+                style: TextStyle(
+                    fontFamily: 'Mukta',
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500),
+              ),
+              trailing: IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.arrow_forward_ios_rounded),
+                color: Colors.black,
+              ),
             ),
           ),
           ListTile(
-              title: Text('Logout'),
-              trailing: IconButton(
-                onPressed: () async {
-                  await FirebaseAuth.instance.signOut().whenComplete(
-                        () => secureStorage
-                            .deleteSecureData('email')
-                            .whenComplete(
-                              () => Navigator.pushNamedAndRemoveUntil(
-                                  context, '/signin', (route) => false),
-                            ),
-                      );
-                },
-                icon: Icon(
-                  Icons.logout_outlined,
-                  color: black,
+            title: Text(
+              'Membership',
+              style: TextStyle(
+                  fontFamily: 'Mukta',
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500),
+            ),
+            trailing: IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.arrow_forward_ios_rounded),
+              color: Colors.black,
+            ),
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.add_box_outlined,
+              size: 30,
+              color: Colors.black,
+            ),
+            title: Text(
+              'More',
+              style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: 'Mukta'),
+            ),
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.3,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width * 0.2),
+            child: InkWell(
+              onTap: () async {
+                await AuthServices.signout(context);
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color(0xffEDEDFF),
+                  borderRadius: BorderRadius.circular(30),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      spreadRadius: 1,
+                      blurRadius: 2,
+                      offset: Offset(1, 2),
+                    ),
+                  ],
                 ),
-              )),
-          // ListTile(
-          //   title: Text('Item 2'),
-          //   onTap: () {},
-          // ),
+                child: ListTile(
+                  leading: Icon(
+                    Icons.logout_rounded,
+                    color: Colors.black,
+                  ),
+                  title: Text(
+                    'Logout',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w900,
+                      fontSize: 20,
+                      fontFamily: 'Mukta',
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
