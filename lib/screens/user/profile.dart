@@ -1,14 +1,14 @@
 import 'dart:convert';
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/generated/assets.dart';
 import 'package:nd_fitness/materials/colors.dart';
+import 'package:nd_fitness/screens/user/edit_profile.dart';
+import 'package:nd_fitness/screens/user/plan.dart';
 import 'package:nd_fitness/screens/user/user_drawer.dart';
-import 'package:nd_fitness/services/authservice.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../services/authservice.dart';
 import '../../services/container_color.dart';
 import '../../services/planutils.dart';
 import '../../services/secure_storage.dart';
@@ -28,16 +28,16 @@ class _Usr_ProfileState extends State<Usr_Profile> {
       .collection('userdetail')
       .doc(FirebaseAuth.instance.currentUser?.uid)
       .snapshots();
-  bool _isClicked = false;
+  // bool _isClicked = false;
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
 
   // Method to toggle the drawer state
-  void _toggleDrawer() {
-    setState(() {
-      _isClicked = !_isClicked;
-    });
-    _scaffoldKey.currentState!.openEndDrawer(); // Open Drawer
-  }
+  // void _toggleDrawer() {
+  //   setState(() {
+  //     _isClicked = !_isClicked;
+  //   });
+  //   _scaffoldKey.currentState!.openEndDrawer(); // Open Drawer
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +55,10 @@ class _Usr_ProfileState extends State<Usr_Profile> {
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
-            onPressed: ()  {
-              _toggleDrawer();
+            onPressed: () async {
+              await AuthServices.signout(context);
             },
-            // _toggleDrawer(),
-            icon: Icon(Icons.settings_rounded)
+            icon: Icon(Icons.logout_rounded)
           ),
         ],
         backgroundColor: Colors.transparent,
@@ -156,7 +155,7 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                               child: Text(
                                 name ?? "",
                                 style: TextStyle(
-                                    fontSize: 26,
+                                    fontSize: 30,
                                     fontWeight: FontWeight.w700,
                                     fontFamily: 'Mukta',
                                     color: Colors.black),
@@ -164,19 +163,29 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                             ),
                             Padding(
                               padding: EdgeInsets.symmetric(vertical: 12),
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 2, horizontal: 20),
-                                decoration: BoxDecoration(
-                                    color: planInfo['color'],
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: Text(
-                                  planInfo['label'],
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontFamily: 'Mukta',
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.black),
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Plan(),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 2, horizontal: 20),
+                                  decoration: BoxDecoration(
+                                      color: planInfo['color'],
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Text(
+                                    planInfo['label'],
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontFamily: 'Mukta',
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.black),
+                                  ),
                                 ),
                               ),
                             )
@@ -189,7 +198,7 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                           child: Text(
                             email ?? "",
                             style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 20,
                                 fontWeight: FontWeight.w700,
                                 fontFamily: 'Mukta',
                                 color: Colors.black),
@@ -199,7 +208,7 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                           child: Text(
                             mobno ?? "",
                             style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 20,
                                 fontWeight: FontWeight.w700,
                                 fontFamily: 'Mukta',
                                 color: Colors.black),
@@ -212,7 +221,7 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                           child: Text(
                             address ?? "",
                             style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 20,
                                 fontWeight: FontWeight.w700,
                                 fontFamily: 'Mukta',
                                 color: Colors.black),
@@ -220,7 +229,38 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                         ),
                       ],
                     );
-                  }),
+                  }
+                  ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.height*0.025,
+                vertical: MediaQuery.of(context).size.width*0.06,
+              ),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EditProfile(),
+                    ),
+                  );
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.height*0.025,
+                    vertical: MediaQuery.of(context).size.width*0.035,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15)
+                  ),
+                  child: Icon(Icons.edit),
+                ),
+              ),
             ),
           ),
         ],
