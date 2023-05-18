@@ -11,6 +11,8 @@ import 'package:nd_fitness/screens/info/profilecontroller/profile.dart';
 import 'package:nd_fitness/screens/onboard/onboarding_scrn.dart';
 import 'package:nd_fitness/screens/onboard/splash_scrn.dart';
 import 'screens/auth/forgot_pass.dart';
+import 'package:nd_fitness/screens/user/edit_profile.dart';
+import 'package:nd_fitness/screens/user/plan.dart';
 import 'screens/info/Weight/weight.dart';
 import 'screens/info/all_set.dart';
 import 'screens/user/profile.dart';
@@ -50,6 +52,8 @@ class MyApp extends StatelessWidget {
         '/adsignin': (context) => Admin_sign_in(),
         '/adhome': (context) => Admin_Home(),
         '/usrprofile': (context) => Usr_Profile(),
+        '/editprofile': (context) => EditProfile(),
+        '/plan': (context) => Plan(),
         '/allset': (context) => AllSet(),
         '/weigt': (context) => Usr_Weight(),
         '/ForgotPass': (context) => ForgotPassword(),
