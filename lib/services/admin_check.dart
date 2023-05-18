@@ -1,32 +1,32 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 
-class AdminAuth {
-  // Function to check if user is an admin
-  Future<void> checkAdmin(
-      String emailcontrollter, String passwordcontroller) async {
-    try {
-      // Query the 'admin_users' collection for user with matching email and password
-      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-          .collection('admin_users')
-          .where('email', isEqualTo: emailcontrollter)
-          .where('password', isEqualTo: passwordcontroller)
-          .get();
-      // Check if there is exactly 1 user with matching email and password
-      if (querySnapshot.docs.length == 1) {
-        // Get the data of the user with matching email and password
-        var userData = querySnapshot.docs[0].data() as Map<String, dynamic>;
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:nd_fitness/services/secure_storage.dart';
 
-        // Check if the user has admin Access
-        if (userData['isAdmin']) {
-          print('User is an admin');
-        } else {
-          print('User is not an admin');
-        }
+class AdminCheck {
+ final firebase = FirebaseAuth.instance;
+ final secureStorage = secure_storage();
+ adminSignIn(emailController, passwordController) async{
+  UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: emailController.trim(),
+              password: passwordController.trim());
+      await secureStorage.writeSecureData(
+          'email', userCredential.user!.email.toString());
+      secureStorage.writeSecureData(
+          'name', userCredential.user!.displayName.toString())
+    .then((userCredential) => {
+      // Check if user is admin
+        user = userCredential.user;
+      if (user && user.email === 'admin@example.com') {
+        console.log('Admin user signed in:', user.email);
+        // Redirect to admin dashboard or perform admin actions
       } else {
-        print('User not found or multiple users found');
+        console.error('User is not authorized to access the admin portal');
       }
-    } catch (e) {
-      print('Error: $e');
-    }
-  }
+    })
+    .catch((error) => {
+      console.error('Error signing in:', error);
+    });
+}
+
 }
