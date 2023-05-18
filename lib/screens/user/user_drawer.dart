@@ -56,23 +56,19 @@ class CustomDrawer {
               color: Colors.black,
             ),
           ),
-          InkWell(
-            onTap: () {
-              // Navigator.pushNamed(context, "/weigt");
-            },
-            child: ListTile(
-              title: Text(
-                'Change Password',
-                style: TextStyle(
-                    fontFamily: 'Mukta',
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500),
+          ListTile(
+            title: Text(
+              'Change Password',
+              style: TextStyle(
+                fontFamily: 'Mukta',
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
               ),
-              trailing: IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.arrow_forward_ios_rounded),
-                color: Colors.black,
-              ),
+            ),
+            trailing: IconButton(
+              onPressed: () => Navigator.pushNamed(context, "/ForgotPass"),
+              icon: Icon(Icons.arrow_forward_ios_rounded),
+              color: Colors.black,
             ),
           ),
           ListTile(

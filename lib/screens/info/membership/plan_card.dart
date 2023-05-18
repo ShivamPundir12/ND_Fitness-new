@@ -7,7 +7,6 @@ class PlanCard extends StatelessWidget {
   final String t1;
   final String t2;
   final String t3;
-
   //constructor for PlanCard class that assigns the given values to the above mentioned final variables
   PlanCard({
     Key? key,
@@ -40,7 +39,7 @@ class PlanCard extends StatelessWidget {
                 fontFamily: 'Mukta'),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height*0.01,
+            height: MediaQuery.of(context).size.height * 0.01,
           ),
           //Displays Row with prefix text "Duration : " and time value
           Row(
@@ -71,15 +70,15 @@ class PlanCard extends StatelessWidget {
               //Displays the value of the variable t3 in styled text
               Padding(
                 padding: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width*0.05
-                ),
+                    left: MediaQuery.of(context).size.width * 0.001),
                 child: Text(
                   "${t3}",
                   style: TextStyle(
-                      color: background_color,
-                      fontSize: 26,
-                      fontWeight: FontWeight.w900,
-                      fontFamily: 'Mukta'),
+                    color: background_color,
+                    fontSize: 23,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: 'Mukta',
+                  ),
                 ),
               ),
             ],

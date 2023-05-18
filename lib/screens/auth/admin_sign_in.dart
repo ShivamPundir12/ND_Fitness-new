@@ -158,8 +158,12 @@ class _Admin_sign_inState extends State<Admin_sign_in> {
                           height: 20,
                         ),
                         InkWell(
-                          onTap: () => AdminAuth().checkAdmin(
-                              emailController.text, passwordController.text),
+                          onTap: () => AdminAuth()
+                              .checkAdmin(
+                                  emailController.text, passwordController.text)
+                              .whenComplete(() {
+                            Navigator.pushNamed(context, "/adhome");
+                          }),
                           child: Container(
                             alignment: Alignment.center,
                             padding: EdgeInsets.symmetric(vertical: 18),

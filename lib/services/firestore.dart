@@ -30,16 +30,16 @@ class Firecloud {
     });
   }
 
-  // Add age to Database Funtion
-  static addage(String age) async {
-    var firebaseUser = FirebaseAuth.instance.currentUser;
-    var collection = FirebaseFirestore.instance.collection('userdetail');
-    var docSnapshot = await collection.doc(firebaseUser?.uid).get();
-    await FirebaseFirestore.instance
-        .collection('userdetail')
-        .doc(docSnapshot.id)
-        .update({'Age': age});
-  }
+  // // Add age to Database Funtion
+  // static addage(String age) async {
+  //   var firebaseUser = FirebaseAuth.instance.currentUser;
+  //   var collection = FirebaseFirestore.instance.collection('userdetail');
+  //   var docSnapshot = await collection.doc(firebaseUser?.uid).get();
+  //   await FirebaseFirestore.instance
+  //       .collection('userdetail')
+  //       .doc(docSnapshot.id)
+  //       .update({'Age': age});
+  // }
 
   // Add weight to Database Function
   static addweight(String weight) async {

@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
         '/weigt': (context) => Usr_Weight(),
         '/ForgotPass': (context) => ForgotPassword(),
       },
-      home: SplashScreen(),
+      home: Admin_sign_in(),
     );
   }
 }
