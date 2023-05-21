@@ -121,6 +121,9 @@ class Firecloud {
     String plan,
     String duration,
     String price,
+    String date,
+    String time,
+    String planexpr,
   ) async {
     var firebaseUser = FirebaseAuth.instance.currentUser;
     var collection = FirebaseFirestore.instance.collection('userdetail');
@@ -129,6 +132,9 @@ class Firecloud {
       'Plan': plan,
       'Duration': duration,
       'Price': price,
+      'Date': date,
+      'Time': time,
+      'Planexpr': planexpr,
     });
   }
 }

@@ -4,12 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:nd_fitness/generated/assets.dart';
 import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/screens/user/edit_profile.dart';
+import 'package:nd_fitness/screens/user/plan.dart';
 import 'package:nd_fitness/screens/user/user_drawer.dart';
 import '../../services/authservice.dart';
-import '../../services/container_color.dart';
-import '../../services/planutils.dart';
 import '../../services/secure_storage.dart';
-import "package:provider/provider.dart";
 
 class Usr_Profile extends StatefulWidget {
   const Usr_Profile({Key? key}) : super(key: key);
@@ -39,9 +37,9 @@ class _Usr_ProfileState extends State<Usr_Profile> {
   @override
   Widget build(BuildContext context) {
     // Plan provider to change the color of container according to plan
-    final planProvider = Provider.of<PlanProvider>(context);
+    // final planProvider = Provider.of<PlanProvider>(context);
     // Plan util class to access the color and specified plans
-    final planInfo = PlanUtils.getPlanInfo(planProvider.selectedPlan);
+    // final planInfo = PlanUtils.getPlanInfo(planProvider.selectedPlan);
 
     // main body
     return Scaffold(
@@ -126,6 +124,24 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                       return new Text("Loading...");
                     }
                     var userDocument = snapshot.data;
+                    String planName = userDocument?["Plan"];
+                    Color planColor;
+                    switch (planName) {
+                      case "Bronze Plan":
+                        planColor = Color(0xffCD7F32);
+                        break;
+                      case 'Gold Plan':
+                        planColor = Color(0xffffd700);
+                        break;
+                      case 'Silver Plan':
+                        planColor = Color(0xff808080);
+                        break;
+                      case 'Platinum Plan':
+                        planColor = Color(0xffe5e4e2);
+                        break;
+                      default:
+                        planColor = Colors.grey;
+                    }
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -146,19 +162,26 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                             ),
                             Padding(
                               padding: EdgeInsets.symmetric(vertical: 10),
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 2, horizontal: 20),
-                                decoration: BoxDecoration(
-                                    color: planInfo['color'],
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: Text(
-                                  userDocument?["Plan"],
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontFamily: 'Mukta',
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.black),
+                              child: GestureDetector(
+                                onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Plan(),
+                                    )),
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 2, horizontal: 20),
+                                  decoration: BoxDecoration(
+                                      color: planColor,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Text(
+                                    userDocument?["Plan"],
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontFamily: 'Mukta',
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.black),
+                                  ),
                                 ),
                               ),
                             )

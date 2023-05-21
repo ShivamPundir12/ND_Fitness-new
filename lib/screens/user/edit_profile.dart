@@ -67,13 +67,13 @@ class _EditProfileState extends State<EditProfile> {
                 horizontal: MediaQuery.of(context).size.height * 0.025,
                 vertical: MediaQuery.of(context).size.width * 0.02,
               ),
-              child: StreamBuilder<DocumentSnapshot>(
+              child: StreamBuilder(
                   stream: firebasefirestore.snapshots(),
-                  builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                  builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return CircularProgressIndicator();
                     }
-                    var userDocument = snapshot.data;
+                    var userDocument = snapshot.data?.data();
                     var profileImageUrl = userDocument?['ProfileImage'];
                     var name = userDocument?['Name'];
                     var age = userDocument?['Age'];
@@ -142,14 +142,24 @@ class _EditProfileState extends State<EditProfile> {
                                         ],
                                       );
                                     } else {
-                                      return Container(
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            image:
-                                                AssetImage(Assets.assetsPerson),
-                                            fit: BoxFit.cover,
+                                      return CircleAvatar(
+                                        radius: 55,
+                                        child: Stack(children: [
+                                          Center(
+                                            child: CircularProgressIndicator
+                                                .adaptive(),
                                           ),
-                                        ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              image: DecorationImage(
+                                                image: AssetImage(
+                                                    Assets.assetsPerson),
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        ]),
                                       );
                                     }
                                   }),
@@ -227,7 +237,7 @@ class _EditProfileState extends State<EditProfile> {
                                     setState(() {
                                       firebasefirestore
                                           .update({"Gender": value});
-                                      gender = value;
+                                      gender = value ?? "";
                                     });
                                   },
                                 ),
@@ -243,7 +253,7 @@ class _EditProfileState extends State<EditProfile> {
                             child: InfoRow(
                               title: "Age",
                               width: MediaQuery.of(context).size.width * 0.25,
-                              value: age,
+                              value: age ?? "",
                             ),
                           ),
                           SizedBox(

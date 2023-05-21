@@ -7,12 +7,18 @@ class PlanCard extends StatelessWidget {
   final String t1;
   final String t2;
   final String t3;
+  final String date;
+  final String time;
+  final String planexpr;
   //constructor for PlanCard class that assigns the given values to the above mentioned final variables
   PlanCard({
     Key? key,
     required this.t1,
     required this.t2,
     required this.t3,
+    required this.date,
+    required this.time,
+    required this.planexpr,
   }) : super(key: key);
 
   //Overriding the build method of the Stateless widget (PlanCard)
