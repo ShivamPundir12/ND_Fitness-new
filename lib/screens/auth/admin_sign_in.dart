@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/generated/assets.dart';
-import 'package:nd_fitness/services/admin_check.dart';
-
 import '../../widgets/textstyle.dart';
 import 'sign_in.dart';
 
@@ -158,12 +156,6 @@ class _Admin_sign_inState extends State<Admin_sign_in> {
                           height: 20,
                         ),
                         InkWell(
-                          onTap: () => AdminAuth()
-                              .checkAdmin(
-                                  emailController.text, passwordController.text)
-                              .whenComplete(() {
-                            Navigator.pushNamed(context, "/adhome");
-                          }),
                           child: Container(
                             alignment: Alignment.center,
                             padding: EdgeInsets.symmetric(vertical: 18),

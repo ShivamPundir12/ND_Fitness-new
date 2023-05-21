@@ -24,9 +24,8 @@ class _Onboard_screenState extends State<Onboard_screen>
   }
 
   void dispose() {
-    super.dispose();
     controller.dispose();
-    animation.isDismissed;
+    super.dispose();
   }
 
   @override

@@ -350,7 +350,6 @@ class _ProfileState extends State<Profile> {
                                 onTap: () async {
                                   try {
                                     if (_formkey.currentState!.validate()) {
-                                      _saveFieldValues();
                                       userData.adduserdetail(
                                         _namecontroller.text,
                                         _mobnocontroller.text,
@@ -360,6 +359,7 @@ class _ProfileState extends State<Profile> {
                                         _reltioncontroller.text,
                                         _emrccontroller.text,
                                       );
+                                      _saveFieldValues();
                                       Navigator.pushNamedAndRemoveUntil(
                                         context,
                                         "/member",

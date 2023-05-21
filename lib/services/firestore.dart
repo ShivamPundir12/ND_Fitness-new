@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 // Add user to database Function
 class Firecloud {
@@ -17,6 +18,7 @@ class Firecloud {
     var firebaseUser = FirebaseAuth.instance.currentUser;
     var collection = FirebaseFirestore.instance.collection('userdetail');
     var docSnapshot = await collection.doc(firebaseUser?.uid).get();
+    var dbRef = FirebaseDatabase.instance.ref().child('userdetails');
 
     await collection.doc(docSnapshot.id).update({
       'Name': name,
@@ -27,7 +29,8 @@ class Firecloud {
       'Relation': relation,
       'Relation Phone no': rnumber,
       'Picurl': url,
-    });
+    }).whenComplete(() => dbRef.push().set(
+        adduserdetail(name, mobileno, age, address, rname, relation, rnumber)));
   }
 
   // // Add age to Database Funtion
@@ -75,6 +78,25 @@ class Firecloud {
   }
 
   // Fetch Data for Current User from database
+  // static fetchdata() {
+  //   var collection = FirebaseFirestore.instance.collection('userdetail');
+  //   collection.get().then((querySnapshot) {
+  //     querySnapshot.docs.forEach((result) {
+  //       collection
+  //           .doc(result.id)
+  //           .collection("userdetail")
+  //           .get()
+  //           .then((querySnapshot) {
+  //         querySnapshot.docs.forEach((result) {
+  //           print(
+  //             result.data(),
+  //           );
+  //         });
+  //       });
+  //     });
+  //   });
+  // }
+
   static fetchdata() {
     var collection = FirebaseFirestore.instance.collection('userdetail');
     collection.get().then((querySnapshot) {

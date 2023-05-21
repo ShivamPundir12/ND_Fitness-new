@@ -1,13 +1,10 @@
-import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/generated/assets.dart';
 import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/screens/user/edit_profile.dart';
-import 'package:nd_fitness/screens/user/plan.dart';
 import 'package:nd_fitness/screens/user/user_drawer.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../services/authservice.dart';
 import '../../services/container_color.dart';
 import '../../services/planutils.dart';
@@ -49,6 +46,7 @@ class _Usr_ProfileState extends State<Usr_Profile> {
     // main body
     return Scaffold(
       extendBodyBehindAppBar: true,
+      backgroundColor: Colors.transparent,
       key: _scaffoldKey,
       endDrawer: CustomDrawer.drawer(context),
       appBar: AppBar(
@@ -121,27 +119,13 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                 color: text_color.withOpacity(0.75),
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: FutureBuilder(
-                  future: SharedPreferences.getInstance(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<SharedPreferences> snapshot) {
+              child: StreamBuilder(
+                  stream: firebasefirestore,
+                  builder: (context, snapshot) {
                     if (!snapshot.hasData) {
-                      return CircularProgressIndicator(
-                        color: text_color,
-                      );
+                      return new Text("Loading...");
                     }
-                    SharedPreferences? _prefs = snapshot.data;
-                    String loggedInUserKey =
-                        user.toString(); // unique key for current user
-                    if (!_prefs!.containsKey(loggedInUserKey)) {
-                      return Text("No data found for current user.");
-                    }
-                    String? userDocument = _prefs.getString(loggedInUserKey);
-                    Map<String, dynamic> userData = json.decode(userDocument!);
-                    var name = userData["name"];
-                    var mobno = userData["mobno"];
-                    var address = userData["address"];
-                    var email = _prefs.getString('email');
+                    var userDocument = snapshot.data;
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -152,39 +136,29 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                           children: [
                             Container(
                               child: Text(
-                                name ?? "",
+                                userDocument?["Name"],
                                 style: TextStyle(
-                                    fontSize: 30,
+                                    fontSize: 26,
                                     fontWeight: FontWeight.w700,
                                     fontFamily: 'Mukta',
                                     color: Colors.black),
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.symmetric(vertical: 12),
-                              child: InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Plan(),
-                                    ),
-                                  );
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 2, horizontal: 20),
-                                  decoration: BoxDecoration(
-                                      color: planInfo['color'],
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: Text(
-                                    planInfo['label'],
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontFamily: 'Mukta',
-                                        fontWeight: FontWeight.w700,
-                                        color: Colors.black),
-                                  ),
+                              padding: EdgeInsets.symmetric(vertical: 10),
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 2, horizontal: 20),
+                                decoration: BoxDecoration(
+                                    color: planInfo['color'],
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Text(
+                                  userDocument?["Plan"],
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontFamily: 'Mukta',
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.black),
                                 ),
                               ),
                             )
@@ -195,9 +169,9 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                         ),
                         Container(
                           child: Text(
-                            email ?? "",
+                            user.toString(),
                             style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 18,
                                 fontWeight: FontWeight.w700,
                                 fontFamily: 'Mukta',
                                 color: Colors.black),
@@ -205,9 +179,9 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                         ),
                         Container(
                           child: Text(
-                            mobno ?? "",
+                            userDocument?["Mobile no"],
                             style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 18,
                                 fontWeight: FontWeight.w700,
                                 fontFamily: 'Mukta',
                                 color: Colors.black),
@@ -218,46 +192,51 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                         ),
                         Container(
                           child: Text(
-                            address ?? "",
+                            userDocument?["Address"],
                             style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 18,
                                 fontWeight: FontWeight.w700,
                                 fontFamily: 'Mukta',
                                 color: Colors.black),
                           ),
                         ),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal:
+                                  MediaQuery.of(context).size.height * 0.025,
+                              vertical:
+                                  MediaQuery.of(context).size.width * 0.06,
+                            ),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => EditProfile(),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal:
+                                      MediaQuery.of(context).size.height *
+                                          0.025,
+                                  vertical:
+                                      MediaQuery.of(context).size.width * 0.035,
+                                ),
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15)),
+                                child: Icon(Icons.edit),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     );
                   }),
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.height * 0.025,
-                vertical: MediaQuery.of(context).size.width * 0.06,
-              ),
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EditProfile(),
-                    ),
-                  );
-                },
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: MediaQuery.of(context).size.height * 0.025,
-                    vertical: MediaQuery.of(context).size.width * 0.035,
-                  ),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15)),
-                  child: Icon(Icons.edit),
-                ),
-              ),
             ),
           ),
         ],

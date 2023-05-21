@@ -154,8 +154,8 @@ class _Usr_WeightState extends State<Usr_Weight> {
                     width: 20,
                   ),
                   GestureDetector(
-                    onTap: () async {
-                      await Firecloud.addweight("${currentweight}");
+                    onTap: () {
+                      Firecloud.addweight("${currentweight}");
                       Navigator.pushNamedAndRemoveUntil(
                         context,
                         '/level',

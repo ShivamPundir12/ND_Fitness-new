@@ -5,9 +5,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nd_fitness/materials/colors.dart';
+import 'package:nd_fitness/materials/inputtext.dart';
 import 'package:nd_fitness/services/Message.dart';
 
 class ProfileController with ChangeNotifier {
+  TextEditingController namecontroller = new TextEditingController();
+  TextEditingController agecontroller = new TextEditingController();
+  TextEditingController addresscontroller = new TextEditingController();
+  final namefocusnode = FocusNode();
   final picker = ImagePicker();
   final firebaseuser = FirebaseAuth.instance.currentUser?.uid;
 
@@ -125,5 +130,154 @@ class ProfileController with ChangeNotifier {
       setLoading(false);
       Message.custommessage(e, context);
     });
+  }
+
+  Future<void> showUserNameDialogAlert(
+      BuildContext context, String name) async {
+    var collection = FirebaseFirestore.instance.collection('userdetail');
+    var docSnapshot = await collection.doc(firebaseuser).get();
+    namecontroller.text = name;
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Update Name'),
+            content: SingleChildScrollView(
+                child: Column(
+              children: [
+                InputTextField(
+                  controller: namecontroller,
+                  hint: 'Enter name',
+                  focusNode: namefocusnode,
+                  obscuretext: false,
+                  keyBoardType: TextInputType.text,
+                )
+              ],
+            )),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  'Cancel',
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleSmall!
+                      .copyWith(color: Colors.red),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  collection
+                      .doc(docSnapshot.id)
+                      .update({"Name": namecontroller.text.toString()});
+                  Navigator.pop(context);
+                },
+                child:
+                    Text('Ok', style: Theme.of(context).textTheme.titleSmall),
+              ),
+            ],
+          );
+        });
+  }
+
+  Future<void> showUserAgeDialogAlert(BuildContext context, String age) async {
+    var collection = FirebaseFirestore.instance.collection('userdetail');
+    var docSnapshot = await collection.doc(firebaseuser).get();
+    agecontroller.text = age;
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Update Age'),
+            content: SingleChildScrollView(
+                child: Column(
+              children: [
+                InputTextField(
+                  controller: agecontroller,
+                  hint: 'Enter Age',
+                  focusNode: namefocusnode,
+                  obscuretext: false,
+                  keyBoardType: TextInputType.text,
+                )
+              ],
+            )),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  'Cancel',
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleSmall!
+                      .copyWith(color: Colors.red),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  collection
+                      .doc(docSnapshot.id)
+                      .update({"Age": agecontroller.text.toString()});
+                  Navigator.pop(context);
+                },
+                child:
+                    Text('Ok', style: Theme.of(context).textTheme.titleSmall),
+              ),
+            ],
+          );
+        });
+  }
+
+  Future<void> showUserAddressDialogAlert(
+      BuildContext context, String address) async {
+    var collection = FirebaseFirestore.instance.collection('userdetail');
+    var docSnapshot = await collection.doc(firebaseuser).get();
+    addresscontroller.text = address;
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Update Address'),
+            content: SingleChildScrollView(
+                child: Column(
+              children: [
+                InputTextField(
+                  controller: addresscontroller,
+                  hint: 'Enter Aaddress',
+                  focusNode: namefocusnode,
+                  obscuretext: false,
+                  keyBoardType: TextInputType.text,
+                )
+              ],
+            )),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  'Cancel',
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleSmall!
+                      .copyWith(color: Colors.red),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  collection
+                      .doc(docSnapshot.id)
+                      .update({"Address": addresscontroller.text.toString()});
+                  Navigator.pop(context);
+                },
+                child:
+                    Text('Ok', style: Theme.of(context).textTheme.titleSmall),
+              ),
+            ],
+          );
+        });
   }
 }
