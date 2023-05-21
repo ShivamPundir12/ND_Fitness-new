@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,12 +6,8 @@ import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/screens/user/edit_profile.dart';
 import 'package:nd_fitness/screens/user/plan.dart';
 import 'package:nd_fitness/screens/user/user_drawer.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../services/authservice.dart';
-import '../../services/container_color.dart';
-import '../../services/planutils.dart';
 import '../../services/secure_storage.dart';
-import "package:provider/provider.dart";
 
 class Usr_Profile extends StatefulWidget {
   const Usr_Profile({Key? key}) : super(key: key);
@@ -42,12 +37,13 @@ class _Usr_ProfileState extends State<Usr_Profile> {
   @override
   Widget build(BuildContext context) {
     // Plan provider to change the color of container according to plan
-    final planProvider = Provider.of<PlanProvider>(context);
+    // final planProvider = Provider.of<PlanProvider>(context);
     // Plan util class to access the color and specified plans
-    final planInfo = PlanUtils.getPlanInfo(planProvider.selectedPlan);
+    // final planInfo = PlanUtils.getPlanInfo(planProvider.selectedPlan);
 
     // main body
     return Scaffold(
+      extendBodyBehindAppBar: true,
       backgroundColor: Colors.transparent,
       key: _scaffoldKey,
       endDrawer: CustomDrawer.drawer(context),
@@ -55,11 +51,10 @@ class _Usr_ProfileState extends State<Usr_Profile> {
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
-            onPressed: () async {
-              await AuthServices.signout(context);
-            },
-            icon: Icon(Icons.logout_rounded)
-          ),
+              onPressed: () async {
+                await AuthServices.signout(context);
+              },
+              icon: Icon(Icons.logout_rounded)),
         ],
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -78,7 +73,7 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                     children: [
                       Center(
                         child:
-                        CircularProgressIndicator(color: background_color),
+                            CircularProgressIndicator(color: background_color),
                       ),
                       Container(
                         decoration: BoxDecoration(
@@ -95,7 +90,7 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                     children: [
                       Center(
                         child:
-                        CircularProgressIndicator(color: background_color),
+                            CircularProgressIndicator(color: background_color),
                       ),
                       Container(
                         decoration: BoxDecoration(
@@ -122,27 +117,31 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                 color: text_color.withOpacity(0.75),
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: FutureBuilder(
-                  future: SharedPreferences.getInstance(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<SharedPreferences> snapshot) {
+              child: StreamBuilder(
+                  stream: firebasefirestore,
+                  builder: (context, snapshot) {
                     if (!snapshot.hasData) {
-                      return CircularProgressIndicator(
-                        color: text_color,
-                      );
+                      return new Text("Loading...");
                     }
-                    SharedPreferences? _prefs = snapshot.data;
-                    String loggedInUserKey =
-                    user.toString(); // unique key for current user
-                    if (!_prefs!.containsKey(loggedInUserKey)) {
-                      return Text("No data found for current user.");
+                    var userDocument = snapshot.data;
+                    String planName = userDocument?["Plan"];
+                    Color planColor;
+                    switch (planName) {
+                      case "Bronze Plan":
+                        planColor = Color(0xffCD7F32);
+                        break;
+                      case 'Gold Plan':
+                        planColor = Color(0xffffd700);
+                        break;
+                      case 'Silver Plan':
+                        planColor = Color(0xff808080);
+                        break;
+                      case 'Platinum Plan':
+                        planColor = Color(0xffe5e4e2);
+                        break;
+                      default:
+                        planColor = Colors.grey;
                     }
-                    String? userDocument = _prefs.getString(loggedInUserKey);
-                    Map<String, dynamic> userData = json.decode(userDocument!);
-                    var name = userData["name"];
-                    var mobno = userData["mobno"];
-                    var address = userData["address"];
-                    var email = _prefs.getString('email');
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -153,33 +152,30 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                           children: [
                             Container(
                               child: Text(
-                                name ?? "",
+                                userDocument?["Name"],
                                 style: TextStyle(
-                                    fontSize: 30,
+                                    fontSize: 26,
                                     fontWeight: FontWeight.w700,
                                     fontFamily: 'Mukta',
                                     color: Colors.black),
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.symmetric(vertical: 12),
-                              child: InkWell(
-                                onTap: () {
-                                  Navigator.push(
+                              padding: EdgeInsets.symmetric(vertical: 10),
+                              child: GestureDetector(
+                                onTap: () => Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => Plan(),
-                                    ),
-                                  );
-                                },
+                                    )),
                                 child: Container(
                                   padding: EdgeInsets.symmetric(
                                       vertical: 2, horizontal: 20),
                                   decoration: BoxDecoration(
-                                      color: planInfo['color'],
+                                      color: planColor,
                                       borderRadius: BorderRadius.circular(10)),
                                   child: Text(
-                                    planInfo['label'],
+                                    userDocument?["Plan"],
                                     style: TextStyle(
                                         fontSize: 15,
                                         fontFamily: 'Mukta',
@@ -196,9 +192,9 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                         ),
                         Container(
                           child: Text(
-                            email ?? "",
+                            user.toString(),
                             style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 18,
                                 fontWeight: FontWeight.w700,
                                 fontFamily: 'Mukta',
                                 color: Colors.black),
@@ -206,9 +202,9 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                         ),
                         Container(
                           child: Text(
-                            mobno ?? "",
+                            userDocument?["Mobile no"],
                             style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 18,
                                 fontWeight: FontWeight.w700,
                                 fontFamily: 'Mukta',
                                 color: Colors.black),
@@ -219,48 +215,51 @@ class _Usr_ProfileState extends State<Usr_Profile> {
                         ),
                         Container(
                           child: Text(
-                            address ?? "",
+                            userDocument?["Address"],
                             style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 18,
                                 fontWeight: FontWeight.w700,
                                 fontFamily: 'Mukta',
                                 color: Colors.black),
                           ),
                         ),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal:
+                                  MediaQuery.of(context).size.height * 0.025,
+                              vertical:
+                                  MediaQuery.of(context).size.width * 0.06,
+                            ),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => EditProfile(),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal:
+                                      MediaQuery.of(context).size.height *
+                                          0.025,
+                                  vertical:
+                                      MediaQuery.of(context).size.width * 0.035,
+                                ),
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15)),
+                                child: Icon(Icons.edit),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     );
-                  }
-                  ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.height*0.025,
-                vertical: MediaQuery.of(context).size.width*0.06,
-              ),
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EditProfile(),
-                    ),
-                  );
-                },
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: MediaQuery.of(context).size.height*0.025,
-                    vertical: MediaQuery.of(context).size.width*0.035,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15)
-                  ),
-                  child: Icon(Icons.edit),
-                ),
-              ),
+                  }),
             ),
           ),
         ],

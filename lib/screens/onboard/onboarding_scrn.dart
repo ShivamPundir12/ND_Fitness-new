@@ -23,6 +23,11 @@ class _Onboard_screenState extends State<Onboard_screen>
     controller.forward();
   }
 
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

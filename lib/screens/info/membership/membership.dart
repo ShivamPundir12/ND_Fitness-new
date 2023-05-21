@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/screens/info/membership/plan_card.dart';
+import 'package:nd_fitness/services/Message.dart';
 import 'package:nd_fitness/services/firestore.dart';
 import 'package:provider/provider.dart';
 import '../../../materials/colors.dart';
 import '../../../services/container_color.dart';
 import '../../../services/secure_storage.dart';
+import 'package:intl/intl.dart';
 
 class Membership extends StatefulWidget {
   const Membership({Key? key}) : super(key: key);
@@ -32,6 +34,32 @@ class _MembershipState extends State<Membership> {
   String p4t1 = "Platinum Plan";
   String p4t2 = "12 mo";
   String p4t3 = "₹ 13000";
+  // Get the current date and time
+  static final DateTime now = DateTime.now();
+  DateFormat formatter = DateFormat('dd-MM-yyy');
+  String currentDate = DateFormat('dd-MM-yyy').format(now);
+  String currentTime = DateFormat('kk:mm:ss').format(now);
+
+  DateTime calculatePlanExpireDate(String planType) {
+    // Get the current date and time
+    DateTime currentDate = DateTime.now();
+
+    // Calculate the plan expire date based on the plan type
+    switch (planType) {
+      case "Bronze Plan":
+        return currentDate.add(Duration(days: 30));
+      case "Silver Plan":
+        return currentDate.add(Duration(days: 90));
+      case "Gold Plan":
+        return currentDate.add(Duration(days: 180));
+      case "Platinum Plan":
+        return currentDate.add(Duration(days: 365));
+      default:
+        // Handle invalid plan type
+        return Message.custommessage("Something went wrong", context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,12 +113,26 @@ class _MembershipState extends State<Membership> {
                           t1: p1t1,
                           t2: p1t2,
                           t3: p1t3,
+                          date: currentDate,
+                          time: currentTime,
+                          planexpr: formatter
+                              .format(calculatePlanExpireDate(p1t1))
+                              .toString(),
                         ),
                         // ontap function for Adding data to database
                         onTap: () {
                           Provider.of<PlanProvider>(context, listen: false)
                               .updateSelectedPlan(p1t1);
-                          Firecloud.addplandetail(p1t1, p1t2, p1t3);
+                          Firecloud.addplandetail(
+                            p1t1,
+                            p1t2,
+                            p1t3,
+                            currentTime,
+                            currentDate,
+                            formatter
+                                .format(calculatePlanExpireDate(p1t1))
+                                .toString(),
+                          );
                           Navigator.pushNamedAndRemoveUntil(
                               context, "/allset", (route) => false);
                         },
@@ -104,11 +146,25 @@ class _MembershipState extends State<Membership> {
                           t1: p2t1,
                           t2: p2t2,
                           t3: p2t3,
+                          date: currentDate,
+                          time: currentTime,
+                          planexpr: formatter
+                              .format(calculatePlanExpireDate(p2t1))
+                              .toString(),
                         ),
                         onTap: () {
-                          Provider.of<PlanProvider>(context, listen: false)
-                              .updateSelectedPlan(p2t1);
-                          Firecloud.addplandetail(p2t1, p2t2, p2t3);
+                          // Provider.of<PlanProvider>(context, listen: false)
+                          //     .updateSelectedPlan(p2t1);
+                          Firecloud.addplandetail(
+                            p2t1,
+                            p2t2,
+                            p2t3,
+                            currentDate,
+                            currentTime,
+                            formatter
+                                .format(calculatePlanExpireDate(p2t1))
+                                .toString(),
+                          );
                           Navigator.pushNamedAndRemoveUntil(
                               context, "/allset", (route) => false);
                         },
@@ -121,11 +177,25 @@ class _MembershipState extends State<Membership> {
                           t1: p3t1,
                           t2: p3t2,
                           t3: p3t3,
+                          date: currentDate,
+                          time: currentTime,
+                          planexpr: formatter
+                              .format(calculatePlanExpireDate(p3t1))
+                              .toString(),
                         ),
                         onTap: () {
-                          Provider.of<PlanProvider>(context, listen: false)
-                              .updateSelectedPlan(p3t1);
-                          Firecloud.addplandetail(p3t1, p3t2, p3t3);
+                          // Provider.of<PlanProvider>(context, listen: false)
+                          //     .updateSelectedPlan(p3t1);
+                          Firecloud.addplandetail(
+                            p3t1,
+                            p3t2,
+                            p3t3,
+                            currentDate,
+                            currentTime,
+                            formatter
+                                .format(calculatePlanExpireDate(p3t1))
+                                .toString(),
+                          );
                           Navigator.pushNamedAndRemoveUntil(
                               context, "/allset", (route) => false);
                         },
@@ -138,11 +208,25 @@ class _MembershipState extends State<Membership> {
                           t1: p4t1,
                           t2: p4t2,
                           t3: p4t3,
+                          date: currentDate,
+                          time: currentTime,
+                          planexpr: formatter
+                              .format(calculatePlanExpireDate(p4t1))
+                              .toString(),
                         ),
                         onTap: () {
-                          Provider.of<PlanProvider>(context, listen: false)
-                              .updateSelectedPlan(p4t1);
-                          Firecloud.addplandetail(p4t1, p4t2, p4t3);
+                          // Provider.of<PlanProvider>(context, listen: false)
+                          //     .updateSelectedPlan(p4t1);
+                          Firecloud.addplandetail(
+                            p4t1,
+                            p4t2,
+                            p4t3,
+                            currentDate,
+                            currentTime,
+                            formatter
+                                .format(calculatePlanExpireDate(p4t1))
+                                .toString(),
+                          );
                           Navigator.pushNamedAndRemoveUntil(
                               context, "/allset", (route) => false);
                         },

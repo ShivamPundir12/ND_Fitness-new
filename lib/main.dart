@@ -10,6 +10,7 @@ import 'package:nd_fitness/screens/info/membership/membership.dart';
 import 'package:nd_fitness/screens/info/profilecontroller/profile.dart';
 import 'package:nd_fitness/screens/onboard/onboarding_scrn.dart';
 import 'package:nd_fitness/screens/onboard/splash_scrn.dart';
+import 'screens/auth/forgot_pass.dart';
 import 'package:nd_fitness/screens/user/edit_profile.dart';
 import 'package:nd_fitness/screens/user/plan.dart';
 import 'screens/info/Weight/weight.dart';
@@ -55,9 +56,9 @@ class MyApp extends StatelessWidget {
         '/plan': (context) => Plan(),
         '/allset': (context) => AllSet(),
         '/weigt': (context) => Usr_Weight(),
-        // '/age': (context) => age(),
+        '/ForgotPass': (context) => ForgotPassword(),
       },
-      home: Usr_Profile(),
+      home: SplashScreen(),
     );
   }
 }

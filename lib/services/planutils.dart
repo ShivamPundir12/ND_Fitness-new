@@ -1,7 +1,24 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class PlanUtils {
   static Map<String, dynamic> getPlanInfo(String selectedPlan) {
+    // ignore: unused_element
+
+    // ignore: unused_element
+    Future<void> initialize() async {
+      final firestore = FirebaseFirestore.instance;
+      final docRef = firestore
+          .collection('userdetail')
+          .doc(FirebaseAuth.instance.currentUser?.uid);
+      final snapshot = await docRef.get();
+
+      if (snapshot.exists) {
+        selectedPlan = snapshot.data()?['Plan'];
+      }
+    }
+
     String d = "Member";
     String p1 = "Gold Plan";
     String p2 = "Silver Plan";

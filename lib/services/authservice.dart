@@ -53,4 +53,13 @@ class AuthServices {
               ),
         );
   }
+
+  // Forgot Password function
+  static forgotpass(BuildContext context, String emailController) {
+    final user = FirebaseAuth.instance;
+    user.sendPasswordResetEmail(email: emailController).whenComplete(
+          () => Navigator.pushNamedAndRemoveUntil(
+              context, '/signin', (route) => false),
+        );
+  }
 }

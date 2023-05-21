@@ -166,25 +166,26 @@ class _ProfileState extends State<Profile> {
                                     shape: BoxShape.circle),
                               ),
                               Positioned(
-                                  bottom: 0,
-                                  right: 0,
-                                  child: Container(
-                                    height: 35,
-                                    width: 35,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                            width: 3, color: Colors.white),
-                                        color: background_color),
-                                    child: IconButton(
-                                      onPressed: () {
-                                        provider.pickImage(context);
-                                      },
-                                      icon: Icon(CupertinoIcons.plus),
-                                      color: Colors.white,
-                                      iconSize: 15,
-                                    ),
-                                  ))
+                                bottom: 0,
+                                right: 0,
+                                child: Container(
+                                  height: 35,
+                                  width: 35,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          width: 3, color: Colors.white),
+                                      color: background_color),
+                                  child: IconButton(
+                                    onPressed: () {
+                                      provider.pickImage(context);
+                                    },
+                                    icon: Icon(CupertinoIcons.plus),
+                                    color: Colors.white,
+                                    iconSize: 15,
+                                  ),
+                                ),
+                              )
                             ]),
                             SizedBox(
                               height: 30,
@@ -196,155 +197,142 @@ class _ProfileState extends State<Profile> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     TextFormField(
-                                      enableInteractiveSelection: true,
-                                      validator: validate.formvaild,
-                                      controller: _namecontroller,
-                                      decoration: InputDecoration(
-                                        labelText: 'Enter your full name',
-                                        suffixIcon: Icon(CupertinoIcons.person),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(18),
+                                        enableInteractiveSelection: true,
+                                        validator: validate.formvaild,
+                                        controller: _namecontroller,
+                                        decoration: InputDecoration(
+                                          labelText: 'Enter your full name',
+                                          suffixIcon:
+                                              Icon(CupertinoIcons.person),
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(18),
+                                          ),
                                         ),
-                                      ),
-                                      style: profilestyle (
-                                        color: black.withOpacity(0.4)
-                                      )
-                                    ),
+                                        style: profilestyle(
+                                            color: black.withOpacity(0.4))),
                                     SizedBox(
                                       height: 20,
                                     ),
                                     TextFormField(
-                                      readOnly: true,
-                                      validator: validate.formvaild,
-                                      keyboardType: TextInputType.none,
-                                      onTap: () async {
-                                        FocusScope.of(context)
-                                            .requestFocus(new FocusNode());
-                                        showDateSelector(context);
-                                      },
-                                      controller: _dobcontroller,
-                                      decoration: InputDecoration(
-                                        labelText: 'Enter your D.O.B',
-                                        suffixIcon:
-                                            Icon(CupertinoIcons.calendar_today),
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(18)),
-                                      ),
-                                      style: profilestyle (
-                                          color: black.withOpacity(0.4)
-                                      )
-                                    ),
+                                        readOnly: true,
+                                        validator: validate.formvaild,
+                                        keyboardType: TextInputType.none,
+                                        onTap: () async {
+                                          FocusScope.of(context)
+                                              .requestFocus(new FocusNode());
+                                          showDateSelector(context);
+                                        },
+                                        controller: _dobcontroller,
+                                        decoration: InputDecoration(
+                                          labelText: 'Enter your D.O.B',
+                                          suffixIcon: Icon(
+                                              CupertinoIcons.calendar_today),
+                                          border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(18)),
+                                        ),
+                                        style: profilestyle(
+                                            color: black.withOpacity(0.4))),
                                     SizedBox(
                                       height: 20,
                                     ),
                                     TextFormField(
-                                      validator: validate.formvaild,
-                                      controller: _addresscontroller,
-                                      decoration: InputDecoration(
-                                        labelText: 'Enter your Address',
-                                        suffixIcon: Icon(CupertinoIcons.home),
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(18)),
-                                      ),
-                                      style: profilestyle (
-                                          color: black.withOpacity(0.4)
-                                      )
-                                    ),
+                                        validator: validate.formvaild,
+                                        controller: _addresscontroller,
+                                        decoration: InputDecoration(
+                                          labelText: 'Enter your Address',
+                                          suffixIcon: Icon(CupertinoIcons.home),
+                                          border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(18)),
+                                        ),
+                                        style: profilestyle(
+                                            color: black.withOpacity(0.4))),
                                     SizedBox(
                                       height: 20,
                                     ),
                                     TextFormField(
-                                      keyboardType: TextInputType.phone,
-                                      onChanged: (value) {
-                                        _formkey.currentState?.validate();
-                                      },
-                                      validator: validate.mobilevalid,
-                                      controller: _mobnocontroller,
-                                      decoration: InputDecoration(
-                                        prefixText: _pretext,
-                                        labelText: 'Enter your Mobile no.',
-                                        suffixIcon: Icon(CupertinoIcons.phone),
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(18)),
-                                      ),
-                                      style: profilestyle (
-                                          color: black.withOpacity(0.4)
-                                      )
-                                    ),
+                                        keyboardType: TextInputType.phone,
+                                        onChanged: (value) {
+                                          _formkey.currentState?.validate();
+                                        },
+                                        validator: validate.mobilevalid,
+                                        controller: _mobnocontroller,
+                                        decoration: InputDecoration(
+                                          prefixText: _pretext,
+                                          labelText: 'Enter your Mobile no.',
+                                          suffixIcon:
+                                              Icon(CupertinoIcons.phone),
+                                          border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(18)),
+                                        ),
+                                        style: profilestyle(
+                                            color: black.withOpacity(0.4))),
                                     SizedBox(
                                       height: 30,
                                     ),
                                     Container(
-                                      child: Text(
-                                        'Emergency contact',
-                                        style: profilestyle (
-                                            color: black.withOpacity(0.4)
-                                        )
-                                      ),
+                                      child: Text('Emergency contact',
+                                          style: profilestyle(
+                                              color: black.withOpacity(0.4))),
                                     ),
                                     SizedBox(
                                       height: 10,
                                     ),
                                     TextFormField(
-                                      validator: validate.formvaild,
-                                      controller: _relatvnamecontroller,
-                                      decoration: InputDecoration(
-                                        labelText: 'Enter your full name',
-                                        suffixIcon: Icon(CupertinoIcons.person),
-                                        border: OutlineInputBorder(
+                                        validator: validate.formvaild,
+                                        controller: _relatvnamecontroller,
+                                        decoration: InputDecoration(
+                                          labelText: 'Enter your full name',
+                                          suffixIcon:
+                                              Icon(CupertinoIcons.person),
+                                          border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(18)),
+                                        ),
+                                        style: profilestyle(
+                                            color: black.withOpacity(0.4))),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    TextFormField(
+                                        keyboardType: TextInputType.phone,
+                                        controller: _emrccontroller,
+                                        onChanged: (value) {
+                                          _formkey.currentState?.validate();
+                                        },
+                                        validator: validate.mobilevalid,
+                                        decoration: InputDecoration(
+                                          prefixText: _pretext,
+                                          labelText: 'Enter your Mobile no.',
+                                          suffixIcon:
+                                              Icon(CupertinoIcons.phone),
+                                          border: OutlineInputBorder(
                                             borderRadius:
-                                                BorderRadius.circular(18)),
-                                      ),
-                                      style: profilestyle (
-                                          color: black.withOpacity(0.4)
-                                      )
-                                    ),
+                                                BorderRadius.circular(18),
+                                          ),
+                                        ),
+                                        style: profilestyle(
+                                            color: black.withOpacity(0.4))),
                                     SizedBox(
                                       height: 20,
                                     ),
                                     TextFormField(
-                                      keyboardType: TextInputType.phone,
-                                      controller: _emrccontroller,
-                                      onChanged: (value) {
-                                        _formkey.currentState?.validate();
-                                      },
-                                      validator: validate.mobilevalid,
-                                      decoration: InputDecoration(
-                                        prefixText: _pretext,
-                                        labelText: 'Enter your Mobile no.',
-                                        suffixIcon: Icon(CupertinoIcons.phone),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(18),
+                                        validator: validate.formvaild,
+                                        controller: _reltioncontroller,
+                                        decoration: InputDecoration(
+                                          labelText: 'Enter your Relationship.',
+                                          suffixIcon:
+                                              Icon(CupertinoIcons.person_2),
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(18),
+                                          ),
                                         ),
-                                      ),
-                                      style: profilestyle (
-                                          color: black.withOpacity(0.4)
-                                      )
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    TextFormField(
-                                      validator: validate.formvaild,
-                                      controller: _reltioncontroller,
-                                      decoration: InputDecoration(
-                                        labelText: 'Enter your Relationship.',
-                                        suffixIcon:
-                                            Icon(CupertinoIcons.person_2),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(18),
-                                        ),
-                                      ),
-                                      style: profilestyle (
-                                          color: black.withOpacity(0.4)
-                                      )
-                                    ),
+                                        style: profilestyle(
+                                            color: black.withOpacity(0.4))),
                                     SizedBox(
                                       height: 30,
                                     )
@@ -362,7 +350,6 @@ class _ProfileState extends State<Profile> {
                                 onTap: () async {
                                   try {
                                     if (_formkey.currentState!.validate()) {
-                                      _saveFieldValues();
                                       userData.adduserdetail(
                                         _namecontroller.text,
                                         _mobnocontroller.text,
@@ -372,6 +359,7 @@ class _ProfileState extends State<Profile> {
                                         _reltioncontroller.text,
                                         _emrccontroller.text,
                                       );
+                                      _saveFieldValues();
                                       Navigator.pushNamedAndRemoveUntil(
                                         context,
                                         "/member",

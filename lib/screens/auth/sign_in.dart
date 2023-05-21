@@ -241,7 +241,8 @@ class _Sign_inState extends State<Sign_in> {
                         SizedBox(
                             height: MediaQuery.of(context).size.height * 0.05),
                         GestureDetector(
-                          // onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=> ()),);},
+                          onTap: () =>
+                              Navigator.pushNamed(context, "/ForgotPass"),
                           child: Container(
                             child: Text(
                               "Forgot password?",
