@@ -259,21 +259,21 @@ class _EditProfileState extends State<EditProfile> {
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.04,
                           ),
+                          InfoRow(
+                              title: "Email",
+                              width: MediaQuery.of(context).size.width * 0.18,
+                              value: user.email.toString()),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.04,
+                          ),
                           GestureDetector(
                             onTap: () => provider.showUserAddressDialogAlert(
                                 context, address),
                             child: InfoRow(
-                                title: "Email",
-                                width: MediaQuery.of(context).size.width * 0.18,
-                                value: user.email.toString()),
+                                title: "Address",
+                                width: MediaQuery.of(context).size.width * 0.13,
+                                value: address ?? ""),
                           ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.04,
-                          ),
-                          InfoRow(
-                              title: "Address",
-                              width: MediaQuery.of(context).size.width * 0.13,
-                              value: address ?? ""),
                         ],
                       ),
                     );

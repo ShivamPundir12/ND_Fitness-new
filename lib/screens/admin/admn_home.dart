@@ -1,7 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:nd_fitness/generated/assets.dart';
 import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/screens/admin/usr_card.dart';
+import 'package:nd_fitness/services/admin_auth.dart';
+
+import '../onboard/material/photo_hero.dart';
 
 class Admin_Home extends StatefulWidget {
   const Admin_Home({Key? key}) : super(key: key);
@@ -11,9 +15,27 @@ class Admin_Home extends StatefulWidget {
 }
 
 class _Admin_HomeState extends State<Admin_Home> {
+  final user = FirebaseAuth.instance.currentUser?.email;
+  final firebasefirestore =
+      FirebaseFirestore.instance.collection('userdetail').get();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
+      extendBodyBehindAppBar: true,
+      backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+              onPressed: () async {
+                await AdminAuth.adminlogout(context);
+              },
+              icon: Icon(Icons.logout_rounded)),
+        ],
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 30),
         color: background_color,
@@ -24,8 +46,11 @@ class _Admin_HomeState extends State<Admin_Home> {
               children: [
                 Container(
                   padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.03),
-                  child: Image.asset(Assets.assetsLogosml),
+                      top: MediaQuery.of(context).size.height * 0.05),
+                  child: PhotoHero(
+                    photo: 'assets/logo.png',
+                    width: 70,
+                  ),
                 ),
                 Container(
                   padding: EdgeInsets.only(
@@ -49,16 +74,58 @@ class _Admin_HomeState extends State<Admin_Home> {
             Expanded(
               child: SingleChildScrollView(
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 20),
-                  child: Column(
-                    children: [
-                      Usr_Card(),
-                      Usr_Card(),
-                      Usr_Card(),
-                      Usr_Card(),
-                      Usr_Card(),
-                    ],
-                  ),
+                  child: StreamBuilder(
+                      stream: firebasefirestore.asStream(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: CircularProgressIndicator.adaptive(),
+                          );
+                        } else {
+                          final users = snapshot.data!.docs;
+                          List<Usr_Card> userList = [];
+                          for (var user in users) {
+                            final name = user['Name'];
+                            final age = user['Age'];
+                            final profile = user['Picurl'];
+                            final plan = user['Plan'];
+                            final aclevel = user['Physical Activity'];
+                            String userprofile;
+                            final userdata = user.data();
+                            if (userdata.containsKey('ProfileImage')) {
+                              // Check if field exists
+                              userprofile = user['ProfileImage'];
+                            } else {
+                              userprofile = profile;
+                            }
+                            userList.add(Usr_Card(
+                                name: name,
+                                age: age,
+                                aclevel: aclevel,
+                                plan: plan,
+                                image: userprofile));
+                          }
+                          return ListView.builder(
+                            physics: BouncingScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: userList.length,
+                            itemBuilder: (context, index) {
+                              return userList[index];
+                            },
+                          );
+                        }
+                        // var userdata = snapshot.data?.docs[index];
+                        // // var image = userdata?["ProfileImage"][0];
+                        // // var pic = userdata?["Picurl"];
+                        // print(userdata);
+                        // return Usr_Card(
+                        //     name: userdata?["Name"],
+                        //     age: userdata?["Age"],
+                        //     // address: userdata?["Address"],
+                        //     // image: image,
+                        //     plan: userdata?["Plan"],
+                        //     aclevel: userdata?["Physical Activity"]);
+                      }),
                 ),
               ),
             )
