@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       ),
                       (route) => false);
                 } else {
-                  if (snapshot.exists.hashCode == key) {
+                  if (key != null) {
                     profileComplete = true;
                     Navigator.pushNamed(context, '/usrprofile');
                   } else {

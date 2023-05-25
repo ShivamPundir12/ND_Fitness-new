@@ -33,7 +33,7 @@ class Firecloud {
         adduserdetail(name, mobileno, age, address, rname, relation, rnumber)));
   }
 
-  // // Add age to Database Funtion
+  // Add age to Database Funtion
   // static addage(String age) async {
   //   var firebaseUser = FirebaseAuth.instance.currentUser;
   //   var collection = FirebaseFirestore.instance.collection('userdetail');
@@ -67,14 +67,20 @@ class Firecloud {
   }
 
   // Add Gender To the database
-  static selectgen(String gend) async {
+  static selectgen(
+    String gend,
+  ) async {
     var firebaseUser = FirebaseAuth.instance.currentUser;
+    String? email = firebaseUser?.email.toString();
     var collection = FirebaseFirestore.instance.collection('userdetail');
     var docSnapshot = await collection.doc(firebaseUser?.uid).get();
     await FirebaseFirestore.instance
         .collection('userdetail')
         .doc(docSnapshot.id)
-        .set({'Gender': gend});
+        .set({
+      'Gender': gend,
+      'Email': email,
+    });
   }
 
   // Fetch Data for Current User from database
