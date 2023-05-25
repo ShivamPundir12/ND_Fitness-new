@@ -184,8 +184,6 @@ class _MembershipState extends State<Membership> {
                               .toString(),
                         ),
                         onTap: () {
-                          // Provider.of<PlanProvider>(context, listen: false)
-                          //     .updateSelectedPlan(p3t1);
                           Firecloud.addplandetail(
                             p3t1,
                             p3t2,

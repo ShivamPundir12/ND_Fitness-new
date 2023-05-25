@@ -1,9 +1,11 @@
 // ignore_for_file: unused_local_variable
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:nd_fitness/screens/admin/navbar/admin_bar.dart';
 import 'package:nd_fitness/screens/onboard/material/photo_hero.dart';
 import 'package:nd_fitness/screens/onboard/onboarding_scrn.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../services/secure_storage.dart';
 
 String? finalEmail, finalName;
@@ -37,16 +39,28 @@ class _SplashScreenState extends State<SplashScreen> {
             bool profileComplete = false; // Assume profile is complete
             if (finalEmail == null || finalName == null) {
             } else {
-              SharedPreferences.getInstance().then((prefs) {
-                String loggedInUserKey = 'email';
-                String? userDataJsonString =
-                    prefs.getString(loggedInUserKey).toString();
-                if (prefs.containsKey(userDataJsonString)) {
-                  profileComplete = true;
-                  Navigator.pushNamed(context, '/usrprofile');
+              final snapshot = FirebaseFirestore.instance
+                  .collection('userdetail')
+                  .doc(FirebaseAuth.instance.currentUser?.uid)
+                  .get();
+              snapshot.then((snapshot) {
+                var userdata = snapshot.data();
+                String? key = userdata?["Plan"];
+                if (finalEmail == 'ndfitness@admin.com') {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AdminBar(),
+                      ),
+                      (route) => false);
                 } else {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, '/gend', (route) => false);
+                  if (snapshot.exists.hashCode == key) {
+                    profileComplete = true;
+                    Navigator.pushNamed(context, '/usrprofile');
+                  } else {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, '/signin', (route) => false);
+                  }
                 }
               });
             }

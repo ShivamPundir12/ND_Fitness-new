@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/generated/assets.dart';
 import 'package:nd_fitness/materials/colors.dart';
+import 'package:nd_fitness/services/Message.dart';
 
 class Member_Profile extends StatefulWidget {
   const Member_Profile({Key? key}) : super(key: key);
@@ -10,145 +13,161 @@ class Member_Profile extends StatefulWidget {
 }
 
 class _Member_ProfileState extends State<Member_Profile> {
+  final currentuser = FirebaseAuth.instance.currentUser;
+  final firebasefirestore =
+      FirebaseFirestore.instance.collection('userdetail').snapshots();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: text_color2,
-        body: Column(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height * 0.4,
-              width: MediaQuery.of(context).size.width,
-              clipBehavior: Clip.none,
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.elliptical(300, 70),
-                ),
-                child: Image.asset(Assets.assetsPerson, fit: BoxFit.cover),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-              height: MediaQuery.of(context).size.height * 0.6,
-              width: MediaQuery.of(context).size.width,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        body: StreamBuilder(
+            stream: firebasefirestore,
+            builder: (context, snapshot) {
+              return ListView.builder(
+                itemCount: snapshot.data?.docs.length,
+                itemBuilder: (context, index) {
+                  var userdata = snapshot.data?.docs[index];
+                  Column(
                     children: [
                       Container(
-                        child: Text(
-                          "David Warner",
-                          style: TextStyle(
-                              fontSize: 35,
-                              fontWeight: FontWeight.w900,
-                              fontFamily: 'Mukta',
-                              color: Colors.black),
+                        height: MediaQuery.of(context).size.height * 0.4,
+                        width: MediaQuery.of(context).size.width,
+                        clipBehavior: Clip.none,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.elliptical(300, 70),
+                          ),
+                          child: Image.asset(Assets.assetsPerson,
+                              fit: BoxFit.cover),
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Text(
-                          "28",
-                          style: TextStyle(
-                              fontSize: 40,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'Mukta',
-                              color: Colors.black),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                        height: MediaQuery.of(context).size.height * 0.6,
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  child: Text(
+                                    userdata?["Name"] ?? "",
+                                    style: TextStyle(
+                                        fontSize: 35,
+                                        fontWeight: FontWeight.w900,
+                                        fontFamily: 'Mukta',
+                                        color: Colors.black),
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                  child: Text(
+                                    userdata?["Age"] ?? "",
+                                    style: TextStyle(
+                                        fontSize: 40,
+                                        fontWeight: FontWeight.w700,
+                                        fontFamily: 'Mukta',
+                                        color: Colors.black),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Container(
+                              child: Text(
+                                "A Muscle freak with ambition and discipline to fulfill my dreams",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'Mukta',
+                                    color: Colors.black),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 35,
+                            ),
+                            Container(
+                              child: Text(
+                                "Email",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: 'Mukta',
+                                  color: Colors.black.withOpacity(0.75),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              child: Text(
+                                "${currentuser?.email}",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: 'Mukta',
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                              child: Text(
+                                "Mobile no.",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: 'Mukta',
+                                  color: Colors.black.withOpacity(0.75),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              child: Text(
+                                userdata?["Mobile no"],
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: 'Mukta',
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                              child: Text(
+                                "Address",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: 'Mukta',
+                                  color: Colors.black.withOpacity(0.75),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              child: Text(
+                                userdata?["Address"] ?? "",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: 'Mukta',
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
+                      )
                     ],
-                  ),
-                  Container(
-                    child: Text(
-                      "A Muscle freak with ambition and discipline to fulfill my dreams",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: 'Mukta',
-                          color: Colors.black),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 35,
-                  ),
-                  Container(
-                    child: Text(
-                      "Email",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Mukta',
-                        color: Colors.black.withOpacity(0.75),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    child: Text(
-                      "davidwarner123@gmail.com",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Mukta',
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    child: Text(
-                      "Mobile no.",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Mukta',
-                        color: Colors.black.withOpacity(0.75),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    child: Text(
-                      "+91 5423652545",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Mukta',
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    child: Text(
-                      "Address",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Mukta',
-                        color: Colors.black.withOpacity(0.75),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    child: Text(
-                      "House no. 13, downtown streets, California, New York",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Mukta',
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ));
+                  );
+                  return Message.custommessage("Something went wrong", context);
+                },
+              );
+            }));
   }
 }
