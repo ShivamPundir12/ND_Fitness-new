@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/materials/colors.dart';
+import 'package:nd_fitness/screens/admin/member/member_profile.dart';
 import 'package:nd_fitness/screens/admin/usr_card.dart';
 import 'package:nd_fitness/services/admin_auth.dart';
 
@@ -15,7 +15,6 @@ class Admin_Home extends StatefulWidget {
 }
 
 class _Admin_HomeState extends State<Admin_Home> {
-  final user = FirebaseAuth.instance.currentUser?.email;
   final firebasefirestore =
       FirebaseFirestore.instance.collection('userdetail').get();
   @override
@@ -98,33 +97,40 @@ class _Admin_HomeState extends State<Admin_Home> {
                             } else {
                               userprofile = profile;
                             }
-                            userList.add(Usr_Card(
-                                name: name,
-                                age: age,
-                                aclevel: aclevel,
-                                plan: plan,
-                                image: userprofile));
+                            userList.add(
+                              Usr_Card(
+                                  name: name,
+                                  age: age,
+                                  aclevel: aclevel,
+                                  plan: plan,
+                                  image: userprofile),
+                            );
                           }
                           return ListView.builder(
                             physics: BouncingScrollPhysics(),
                             shrinkWrap: true,
                             itemCount: userList.length,
                             itemBuilder: (context, index) {
-                              return userList[index];
+                              final name = userList[index].name;
+                              final age = userList[index].age;
+                              final image = userList[index].image;
+                              final aclevel = userList[index].aclevel;
+                              final plan = userList[index].plan;
+                              return GestureDetector(
+                                  onTap: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Member_Profile(
+                                            name: name,
+                                            age: age,
+                                            image: image,
+                                            aclevel: aclevel,
+                                            plan: plan),
+                                      )),
+                                  child: userList[index]);
                             },
                           );
                         }
-                        // var userdata = snapshot.data?.docs[index];
-                        // // var image = userdata?["ProfileImage"][0];
-                        // // var pic = userdata?["Picurl"];
-                        // print(userdata);
-                        // return Usr_Card(
-                        //     name: userdata?["Name"],
-                        //     age: userdata?["Age"],
-                        //     // address: userdata?["Address"],
-                        //     // image: image,
-                        //     plan: userdata?["Plan"],
-                        //     aclevel: userdata?["Physical Activity"]);
                       }),
                 ),
               ),

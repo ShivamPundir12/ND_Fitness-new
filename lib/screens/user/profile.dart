@@ -36,11 +36,6 @@ class _Usr_ProfileState extends State<Usr_Profile> {
 
   @override
   Widget build(BuildContext context) {
-    // Plan provider to change the color of container according to plan
-    // final planProvider = Provider.of<PlanProvider>(context);
-    // Plan util class to access the color and specified plans
-    // final planInfo = PlanUtils.getPlanInfo(planProvider.selectedPlan);
-
     // main body
     return Scaffold(
       extendBodyBehindAppBar: true,

@@ -1,17 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:nd_fitness/generated/assets.dart';
 import '../../materials/colors.dart';
 // import 'member/model.dart';
 
 class Usr_Card extends StatefulWidget {
-  // final Model model;
   final String name;
   final String image;
   final String age;
   final String aclevel;
   final String plan;
-  const Usr_Card({
+  Usr_Card({
     Key? key,
     required this.name,
     required this.age,

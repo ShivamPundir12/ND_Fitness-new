@@ -102,7 +102,6 @@ class _Sign_inState extends State<Sign_in> {
                         stream: firebasefirestore,
                         builder: (context, snapshot) {
                           var userdata = snapshot.data;
-                          // String loginkey = userdata?["Name"];
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -227,7 +226,7 @@ class _Sign_inState extends State<Sign_in> {
                                     context,
                                   );
                                   // check if the user has data
-                                  if (userdata!.exists) {
+                                  if (userdata != null) {
                                     // proceed to user profile page
                                     Navigator.pushNamed(context, '/usrprofile');
                                   }
