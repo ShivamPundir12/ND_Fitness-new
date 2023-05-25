@@ -53,10 +53,6 @@ class _Admin_ReminderState extends State<Admin_Reminder> {
                   child: Column(
                     children: [
                       Reminder_Card(),
-                      Reminder_Card(),
-                      Reminder_Card(),
-                      Reminder_Card(),
-                      Reminder_Card(),
                     ],
                   ),
                 ),
