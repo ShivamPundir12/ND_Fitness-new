@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/generated/assets.dart';
 import 'package:nd_fitness/materials/colors.dart';
@@ -11,6 +12,8 @@ class Admin_Reminder extends StatefulWidget {
 }
 
 class _Admin_ReminderState extends State<Admin_Reminder> {
+  final firebasefirestore =
+      FirebaseFirestore.instance.collection('userdetail').get();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +41,7 @@ class _Admin_ReminderState extends State<Admin_Reminder> {
                         fontFamily: 'Mukta',
                         fontWeight: FontWeight.w900),
                   ),
-                )
+                ),
               ],
             ),
             Container(
@@ -48,16 +51,40 @@ class _Admin_ReminderState extends State<Admin_Reminder> {
             ),
             Expanded(
               child: SingleChildScrollView(
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 20),
-                  child: Column(
-                    children: [
-                      Reminder_Card(),
-                    ],
-                  ),
-                ),
+                child: StreamBuilder(
+                    stream: firebasefirestore.asStream(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: CircularProgressIndicator.adaptive(),
+                        );
+                      } else {
+                        final users = snapshot.data!.docs;
+                        List<Reminder_Card> userList = [];
+                        for (var user in users) {
+                          final name = user['Name'];
+                          final plan = user['Plan'];
+                          final duration = user['Duration'];
+                          userList.add(
+                            Reminder_Card(
+                              name: name,
+                              time: duration,
+                              plan: plan,
+                            ),
+                          );
+                        }
+                        return ListView.builder(
+                          physics: BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: userList.length,
+                          itemBuilder: (context, index) {
+                            return userList[index];
+                          },
+                        );
+                      }
+                    }),
               ),
-            )
+            ),
           ],
         ),
       ),
