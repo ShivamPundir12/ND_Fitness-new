@@ -16,6 +16,7 @@ class Admin_sign_in extends StatefulWidget {
 class _Admin_sign_inState extends State<Admin_sign_in> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  bool obscuretext = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,6 +105,16 @@ class _Admin_sign_inState extends State<Admin_sign_in> {
                       ),
                       TextFormField(
                         controller: emailController,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Email is required";
+                          }
+                          if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                              .hasMatch(value)) {
+                            return 'Please a valid Email';
+                          }
+                          return null;
+                        },
                         decoration: InputDecoration(
                           hintText: 'Enter your owner id',
                           suffixIcon: Icon(CupertinoIcons.mail),
@@ -130,10 +141,29 @@ class _Admin_sign_inState extends State<Admin_sign_in> {
                         height: 5,
                       ),
                       TextFormField(
+                        obscureText: obscuretext,
                         controller: passwordController,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Password is required';
+                          } else if (value.trim().length < 6) {
+                            return 'Password must be at least 8 characters in length';
+                          }
+                          return null;
+                        },
                         decoration: InputDecoration(
                           hintText: 'Enter your password',
-                          suffixIcon: Icon(CupertinoIcons.eye),
+                          suffixIcon: GestureDetector(
+                            onTap: () {
+                              setState(() {});
+                              obscuretext = !obscuretext;
+                            },
+                            child: Icon(
+                              obscuretext
+                                  ? CupertinoIcons.eye_fill
+                                  : CupertinoIcons.eye_slash_fill,
+                            ),
+                          ),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(18)),
                         ),
