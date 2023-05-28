@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import '../../materials/colors.dart';
 
 class Reminder_Card extends StatefulWidget {
-  const Reminder_Card({Key? key}) : super(key: key);
+  final String name;
+  final String time;
+  final String plan;
+  const Reminder_Card(
+      {Key? key, required this.name, required this.time, required this.plan})
+      : super(key: key);
 
   @override
   State<Reminder_Card> createState() => _Reminder_CardState();
@@ -29,7 +34,7 @@ class _Reminder_CardState extends State<Reminder_Card> {
             Container(
               padding: EdgeInsets.only(top: 15),
               child: Text(
-                'David Warner',
+                widget.name,
                 style: TextStyle(
                     fontSize: 25,
                     fontFamily: 'Mukta',
@@ -44,7 +49,7 @@ class _Reminder_CardState extends State<Reminder_Card> {
                   decoration: BoxDecoration(
                       color: card, borderRadius: BorderRadius.circular(25)),
                   child: Text(
-                    'Membership',
+                    widget.plan,
                     style: TextStyle(
                         fontSize: 15,
                         fontFamily: 'Mukta',
@@ -70,7 +75,7 @@ class _Reminder_CardState extends State<Reminder_Card> {
                 ),
                 Container(
                   child: Text(
-                    '7 days',
+                    widget.time,
                     style: TextStyle(
                         fontSize: 22,
                         fontFamily: 'Mukta',

@@ -1,6 +1,8 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:nd_fitness/screens/info/membership/plan_card.dart';
-import 'package:nd_fitness/services/Message.dart';
 import 'package:nd_fitness/services/firestore.dart';
 import 'package:provider/provider.dart';
 import '../../../materials/colors.dart';
@@ -40,24 +42,48 @@ class _MembershipState extends State<Membership> {
   String currentDate = DateFormat('dd-MM-yyy').format(now);
   String currentTime = DateFormat('kk:mm:ss').format(now);
 
-  DateTime calculatePlanExpireDate(String planType) {
+  DateTime calculatePlanExpireDate(String planType, Function showNotification) {
     // Get the current date and time
     DateTime currentDate = DateTime.now();
 
     // Calculate the plan expire date based on the plan type
     switch (planType) {
       case "Bronze Plan":
-        return currentDate.add(Duration(days: 30));
+        currentDate = currentDate.add(Duration(days: 30));
+        showNotification(currentDate);
+        break;
       case "Silver Plan":
-        return currentDate.add(Duration(days: 90));
+        currentDate = currentDate.add(Duration(days: 90));
+        showNotification(currentDate);
+        break;
       case "Gold Plan":
-        return currentDate.add(Duration(days: 180));
+        currentDate = currentDate.add(Duration(days: 180));
+        showNotification(currentDate);
+        break;
       case "Platinum Plan":
-        return currentDate.add(Duration(days: 365));
-      default:
-        // Handle invalid plan type
-        return Message.custommessage("Something went wrong", context);
+        currentDate = currentDate.add(Duration(days: 365));
+        showNotification(currentDate);
+        break;
     }
+
+    return currentDate;
+  }
+
+// Function to show local notification
+  void showNotification(DateTime expireDate) async {
+    var androidDetails = new AndroidNotificationDetails(
+        "channel id", "channel NAME",
+        importance: Importance.max);
+
+    var generalNotificationDetails =
+        new NotificationDetails(android: androidDetails);
+
+    await FlutterLocalNotificationsPlugin().schedule(
+        0,
+        "Plan Expiry",
+        "Your plan expires soon. Renew now!",
+        expireDate,
+        generalNotificationDetails);
   }
 
   @override
@@ -116,7 +142,8 @@ class _MembershipState extends State<Membership> {
                           date: currentDate,
                           time: currentTime,
                           planexpr: formatter
-                              .format(calculatePlanExpireDate(p1t1))
+                              .format(calculatePlanExpireDate(
+                                  p1t1, showNotification))
                               .toString(),
                         ),
                         // ontap function for Adding data to database
@@ -127,10 +154,11 @@ class _MembershipState extends State<Membership> {
                             p1t1,
                             p1t2,
                             p1t3,
-                            currentTime,
                             currentDate,
+                            currentTime,
                             formatter
-                                .format(calculatePlanExpireDate(p1t1))
+                                .format(calculatePlanExpireDate(
+                                    p1t1, showNotification))
                                 .toString(),
                           );
                           Navigator.pushNamedAndRemoveUntil(
@@ -149,7 +177,8 @@ class _MembershipState extends State<Membership> {
                           date: currentDate,
                           time: currentTime,
                           planexpr: formatter
-                              .format(calculatePlanExpireDate(p2t1))
+                              .format(calculatePlanExpireDate(
+                                  p2t1, showNotification))
                               .toString(),
                         ),
                         onTap: () {
@@ -162,7 +191,8 @@ class _MembershipState extends State<Membership> {
                             currentDate,
                             currentTime,
                             formatter
-                                .format(calculatePlanExpireDate(p2t1))
+                                .format(calculatePlanExpireDate(
+                                    p2t1, showNotification))
                                 .toString(),
                           );
                           Navigator.pushNamedAndRemoveUntil(
@@ -180,7 +210,8 @@ class _MembershipState extends State<Membership> {
                           date: currentDate,
                           time: currentTime,
                           planexpr: formatter
-                              .format(calculatePlanExpireDate(p3t1))
+                              .format(calculatePlanExpireDate(
+                                  p3t1, showNotification))
                               .toString(),
                         ),
                         onTap: () {
@@ -191,7 +222,8 @@ class _MembershipState extends State<Membership> {
                             currentDate,
                             currentTime,
                             formatter
-                                .format(calculatePlanExpireDate(p3t1))
+                                .format(calculatePlanExpireDate(
+                                    p3t1, showNotification))
                                 .toString(),
                           );
                           Navigator.pushNamedAndRemoveUntil(
@@ -209,7 +241,8 @@ class _MembershipState extends State<Membership> {
                           date: currentDate,
                           time: currentTime,
                           planexpr: formatter
-                              .format(calculatePlanExpireDate(p4t1))
+                              .format(calculatePlanExpireDate(
+                                  p4t1, showNotification))
                               .toString(),
                         ),
                         onTap: () {
@@ -222,7 +255,8 @@ class _MembershipState extends State<Membership> {
                             currentDate,
                             currentTime,
                             formatter
-                                .format(calculatePlanExpireDate(p4t1))
+                                .format(calculatePlanExpireDate(
+                                    p4t1, showNotification))
                                 .toString(),
                           );
                           Navigator.pushNamedAndRemoveUntil(
