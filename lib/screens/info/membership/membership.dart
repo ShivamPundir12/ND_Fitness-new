@@ -1,12 +1,9 @@
 // ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:nd_fitness/screens/info/membership/plan_card.dart';
 import 'package:nd_fitness/services/firestore.dart';
-import 'package:provider/provider.dart';
+import 'package:nd_fitness/services/notification_services.dart';
 import '../../../materials/colors.dart';
-import '../../../services/container_color.dart';
 import '../../../services/secure_storage.dart';
 import 'package:intl/intl.dart';
 
@@ -19,6 +16,8 @@ class Membership extends StatefulWidget {
 
 class _MembershipState extends State<Membership> {
   final secure_storage secureStorage = secure_storage();
+// Define the duration for the notification to be shown before plan expiration
+  final Duration notificationDuration = Duration(days: 7);
 
   // Plan 1
   String p1t1 = "Bronze Plan";
@@ -42,48 +41,29 @@ class _MembershipState extends State<Membership> {
   String currentDate = DateFormat('dd-MM-yyy').format(now);
   String currentTime = DateFormat('kk:mm:ss').format(now);
 
-  DateTime calculatePlanExpireDate(String planType, Function showNotification) {
+  DateTime calculatePlanExpireDate(
+    String planType,
+  ) {
     // Get the current date and time
     DateTime currentDate = DateTime.now();
 
     // Calculate the plan expire date based on the plan type
     switch (planType) {
       case "Bronze Plan":
-        currentDate = currentDate.add(Duration(days: 30));
-        showNotification(currentDate);
+        currentDate = currentDate.add(Duration(minutes: 1));
         break;
       case "Silver Plan":
         currentDate = currentDate.add(Duration(days: 90));
-        showNotification(currentDate);
         break;
       case "Gold Plan":
         currentDate = currentDate.add(Duration(days: 180));
-        showNotification(currentDate);
         break;
       case "Platinum Plan":
         currentDate = currentDate.add(Duration(days: 365));
-        showNotification(currentDate);
         break;
     }
 
     return currentDate;
-  }
-
-// Function to show local notification
-  void showNotification(DateTime expireDate) async {
-    var androidDetails = new AndroidNotificationDetails(
-        "channel id", "channel NAME",
-        importance: Importance.max);
-
-    var generalNotificationDetails =
-        new NotificationDetails(android: androidDetails);
-
-    await FlutterLocalNotificationsPlugin().schedule(
-        0,
-        "Plan Expiry",
-        "Your plan expires soon. Renew now!",
-        expireDate,
-        generalNotificationDetails);
   }
 
   @override
@@ -143,13 +123,17 @@ class _MembershipState extends State<Membership> {
                           time: currentTime,
                           planexpr: formatter
                               .format(calculatePlanExpireDate(
-                                  p1t1, showNotification))
+                                p1t1,
+                              ))
                               .toString(),
                         ),
                         // ontap function for Adding data to database
                         onTap: () {
-                          Provider.of<PlanProvider>(context, listen: false)
-                              .updateSelectedPlan(p1t1);
+                          NotificationService.showNotification(
+                              title: "Plan Reminder",
+                              body: "Your Plan is expiring at Soon!",
+                              scheduled: true,
+                              notificationTime: calculatePlanExpireDate(p1t1));
                           Firecloud.addplandetail(
                             p1t1,
                             p1t2,
@@ -158,7 +142,8 @@ class _MembershipState extends State<Membership> {
                             currentTime,
                             formatter
                                 .format(calculatePlanExpireDate(
-                                    p1t1, showNotification))
+                                  p1t1,
+                                ))
                                 .toString(),
                           );
                           Navigator.pushNamedAndRemoveUntil(
@@ -178,12 +163,18 @@ class _MembershipState extends State<Membership> {
                           time: currentTime,
                           planexpr: formatter
                               .format(calculatePlanExpireDate(
-                                  p2t1, showNotification))
+                                p2t1,
+                              ))
                               .toString(),
                         ),
                         onTap: () {
-                          // Provider.of<PlanProvider>(context, listen: false)
-                          //     .updateSelectedPlan(p2t1);
+                          NotificationService.showNotification(
+                              title: "Plan Reminder",
+                              body:
+                                  "Your Plan is expiring soon!${calculatePlanExpireDate(p2t1)}",
+                              scheduled: true,
+                              notificationTime: calculatePlanExpireDate(p2t1)
+                                  .subtract(notificationDuration));
                           Firecloud.addplandetail(
                             p2t1,
                             p2t2,
@@ -192,7 +183,8 @@ class _MembershipState extends State<Membership> {
                             currentTime,
                             formatter
                                 .format(calculatePlanExpireDate(
-                                    p2t1, showNotification))
+                                  p2t1,
+                                ))
                                 .toString(),
                           );
                           Navigator.pushNamedAndRemoveUntil(
@@ -211,10 +203,18 @@ class _MembershipState extends State<Membership> {
                           time: currentTime,
                           planexpr: formatter
                               .format(calculatePlanExpireDate(
-                                  p3t1, showNotification))
+                                p3t1,
+                              ))
                               .toString(),
                         ),
                         onTap: () {
+                          NotificationService.showNotification(
+                              title: "Plan Reminder",
+                              body:
+                                  "Your Plan is expiring soon!${calculatePlanExpireDate(p3t1)}",
+                              scheduled: true,
+                              notificationTime: calculatePlanExpireDate(p3t1)
+                                  .subtract(notificationDuration));
                           Firecloud.addplandetail(
                             p3t1,
                             p3t2,
@@ -223,7 +223,8 @@ class _MembershipState extends State<Membership> {
                             currentTime,
                             formatter
                                 .format(calculatePlanExpireDate(
-                                    p3t1, showNotification))
+                                  p3t1,
+                                ))
                                 .toString(),
                           );
                           Navigator.pushNamedAndRemoveUntil(
@@ -242,12 +243,18 @@ class _MembershipState extends State<Membership> {
                           time: currentTime,
                           planexpr: formatter
                               .format(calculatePlanExpireDate(
-                                  p4t1, showNotification))
+                                p4t1,
+                              ))
                               .toString(),
                         ),
                         onTap: () {
-                          // Provider.of<PlanProvider>(context, listen: false)
-                          //     .updateSelectedPlan(p4t1);
+                          NotificationService.showNotification(
+                              title: "Plan Reminder",
+                              body:
+                                  "Your Plan is expiring soon!${calculatePlanExpireDate(p2t1)}",
+                              scheduled: true,
+                              notificationTime: calculatePlanExpireDate(p4t1)
+                                  .subtract(notificationDuration));
                           Firecloud.addplandetail(
                             p4t1,
                             p4t2,
@@ -256,7 +263,8 @@ class _MembershipState extends State<Membership> {
                             currentTime,
                             formatter
                                 .format(calculatePlanExpireDate(
-                                    p4t1, showNotification))
+                                  p4t1,
+                                ))
                                 .toString(),
                           );
                           Navigator.pushNamedAndRemoveUntil(

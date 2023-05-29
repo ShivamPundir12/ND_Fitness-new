@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/screens/admin/member/member_profile.dart';
 import 'package:nd_fitness/screens/admin/usr_card.dart';
-import 'package:nd_fitness/services/admin_auth.dart';
+import 'package:nd_fitness/screens/auth/admin_auth.dart';
 
 import '../onboard/material/photo_hero.dart';
 
