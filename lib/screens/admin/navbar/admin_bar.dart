@@ -17,7 +17,6 @@ class _AdminBarState extends State<AdminBar> {
   List<String> _icons = [
     Assets.iconsMember, // Use SVG images as icons
     Assets.iconsReminder,
-    Assets.iconsProfile,
   ];
 
   void _onItemTapped(int index) {

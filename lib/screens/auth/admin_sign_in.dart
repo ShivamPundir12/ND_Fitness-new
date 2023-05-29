@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nd_fitness/materials/colors.dart';
 import 'package:nd_fitness/generated/assets.dart';
-import 'package:nd_fitness/services/admin_auth.dart';
+import 'package:nd_fitness/screens/auth/admin_auth.dart';
 import '../../widgets/textstyle.dart';
 import 'sign_in.dart';
 

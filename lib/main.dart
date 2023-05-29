@@ -10,36 +10,38 @@ import 'package:nd_fitness/screens/info/membership/membership.dart';
 import 'package:nd_fitness/screens/info/profilecontroller/profile.dart';
 import 'package:nd_fitness/screens/onboard/onboarding_scrn.dart';
 import 'package:nd_fitness/screens/onboard/splash_scrn.dart';
+import 'package:nd_fitness/services/notification_services.dart';
 import 'screens/auth/forgot_pass.dart';
 import 'package:nd_fitness/screens/user/edit_profile.dart';
 import 'package:nd_fitness/screens/user/plan.dart';
 import 'screens/info/Weight/weight.dart';
 import 'screens/info/all_set.dart';
 import 'screens/user/profile.dart';
-import 'package:provider/provider.dart';
-
-import 'services/container_color.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
+  await NotificationService.initializeNotification();
+  await Firebase.initializeApp();
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => PlanProvider(),
-      child: MyApp(),
-    ),
+    MyApp(),
   );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
+      navigatorKey: widget.navigatorKey,
       routes: {
         '/splash': (context) => SplashScreen(),
         '/onboard': (context) => Onboard_screen(),
